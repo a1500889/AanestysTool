@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="Tentti/src/model/Kirja"%>
+<jsp:useBean id="Kirja" type="Kirja" scope="request" />
+    
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>Kirjan tiedot:</h3>
+<%=Kirja.get %>
+
+</body>
+</html>
