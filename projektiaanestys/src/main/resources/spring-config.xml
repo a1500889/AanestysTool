@@ -9,7 +9,7 @@
 
 	<context:property-placeholder location="db_connection.properties"/>
 	
-	<bean id="daoLuokka" class="fi.softala.jee.demo.d13.dao.HenkiloDAOSpringJdbcImpl">
+	<bean id="daoLuokka" class="dao.testiDAO">
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
 
