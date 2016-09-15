@@ -1,7 +1,7 @@
 package bean;
 
 public interface Aani {
-	
+	//git
 	public abstract int getAaniID();
 
 	public abstract void setAaniID(int AaniID);

@@ -1,7 +1,7 @@
 package bean;
 
 public interface Aanestys {
-
+//git
 	
 	public abstract int getAanestysID();
 

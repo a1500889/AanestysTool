@@ -1,7 +1,7 @@
 package bean;
 
 public class AaniImpl implements Aani {
-
+//git
 	
 	private int AaniID;
 	private int AanestysID;

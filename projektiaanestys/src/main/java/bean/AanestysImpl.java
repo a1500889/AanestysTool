@@ -1,7 +1,7 @@
 package bean;
 
 public class AanestysImpl implements Aanestys {
-
+//git
 	private int AanestysID;
 	private String Tunnus;
 	private String AanestysNimi;

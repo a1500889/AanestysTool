@@ -1,7 +1,7 @@
 package bean;
 
 public interface Vaihtoehto {
-
+//git
 	public abstract int getVaihtoehtoID();
 
 	public abstract void setVaihtoehtoID(int VaihtoehtoID);

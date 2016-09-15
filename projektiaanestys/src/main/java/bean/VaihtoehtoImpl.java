@@ -1,7 +1,7 @@
 package bean;
 
 public class VaihtoehtoImpl implements Vaihtoehto{
-
+//git
 	private int vaihtoehtoID;
 	private int AanestysID;
 	private String VaihtoehtoNimi;
