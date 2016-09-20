@@ -1,4 +1,4 @@
-package bean;
+package fi.softala.jee.aanestys.bean;
 
 public class AaniImpl implements Aani {
 //git
