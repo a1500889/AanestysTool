@@ -4,7 +4,6 @@ import java.util.List;
 
 import fi.softala.jee.aanestys.bean.Aani;
 
-
 public interface AaniDAO {
 
 	public void insert (Aani Aani);

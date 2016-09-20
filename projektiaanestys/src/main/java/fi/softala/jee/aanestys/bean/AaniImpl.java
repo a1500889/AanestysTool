@@ -32,5 +32,9 @@ public class AaniImpl implements Aani {
 		VaihtoehtoID = vaihtoehtoID;
 	}
 	
+	public AaniImpl() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	
 }

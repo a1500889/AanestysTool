@@ -48,7 +48,7 @@ public class VaihtoehtoDAOImpl implements VaihtoehtoDAO {
 	}
 
 	public Vaihtoehto get(int Vaihtoehto) {
-		String sql = "SELECT * FROM Vaihtoehto WHERE VaihtoehtoID =" + Vaihtoehto;
+		String sql = "SELECT * FROM Vaihtoehto WHERE VaihtoehtoID =" + Vaihtoehto+";";
 		return jdbcTemplate.query(sql, new ResultSetExtractor<Vaihtoehto>() {
 			
 			public Vaihtoehto extractData(ResultSet rs) throws SQLException, DataAccessException {
