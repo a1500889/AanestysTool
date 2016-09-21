@@ -47,16 +47,17 @@ public class VaihtoehtoDAOImpl implements VaihtoehtoDAO {
 		
 	}
 
-	public Vaihtoehto get(int Vaihtoehto) {
-		String sql = "SELECT * FROM Vaihtoehto WHERE VaihtoehtoID =" + Vaihtoehto+";";
+	public Vaihtoehto get(final int Vaihtoehto) {
+		String sql = "SELECT * FROM Vaihtoehto WHERE VaihtoehtoID =" + Vaihtoehto;
 		return jdbcTemplate.query(sql, new ResultSetExtractor<Vaihtoehto>() {
 			
 			public Vaihtoehto extractData(ResultSet rs) throws SQLException, DataAccessException {
-				if(rs.next()) {
+
+				if(rs.next()){
 					Vaihtoehto vEhto = new VaihtoehtoImpl();
-					vEhto.setVaihtoehtoID(rs.getInt("vaihtoehtoID"));
-					vEhto.setAanestysID(rs.getInt("aanestysID"));
-					vEhto.setVaihtoehtoNimi(rs.getString("vaihtoehtoNimi"));
+					vEhto.setVaihtoehtoID(Vaihtoehto);
+					vEhto.setAanestysID(rs.getInt("AanestysID"));
+					vEhto.setVaihtoehtoNimi(rs.getString("VaihtoehtoNimi"));
 					return vEhto;
 				}
 				return null;

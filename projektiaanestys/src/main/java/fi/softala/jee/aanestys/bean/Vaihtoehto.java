@@ -13,5 +13,9 @@ public interface Vaihtoehto {
 	public abstract String getVaihtoehtoNimi();
 
 	public abstract void setVaihtoehtoNimi(String vaihtoehtoNimi);
+	
+	public abstract void setAanlkm(int lkm);
+	
+	public abstract int getAanlkm();
 
 }

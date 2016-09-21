@@ -25,6 +25,7 @@ public class AaniImpl implements Aani {
 	public void setVaihtoehtoID(int vaihtoehtoID) {
 		VaihtoehtoID = vaihtoehtoID;
 	}
+	
 	public AaniImpl(int aaniID, int aanestysID, int vaihtoehtoID) {
 		super();
 		AaniID = aaniID;

@@ -5,6 +5,7 @@ public class VaihtoehtoImpl implements Vaihtoehto{
 	private int vaihtoehtoID;
 	private int AanestysID;
 	private String VaihtoehtoNimi;
+	private int aanlkm;
 	
 	public int getVaihtoehtoID() {
 		return vaihtoehtoID;
@@ -23,6 +24,13 @@ public class VaihtoehtoImpl implements Vaihtoehto{
 	}
 	public void setVaihtoehtoNimi(String vaihtoehtoNimi) {
 		VaihtoehtoNimi = vaihtoehtoNimi;
+	}
+	
+	public int getAanlkm() {
+		return aanlkm;
+	}
+	public void setAanlkm(int aanlkm) {
+		this.aanlkm = aanlkm;
 	}
 	@Override
 	public String toString() {
