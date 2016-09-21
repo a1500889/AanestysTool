@@ -23,7 +23,7 @@
 
 </c:forEach>
 
-<input type="submit" value="Lähetä">
+<input type="submit" onclick="alert('Kiitos äänestäsi!')" value="Lähetä">
 </form>
 
 
