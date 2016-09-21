@@ -13,35 +13,15 @@
 <h1>Äänestyksen vaihtoehdot:</h1>
 
 
-	<tr>
-    <th>Numero</th>
-    <th>Vaihtoehdon nimi</th>
-  </tr>
-  
-	<c:forEach items="${vaihtoehdot}" var="ehdot"> 
-  	
-  	
-<table style="width:50%">
-  
-  <tr>
-    <td><p><c:out value="${ehdot.vaihtoehtoID}" default="-----"/></p></td>
-    <td><p><c:out value="${ehdot.vaihtoehtoNimi}" default="-----"/></p></td>
-    
-  </tr>
-</table>
-
-</c:forEach>
 
 
 <form>
-<input type="radio" name="vaihtoehto" value="vaihtoehto1" checked> Vaihtoehto 1<br>
+<c:forEach items="${vaihtoehdot}" var="ehdot">
 
-<input type="radio" name="vaihtoehto" value="vaihtoehto2"> Vaihtoehto 2<br>
+<input type="radio" name="vaihtoehto" value="${ehdot.vaihtoehtoNimi}" checked>${ehdot.vaihtoehtoNimi} <br>
 
-<input type="radio" name="vaihtoehto" value="vaihtoehto3"> Vaihtoehto 3<br>
 
-<input type="radio" name="vaihtoehto" value="vaihtoehto4"> Vaihtoehto 5<br>
-
+</c:forEach>
 
 <input type="submit" value="Lähetä">
 </form>
