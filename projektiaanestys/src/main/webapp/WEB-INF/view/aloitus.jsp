@@ -21,7 +21,7 @@
 		
 		<h3>Linkki äänestykseen:</h3>
 		
-			<a href="vaihtoehdot/lista">Äänestys</a>
+			<a href="Main/lista">Äänestys</a>
 		</p>
 	</div>
 

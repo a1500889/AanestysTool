@@ -18,7 +18,7 @@
 <form>
 <c:forEach items="${vaihtoehdot}" var="ehdot">
 
-<input type="radio" name="vaihtoehto" value="${ehdot.vaihtoehtoNimi}" checked>${ehdot.vaihtoehtoNimi} <br>
+<input type="radio" name="vaihtoehto" value="${ehdot.vaihtoehtoID}" value="${ehdot.vaihtoehtoNimi}" checked>${ehdot.vaihtoehtoNimi} <br>
 
 
 </c:forEach>
