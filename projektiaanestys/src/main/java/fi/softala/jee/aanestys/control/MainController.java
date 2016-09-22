@@ -14,11 +14,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import fi.softala.jee.aanestys.bean.Aanestys;
+import fi.softala.jee.aanestys.bean.AanestysImpl;
 import fi.softala.jee.aanestys.bean.Aani;
 import fi.softala.jee.aanestys.bean.AaniImpl;
 import fi.softala.jee.aanestys.bean.Vaihtoehto;
 import fi.softala.jee.aanestys.bean.VaihtoehtoImpl;
 import fi.softala.jee.aanestys.dao.AaniDAO;
+import fi.softala.jee.aanestys.dao.AanestysDAO;
+import fi.softala.jee.aanestys.dao.AanestysDAOImpl;
 import fi.softala.jee.aanestys.dao.VaihtoehtoDAO;
 import fi.softala.jee.aanestys.dao.VaihtoehtoDAOImpl;
 
@@ -48,6 +52,15 @@ public class MainController {
 		public void setDao(VaihtoehtoDAO vdao) {
 			this.vdao = vdao;
 		}
+		
+		@Inject
+		private AanestysDAO edao;
+
+		
+		public void setDao(AanestysDAO edao) {
+			this.edao = edao;
+		}
+
 
 		//Hakee annetut ‰‰net kannasta ja ohjaa ne listaaAanet.jsp sivulle
 		@RequestMapping(value = "listaa", method = RequestMethod.GET)
@@ -106,5 +119,13 @@ public class MainController {
 			return "vaihto/listaavEhdot";
 		}
 
+		//Hakee vaihtoehdot kannasta ja v‰litt‰‰ ne listaavEhdot.jsp sivulle
+				@RequestMapping(value = "aanestys", method = RequestMethod.GET)
+				public String getAanestys(Model model) {
+					List<Aanestys> listaaAanestys = edao.lista();
+					model.addAttribute("aanestykset", listaaAanestys);
+					return "aloitus";
+				}
+		
 	}
 

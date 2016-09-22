@@ -5,6 +5,7 @@ public class AanestysImpl implements Aanestys {
 	private int AanestysID;
 	private String Tunnus;
 	private String AanestysNimi;
+	private String Kuvaus;
 	
 	public int getAanestysID() {
 		return AanestysID;
@@ -24,11 +25,18 @@ public class AanestysImpl implements Aanestys {
 	public void setAanestysNimi(String aanestysNimi) {
 		AanestysNimi = aanestysNimi;
 	}
+	public String getKuvaus() {
+		return Kuvaus;
+	}
+	public void setKuvaus(String kuvaus) {
+		Kuvaus = kuvaus;
+	}
 	@Override
 	public String toString() {
 		return "AanestysImpl [AanestysID=" + AanestysID + ", Tunnus=" + Tunnus
-				+ ", AanestysNimi=" + AanestysNimi + "]";
+				+ ", AanestysNimi=" + AanestysNimi + ", Kuvaus=" + Kuvaus + "]";
 	}
+	
 	
 	
 }

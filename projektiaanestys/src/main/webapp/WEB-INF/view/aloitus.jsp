@@ -26,6 +26,19 @@
 	</div>
 
 </form>
+<h2>Toimiikö?!</h2>
+<a href="Main/aanestys">Äänestykset</a>
+<form>
+<c:forEach items="${aanestykset}" var="tykset">     
+   <c:out value="${tykset.aanestysNimi}"/>
+   <c:out value="${tykset.aanestysID}"/>
+   <c:out value="${tykset.tunnus}"/>
+   <c:out value="${tykset.kuvaus}"/>
+</c:forEach>
+
+
+</form>
+
 </div>
 </div>
 </body>

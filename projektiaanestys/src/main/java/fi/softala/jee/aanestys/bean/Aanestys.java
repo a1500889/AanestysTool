@@ -14,4 +14,8 @@ public interface Aanestys {
 	public abstract String getAanestysNimi();
 
 	public abstract void setAanestysNimi(String AanestysNimi);
+	
+	public abstract String getKuvaus();
+
+	public abstract void setKuvaus(String Kuvaus);
 }
