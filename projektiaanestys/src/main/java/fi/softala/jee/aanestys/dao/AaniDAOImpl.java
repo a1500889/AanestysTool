@@ -32,6 +32,8 @@ public class AaniDAOImpl implements AaniDAO{
 	}
 
 	public void insert(Aani Aani) {
+		String kasky = "INSERT INTO Aani(AanestysID, VaihtoehtoID, AanestajaID) VALUES(?,?,?);";
+		jdbcTemplate.update(kasky, Aani.getAanestysID(), Aani.getVaihtoehtoID(), 1);
 		// TODO Auto-generated method stub
 		
 	}

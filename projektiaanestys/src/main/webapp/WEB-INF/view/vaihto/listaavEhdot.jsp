@@ -1,30 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%@page pageEncoding="UTF-8"%>
+
+<%@ page session="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form"  prefix="form"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
 <title>Vaihtoehdot</title>
 </head>
 <body>
 
-<h1>Äänestyksen vaihtoehdot:</h1>
+<h1>Ã„Ã¤nestyksen vaihtoehdot:</h1>
+<%-- KÃ¤ytetÃ¤Ã¤n backup:ina AanestysVaihtoehto beania --%>
+	<c:forEach items="${vaihtoehdot}" var="ehdot">
+		<form:form modelAttribute="aanestysVaihtoehto" method="post">
+	
+			
+				
+				<br/><p></p>		
 
+		</form:form>
+	</c:forEach>
+	<%-- EnvBean jÃ¤lleen toiminnassa, method=post ohjaa Controllerissa metodia, action=lista ohjaa listaaAanet.jsp:lle --%>
+	<form:form id="envselection" modelAttribute="envBean" method="post" action="lista">
+	<c:forEach var="optio" items="${vaihtoehdot}">
+	<%-- from:radiobutton setti hakee controllerin getView metodista vaihtoehdot --%>
+		<form:radiobutton path="env" value="${optio.vaihtoehtoID}" onclick="submitForm()"/>${optio.vaihtoehtoNimi}
+	</c:forEach>
+	
+	
+<%--     <form:radiobutton path="env" value="QA 71" onclick="submitForm()"/>QA 71 --%>
+<%--     <form:radiobutton path="env" value="QA 72" onclick="submitForm()"/>QA 72 --%>
+<%--     <form:radiobutton path="env" value="QA 73" onclick="submitForm()"/>QA 73 --%>
+<%--     <form:radiobutton path="env" value="QA 74" onclick="submitForm()"/>QA 74 --%>
+    	<button type="submit">Ã„Ã¤nestÃ¤</button>
+</form:form>		
+				
 
-
-
-<form>
-<c:forEach items="${vaihtoehdot}" var="ehdot">
-
-<input type="radio" name="vaihtoehto" value="${ehdot.vaihtoehtoID}" value="${ehdot.vaihtoehtoNimi}" checked>${ehdot.vaihtoehtoNimi} <br>
-
-
-</c:forEach>
-
-<input type="submit" onclick="alert('Kiitos äänestäsi!')" value="Lähetä">
-</form>
 
 
 </body>

@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import fi.softala.jee.aanestys.bean.Aanestys;
 import fi.softala.jee.aanestys.bean.AanestysImpl;
+import fi.softala.jee.aanestys.bean.AanestysVaihtoehto;
 import fi.softala.jee.aanestys.bean.Aani;
 import fi.softala.jee.aanestys.bean.AaniImpl;
+import fi.softala.jee.aanestys.bean.EnvBean;
 import fi.softala.jee.aanestys.bean.Vaihtoehto;
 import fi.softala.jee.aanestys.bean.VaihtoehtoImpl;
 import fi.softala.jee.aanestys.dao.AaniDAO;
@@ -26,10 +28,13 @@ import fi.softala.jee.aanestys.dao.AanestysDAOImpl;
 import fi.softala.jee.aanestys.dao.VaihtoehtoDAO;
 import fi.softala.jee.aanestys.dao.VaihtoehtoDAOImpl;
 
+
 @Controller
 @RequestMapping(value = "/Main")
 public class MainController {
 	
+	//  http://stackoverflow.com/questions/21028954/radio-button-selection-and-its-value-in-spring-mvc
+	//  löytyy esimerkki EnvBean:ista.
 
 		@Inject
 		private AaniDAO adao;
@@ -62,7 +67,7 @@ public class MainController {
 		}
 
 
-		//Hakee annetut äänet kannasta ja ohjaa ne listaaAanet.jsp sivulle
+		//HAKEE ANNETUT ÄÄNET KANNASTA JA OHJAA NE .jsp SIVULLE.
 		@RequestMapping(value = "listaa", method = RequestMethod.GET)
 		public String getCreateForm(Model model) {
 			List<Aani> Annetutlista = adao.lista();
@@ -91,41 +96,34 @@ public class MainController {
 			return "tulos/listaaAanet";
 		}
 
-//		// EI KÄYTÖSSÄ!!!!
-//		@RequestMapping(value = "uusi", method = RequestMethod.POST)
-//		public String create(@ModelAttribute(value = "Aani") AaniImpl Aani) {
-//			dao.insert(Aani);
-//			return "redirect:/Vaihtoehdot/" + Aani.getAaniID();
-//		}
 
-//		//EI KÄYTÖSSÄ
-//		@RequestMapping(value = "{id}", method = RequestMethod.GET)
-//		public String getView(@PathVariable Integer id, Model model) {
-//			Aani Aani = dao.get(id);
-//			model.addAttribute("Aani", Aani);
-//			return "view";
-//		}
+		//OTTAA ÄÄNESTETTÄVÄN VAIHTOEHDON VASTAAN JA OHJAA ETEENPÄIN
+		@RequestMapping(value = "/lista", method = RequestMethod.POST)
+		public String env(@ModelAttribute("envBean") EnvBean envBean){
+			Aani a = new AaniImpl();
+			int vaihtoehtoID = Integer.parseInt(envBean.getEnv());
+			a.setVaihtoehtoID(vaihtoehtoID);
+			a.setAanestysID(vdao.get(vaihtoehtoID).getAanestysID());
+			
+			adao.insert(a);
+		    System.out.println("parameter is " + envBean.getEnv());
+		    
+		    
+		    return "redirect:listaa";
+
+		}
 		
-		//vaihtoehto metodit
-
 		
-
-	
-		//Hakee vaihtoehdot kannasta ja välittää ne listaavEhdot.jsp sivulle
+		//HAKEE KANNASTA VAIHTOEHDOT JA LISTAA NE KÄYTTÄJÄLLE
+		//EnvBean toimii backup beanina, ei tarvitse kiinnittää huomiota.
 		@RequestMapping(value = "lista", method = RequestMethod.GET)
 		public String getView(Model model) {
 			List<Vaihtoehto> listaaVaihtoehdot = vdao.lista();
 			model.addAttribute("vaihtoehdot", listaaVaihtoehdot);
+			EnvBean envBean = new EnvBean();
+			model.addAttribute(envBean);
 			return "vaihto/listaavEhdot";
 		}
 
-		//Hakee vaihtoehdot kannasta ja välittää ne listaavEhdot.jsp sivulle
-				@RequestMapping(value = "aanestys", method = RequestMethod.GET)
-				public String getAanestys(Model model) {
-					List<Aanestys> listaaAanestys = edao.lista();
-					model.addAttribute("aanestykset", listaaAanestys);
-					return "aloitus";
-				}
-		
 	}
 
