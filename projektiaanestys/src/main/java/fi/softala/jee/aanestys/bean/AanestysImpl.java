@@ -31,6 +31,11 @@ public class AanestysImpl implements Aanestys {
 	public void setKuvaus(String kuvaus) {
 		Kuvaus = kuvaus;
 	}
+	
+	public AanestysImpl() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@Override
 	public String toString() {
 		return "AanestysImpl [AanestysID=" + AanestysID + ", Tunnus=" + Tunnus

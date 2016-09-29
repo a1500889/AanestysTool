@@ -9,7 +9,7 @@ public interface AanestysDAO {
 	
 	public List<Aanestys> lista();
 	
-	public void insert(Aanestys Aanestys);
+	public  void saveOrUpdate (Aanestys aanestys);
 		
 	public void delete(int AanestysID);
 	
