@@ -3,6 +3,7 @@ package fi.softala.jee.aanestys.bean;
 public interface Aanestys {
 //git
 	
+	
 	public abstract int getAanestysID();
 
 	public abstract void setAanestysID(int AanestysID);

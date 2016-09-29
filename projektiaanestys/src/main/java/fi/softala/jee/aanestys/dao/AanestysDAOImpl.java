@@ -33,9 +33,19 @@ public class AanestysDAOImpl implements AanestysDAO{
 		this.jdbcTemplate = jdbcTemplate;
 	}
 	
-	public void insert(Aanestys Aanestys) {
-		// TODO Auto-generated method stub
-		
+	public void saveOrUpdate(Aanestys aanestys) {
+	    if (aanestys.getAanestysID() > 0) {
+	        // update
+	        String sql = "UPDATE Aanestys SET Tunnus=?, AanestysNimi=?, Kuvaus=?, + WHERE AanestysID=? ";
+	        jdbcTemplate.update(sql, aanestys.getTunnus(), aanestys.getAanestysNimi(), aanestys.getKuvaus(), aanestys.getAanestysID());
+	    } else {
+	        // insert
+	        String sql = "INSERT INTO Aanestys (Tunnus, AanestysNimi, Kuvaus)"
+	                    + " VALUES (?, ?, ?)";
+	        jdbcTemplate.update(sql, aanestys.getTunnus(), aanestys.getAanestysNimi(),
+	                aanestys.getKuvaus());
+	    }
+	 
 	}
 
 	public void delete(int AanestysID) {
