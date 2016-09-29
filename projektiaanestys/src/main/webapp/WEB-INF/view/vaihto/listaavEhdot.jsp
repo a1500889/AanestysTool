@@ -9,6 +9,8 @@
 <html>
 <head>
 
+<link rel="stylesheet" href="resources/styles/tyyli.css">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Vaihtoehdot</title>
 </head>
 <body>

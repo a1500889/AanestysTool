@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import fi.softala.jee.aanestys.bean.Aanestys;
 import fi.softala.jee.aanestys.bean.AanestysImpl;
@@ -32,12 +33,13 @@ import fi.softala.jee.aanestys.dao.VaihtoehtoDAOImpl;
 @Controller
 @RequestMapping(value = "/Main")
 public class MainController {
-	
 	//  http://stackoverflow.com/questions/21028954/radio-button-selection-and-its-value-in-spring-mvc
 	//  löytyy esimerkki EnvBean:ista.
 
-		@Inject
-		private AaniDAO adao;
+
+
+	@Inject
+	private AaniDAO adao;
 
 		public AaniDAO getaDao() {
 			return adao;
@@ -125,5 +127,19 @@ public class MainController {
 			return "vaihto/listaavEhdot";
 		}
 
+	// tallettaa tiedot tietokantaan
+	@RequestMapping(value = "/saveAanestys", method = RequestMethod.POST)
+	public ModelAndView saveAanestys(@ModelAttribute AanestysImpl aanestys) {
+		edao.saveOrUpdate(aanestys);
+		return new ModelAndView("redirect:/");
+	}
+	//Luo äänestysformin
+	@RequestMapping(value = "/newAanestys", method = RequestMethod.GET)
+	public ModelAndView newAanestys(ModelAndView model) {
+	    Aanestys newAanestys = new AanestysImpl();
+	    model.addObject("aanestys", newAanestys);
+	    model.setViewName("tulos/aanestysForm");
+	    return model;
 	}
 
+}
