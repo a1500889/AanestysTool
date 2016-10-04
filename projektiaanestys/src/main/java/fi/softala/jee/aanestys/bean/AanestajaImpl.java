@@ -15,20 +15,20 @@ public class AanestajaImpl implements Aanestaja {
 		
 	}
 
-	public String getAanestajaEtunimi() {
+	public String getEtunimi() {
 		return Etunimi;
 	}
 
-	public void setAanestajaEtunimi(String etunimi) {
+	public void setEtunimi(String etunimi) {
 		this.Etunimi = etunimi;
 		
 	}
 
-	public String getAanestajaSukunimi() {
+	public String getSukunimi() {
 		return Sukunimi;
 	}
 
-	public void setAanestajaSukunimi(String sukunimi) {
+	public void setSukunimi(String sukunimi) {
 		this.Sukunimi = sukunimi;
 		
 	}

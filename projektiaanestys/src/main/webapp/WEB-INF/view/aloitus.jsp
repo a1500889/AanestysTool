@@ -27,6 +27,7 @@
 	</div>
 
 <a href="Main/newAanestys">Muokkaa/lisää äänestys</a>
+<a href="Main/newAanestaja">Lisää äänestäjä</a>
 
 <h2>Toimiikö?!</h2>
 <a href="Main/aanestys">Äänestykset</a>
