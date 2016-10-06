@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import fi.softala.jee.aanestys.bean.Aanestaja;
+import fi.softala.jee.aanestys.bean.AanestajaImpl;
 import fi.softala.jee.aanestys.bean.Aanestys;
 import fi.softala.jee.aanestys.bean.AanestysImpl;
 import fi.softala.jee.aanestys.bean.AanestysVaihtoehto;
@@ -25,109 +27,108 @@ import fi.softala.jee.aanestys.bean.AaniImpl;
 import fi.softala.jee.aanestys.bean.EnvBean;
 import fi.softala.jee.aanestys.bean.Vaihtoehto;
 import fi.softala.jee.aanestys.bean.VaihtoehtoImpl;
+import fi.softala.jee.aanestys.dao.AanestajaDAO;
 import fi.softala.jee.aanestys.dao.AaniDAO;
 import fi.softala.jee.aanestys.dao.AanestysDAO;
 import fi.softala.jee.aanestys.dao.AanestysDAOImpl;
 import fi.softala.jee.aanestys.dao.VaihtoehtoDAO;
 import fi.softala.jee.aanestys.dao.VaihtoehtoDAOImpl;
 
-
 @Controller
 @RequestMapping(value = "/Main")
 public class MainController {
-	//  http://stackoverflow.com/questions/21028954/radio-button-selection-and-its-value-in-spring-mvc
-	//  löytyy esimerkki EnvBean:ista.
-
-
+	// http://stackoverflow.com/questions/21028954/radio-button-selection-and-its-value-in-spring-mvc
+	// löytyy esimerkki EnvBean:ista.
 
 	@Inject
 	private AaniDAO adao;
 
-		public AaniDAO getaDao() {
-			return adao;
+	public AaniDAO getaDao() {
+		return adao;
+	}
+
+	public void setDao(AaniDAO adao) {
+		this.adao = adao;
+	}
+
+	@Inject
+	private VaihtoehtoDAO vdao;
+
+	public VaihtoehtoDAO getDao() {
+		return vdao;
+	}
+
+	public void setDao(VaihtoehtoDAO vdao) {
+		this.vdao = vdao;
+	}
+
+	@Inject
+	private AanestysDAO edao;
+
+	public void setDao(AanestysDAO edao) {
+		this.edao = edao;
+	}
+	
+	@Inject
+	private AanestajaDAO aadao;
+	
+	public void setDAO (AanestajaDAO aadao){
+		this.aadao = aadao;
+	}
+
+	// HAKEE ANNETUT ÄÄNET KANNASTA JA OHJAA NE .jsp SIVULLE.
+	@RequestMapping(value = "listaa", method = RequestMethod.GET)
+	public String getCreateForm(Model model) {
+		List<Aani> Annetutlista = adao.lista();
+		ArrayList<String> AnnetutTxt = new ArrayList<String>();
+
+		for (Aani x : Annetutlista) {
+			AnnetutTxt.add(vdao.get(x.getVaihtoehtoID()).getVaihtoehtoNimi());
 		}
 
-		public void setDao(AaniDAO adao) {
-			this.adao = adao;
+		List<Vaihtoehto> vaihtoehdot = vdao.lista();
+
+		ArrayList<VaihtoehtoImpl> tulos = new ArrayList<VaihtoehtoImpl>();
+
+		for (Vaihtoehto v : vaihtoehdot) {
+			VaihtoehtoImpl temp = new VaihtoehtoImpl();
+			temp.setVaihtoehtoNimi(v.getVaihtoehtoNimi());
+			temp.setVaihtoehtoID(v.getVaihtoehtoID());
+			temp.setAanlkm(Collections.frequency(AnnetutTxt,
+					v.getVaihtoehtoNimi()));
+			tulos.add(temp);
 		}
 
-		@Inject
-		private VaihtoehtoDAO vdao;
+		model.addAttribute("tuloslista", tulos);
 
-		public VaihtoehtoDAO getDao() {
-			return vdao;
-		}
+		return "tulos/listaaAanet";
+	}
 
-		public void setDao(VaihtoehtoDAO vdao) {
-			this.vdao = vdao;
-		}
-		
-		@Inject
-		private AanestysDAO edao;
+	// OTTAA ÄÄNESTETTÄVÄN VAIHTOEHDON VASTAAN JA OHJAA ETEENPÄIN
+	@RequestMapping(value = "/lista", method = RequestMethod.POST)
+	public String env(@ModelAttribute("envBean") EnvBean envBean) {
+		Aani a = new AaniImpl();
+		int vaihtoehtoID = Integer.parseInt(envBean.getEnv());
+		a.setVaihtoehtoID(vaihtoehtoID);
+		a.setAanestysID(vdao.get(vaihtoehtoID).getAanestysID());
 
-		
-		public void setDao(AanestysDAO edao) {
-			this.edao = edao;
-		}
+		adao.insert(a);
+		System.out.println("parameter is " + envBean.getEnv());
 
+		return "redirect:listaa";
 
-		//HAKEE ANNETUT ÄÄNET KANNASTA JA OHJAA NE .jsp SIVULLE.
-		@RequestMapping(value = "listaa", method = RequestMethod.GET)
-		public String getCreateForm(Model model) {
-			List<Aani> Annetutlista = adao.lista();
-			ArrayList<String> AnnetutTxt = new ArrayList<String>();
+	}
 
-			for (Aani x : Annetutlista) {
-				AnnetutTxt.add(vdao.get(x.getVaihtoehtoID())
-						.getVaihtoehtoNimi());
-			}
-
-			List<Vaihtoehto> vaihtoehdot = vdao.lista();
-
-			ArrayList<VaihtoehtoImpl> tulos = new ArrayList<VaihtoehtoImpl>();
-
-			for (Vaihtoehto v : vaihtoehdot) {
-				VaihtoehtoImpl temp = new VaihtoehtoImpl();
-				temp.setVaihtoehtoNimi(v.getVaihtoehtoNimi());
-				temp.setVaihtoehtoID(v.getVaihtoehtoID());
-				temp.setAanlkm(Collections.frequency(AnnetutTxt,
-						v.getVaihtoehtoNimi()));
-				tulos.add(temp);
-			}
-
-			model.addAttribute("tuloslista", tulos);
-
-			return "tulos/listaaAanet";
-		}
-
-
-		//OTTAA ÄÄNESTETTÄVÄN VAIHTOEHDON VASTAAN JA OHJAA ETEENPÄIN
-		@RequestMapping(value = "/lista", method = RequestMethod.POST)
-		public String env(@ModelAttribute("envBean") EnvBean envBean){
-			Aani a = new AaniImpl();
-			int vaihtoehtoID = Integer.parseInt(envBean.getEnv());
-			a.setVaihtoehtoID(vaihtoehtoID);
-			a.setAanestysID(vdao.get(vaihtoehtoID).getAanestysID());
-			
-			adao.insert(a);
-		    System.out.println("parameter is " + envBean.getEnv());
-		    
-		    
-		    return "redirect:listaa";
-
-		}
-		
-		
-		//HAKEE KANNASTA VAIHTOEHDOT JA LISTAA NE KÄYTTÄJÄLLE
-		//EnvBean toimii backup beanina, ei tarvitse kiinnittää huomiota.
-		@RequestMapping(value = "lista", method = RequestMethod.GET)
-		public String getView(Model model) {
-			List<Vaihtoehto> listaaVaihtoehdot = vdao.lista();
-			model.addAttribute("vaihtoehdot", listaaVaihtoehdot);
-			EnvBean envBean = new EnvBean();
-			model.addAttribute(envBean);
-			return "vaihto/listaavEhdot";
-		}
+	// HAKEE KANNASTA VAIHTOEHDOT JA LISTAA NE KÄYTTÄJÄLLE
+	// EnvBean toimii backup beanina, ei tarvitse kiinnittää huomiota.
+	@RequestMapping(value = "lista", method = RequestMethod.GET)
+	public String getView(Model model) {
+		List<Vaihtoehto> listaaVaihtoehdot = vdao.lista();
+		model.addAttribute("vaihtoehdot", listaaVaihtoehdot);
+		EnvBean envBean = new EnvBean();
+		model.addAttribute(envBean);
+		return "vaihto/listaavEhdot";
+	}
 
 	// tallettaa tiedot tietokantaan
 	@RequestMapping(value = "/saveAanestys", method = RequestMethod.POST)
@@ -135,13 +136,39 @@ public class MainController {
 		edao.saveOrUpdate(aanestys);
 		return new ModelAndView("redirect:/");
 	}
-	//Luo äänestysformin
+
+	// Luo äänestysformin
 	@RequestMapping(value = "/newAanestys", method = RequestMethod.GET)
 	public ModelAndView newAanestys(ModelAndView model) {
-	    Aanestys newAanestys = new AanestysImpl();
-	    model.addObject("aanestys", newAanestys);
-	    model.setViewName("tulos/aanestysForm");
-	    return model;
+		Aanestys newAanestys = new AanestysImpl();
+		model.addObject("aanestys", newAanestys);
+		model.setViewName("tulos/aanestysForm");
+		return model;
+	}
+
+	// Hakee äänestykset kannasta
+	@RequestMapping(value = "aanestys", method = RequestMethod.GET)
+	public String getAanestys(Model model) {
+		List<Aanestys> listaaAanestys = edao.lista();
+		model.addAttribute("aanestykset", listaaAanestys);
+		return "aloitus";
+	}
+
+	// Luo äänestäjälisäysformin
+	
+	@RequestMapping(value = "/newAanestaja", method = RequestMethod.GET)
+	public ModelAndView newAanestaja(ModelAndView model) {
+		Aanestaja newAanestaja = new AanestajaImpl();
+		model.addObject("aanestaja", newAanestaja);
+		model.setViewName("Aanestajat/LisaaForm");
+		return model;
+	}
+
+	// tallettaa tiedot tietokantaan
+	@RequestMapping(value = "/saveAanestaja", method = RequestMethod.POST)
+	public ModelAndView saveAanestaja(@ModelAttribute AanestajaImpl aanestaja) {
+		aadao.insert(aanestaja);
+		return new ModelAndView("redirect:/");
 	}
 	
 	//LISTAA ÄÄNESTYKSET

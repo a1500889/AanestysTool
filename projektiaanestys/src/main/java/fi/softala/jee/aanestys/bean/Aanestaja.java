@@ -6,12 +6,12 @@ public interface Aanestaja {
 	
 	public abstract void setAanestajaID(int AanestajaID);
 	
-	public abstract String getAanestajaEtunimi();
+	public abstract String getEtunimi();
 	
-	public abstract void setAanestajaEtunimi(String etunimi);
+	public abstract void setEtunimi(String Etunimi);
 	
-	public abstract String getAanestajaSukunimi();
+	public abstract String getSukunimi();
 	
-	public abstract void  setAanestajaSukunimi(String sukunimi);
+	public abstract void  setSukunimi(String Sukunimi);
 
 }

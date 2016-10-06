@@ -28,9 +28,9 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 	}
 
 	//Lisää kantaan äänestäjän
-	public void insert(Aanestaja hlö) {
-		String sql ="INSERT INTO Aanestaja (Etunimi, Sukunimi) values=(?,?)";
-		jdbcTemplate.update(sql, hlö.getAanestajaEtunimi(), hlö.getAanestajaSukunimi());
+	public void insert(Aanestaja aanestaja) {
+		String sql ="INSERT INTO Aanestaja (Etunimi, Sukunimi)" + " VALUES (?,?)";
+		jdbcTemplate.update(sql, aanestaja.getEtunimi(), aanestaja.getSukunimi());
 		
 	}
 
@@ -45,8 +45,8 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 			public Aanestaja mapRow (ResultSet rs, int rowNum) throws SQLException {
 				Aanestaja hlo = new AanestajaImpl();
 				hlo.setAanestajaID(rs.getInt("AanestajaID"));
-				hlo.setAanestajaEtunimi(rs.getString("Etunimi"));
-				hlo.setAanestajaSukunimi(rs.getString("Sukunimi"));
+				hlo.setEtunimi(rs.getString("Etunimi"));
+				hlo.setSukunimi(rs.getString("Sukunimi"));
 				
 				return hlo;
 			}
