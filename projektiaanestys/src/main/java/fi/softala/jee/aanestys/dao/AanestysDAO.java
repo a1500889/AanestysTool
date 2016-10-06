@@ -13,5 +13,7 @@ public interface AanestysDAO {
 		
 	public void delete(int AanestysID);
 	
+	public void poistaLuvatAanestys (int AanestysID);
+	
 	
 }

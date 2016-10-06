@@ -46,6 +46,12 @@ public class VaihtoehtoDAOImpl implements VaihtoehtoDAO {
 		jdbcTemplate.update(sql, VaihtoehtoID);
 		
 	}
+	
+	public void deletet(int AanestysID) {
+		String sql = "DELETE FROM Vaihtoehto WHERE AanestysID = ?";
+		jdbcTemplate.update(sql, AanestysID);
+		
+	}
 
 	public Vaihtoehto get(final int Vaihtoehto) {
 		String sql = "SELECT * FROM Vaihtoehto WHERE VaihtoehtoID =" + Vaihtoehto;

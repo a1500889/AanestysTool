@@ -40,6 +40,12 @@
  <td>
  <c:out value="${tykset.kuvaus}"/>
  </td>
+ 
+ <form:form id="envselection" modelAttribute="envBean" method="get" action="aanestyspoisto">
+ <form:radiobutton path="env" value="${tykset.aanestysID}" onclick="submitForm()"/>
+ <button type="submit">Testi</button>
+ </form:form>
+
 </tr>
  
 </form>

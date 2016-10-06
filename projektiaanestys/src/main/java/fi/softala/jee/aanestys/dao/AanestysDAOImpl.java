@@ -53,6 +53,11 @@ public class AanestysDAOImpl implements AanestysDAO{
 		jdbcTemplate.update(sql, AanestysID);
 		
 	}
+	
+	public void poistaLuvatAanestys(int AanestysID) {
+		String sql = "DELETE FROM Lupa WHERE AanestysID = ?";
+		jdbcTemplate.update(sql, AanestysID);
+	}
 
 	
 	public Aanestys get(int AanestysID) {

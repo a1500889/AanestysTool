@@ -33,10 +33,15 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 		jdbcTemplate.update(sql, aanestaja.getEtunimi(), aanestaja.getSukunimi());
 		
 	}
-
+	
 	public void delete(int AanestajaID) {
+		// TODO Auto-generated method stub
 		
-		
+	}
+
+	public void deletet(int AanestysID) {
+		String sql = "DELETE FROM Aanestaja WHERE AanestysID = ?";
+		jdbcTemplate.update(sql, AanestysID);
 	}
 
 	public List<Aanestaja> lista() {
@@ -53,5 +58,4 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 		});
 		return lista;
 	}
-
 }

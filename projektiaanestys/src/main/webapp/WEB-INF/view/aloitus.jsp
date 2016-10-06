@@ -32,6 +32,8 @@
 <h2>Äänestyslista</h2>
 <a href="Main/aanestys">Äänestykset</a>
 
+<h2>Äänestäjälista</h2>
+<a href="Main/aanestajat">Äänestäjät</a>
 </div>
 
     

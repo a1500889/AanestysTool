@@ -38,8 +38,9 @@ public class AaniDAOImpl implements AaniDAO{
 		
 	}
 
-	public void delete(int AaniID) {
-		// TODO Auto-generated method stub
+	public void delete(int AanestysID) {
+		String sql = "DELETE FROM Aani WHERE AanestysID = ?";
+		jdbcTemplate.update(sql, AanestysID);
 		
 	}
 
@@ -80,5 +81,10 @@ public class AaniDAOImpl implements AaniDAO{
 		return aaniLista;
 	
 
+	}
+
+	public void deletet(int AaniID) {
+		// TODO Auto-generated method stub
+		
 	}
 }

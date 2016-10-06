@@ -10,6 +10,8 @@ public interface AanestajaDAO {
 	
 	public void delete (int AanestajaID);
 	
+	public void deletet (int AanestysID);
+	
 	public List<Aanestaja> lista();
 
 }

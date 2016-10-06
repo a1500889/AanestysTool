@@ -8,7 +8,9 @@ public interface AaniDAO {
 
 	public void insert (Aani Aani);
 	
-	public void delete (int AaniID);
+	public void delete (int AanestysID);
+	
+	public void deletet (int AaniID);
 	
 	public Aani get (int Aani);
 	

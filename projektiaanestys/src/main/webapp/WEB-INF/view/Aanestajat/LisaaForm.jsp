@@ -21,7 +21,7 @@
                 <td><form:input path="Etunimi" /></td>
             </tr>
             <tr>
-                <td>Sukunini</td>
+                <td>Sukunimi</td>
                 <td><form:input path="Sukunimi" /></td>
             </tr>
          

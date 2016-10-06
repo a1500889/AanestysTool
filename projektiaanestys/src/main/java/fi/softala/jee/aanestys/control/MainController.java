@@ -146,13 +146,7 @@ public class MainController {
 		return model;
 	}
 
-	// Hakee äänestykset kannasta
-	@RequestMapping(value = "aanestys", method = RequestMethod.GET)
-	public String getAanestys(Model model) {
-		List<Aanestys> listaaAanestys = edao.lista();
-		model.addAttribute("aanestykset", listaaAanestys);
-		return "aloitus";
-	}
+	
 
 	// Luo äänestäjälisäysformin
 	
@@ -171,21 +165,41 @@ public class MainController {
 		return new ModelAndView("redirect:/");
 	}
 	
+	//LISTAA ÄÄNESTÄJÄT
+	@RequestMapping(value = "aanestajat", method = RequestMethod.GET)
+	public String lista(Model model) {
+		List<Aanestaja> listaaAanestajat = aadao.lista();
+		model.addAttribute("aanestajat", listaaAanestajat);
+		EnvBean envBean = new EnvBean();
+		model.addAttribute(envBean);
+		
+		return "vaihto/aanestajat";
+	}
+	
 	//LISTAA ÄÄNESTYKSET
 	@RequestMapping(value = "aanestys", method = RequestMethod.GET)
 					public String getAanestykset(Model model) {
 						List<Aanestys> listaaAanestys = edao.lista();
 						model.addAttribute("aanestykset", listaaAanestys);
+						EnvBean envBean = new EnvBean();
+						model.addAttribute(envBean);
 						return "vaihto/aanestykset";
 	}
 	
 	//POISTAA ÄÄNESTYKSEN
-	@RequestMapping(value = "/aanestyspoisto/{aanestysID}", method = RequestMethod.GET)
+	@RequestMapping(value = "/aanestyspoisto", method = RequestMethod.GET)
 	public String poista(@ModelAttribute("envBean") EnvBean envBean) {
 //		int tunnus = model.
 //		System.out.println("ping");
-		edao.delete(Integer.parseInt(envBean.getEnv()));
-		System.out.println("ping2");
+		int ID = Integer.parseInt(envBean.getEnv());
+		//Poistaa äänestyksen vaihtoehdot.
+		vdao.deletet(ID);
+		//Poistaa äänestyksen äänet.
+		adao.delete(ID);
+		//Poistaa oikeudet poistettavaan äänestykseen.
+		edao.poistaLuvatAanestys(ID);
+		//Poistaa itse äänestyksen.
+		edao.delete(ID);
 		return "redirect:/";
 	}
 

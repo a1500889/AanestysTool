@@ -10,6 +10,8 @@ public interface VaihtoehtoDAO {
 	
 	public void delete (int VaihtoehtoID);
 	
+	public void deletet(int AanestysID);
+	
 	public Vaihtoehto get (int Vaihtoehto);
 	
 	public List<Vaihtoehto> lista();
