@@ -49,8 +49,27 @@ public class AanestysDAOImpl implements AanestysDAO{
 	}
 
 	public void delete(int AanestysID) {
-		// TODO Auto-generated method stub
+		String sql = "DELETE FROM Aanestys WHERE AanestysID = ?";
+		jdbcTemplate.update(sql, AanestysID);
 		
+	}
+
+	
+	public Aanestys get(int AanestysID) {
+		String sql = "SELECT * FROM Aanestys WHERE AanestysID=" + AanestysID;
+		return jdbcTemplate.query(sql, new ResultSetExtractor<Aanestys>() {
+			
+			public Aanestys extractData(ResultSet rs) throws SQLException,
+			DataAccessException {
+				if(rs.next()) {
+					Aanestys aanestys = new AanestysImpl();
+					aanestys.setAanestysID(rs.getInt("AanestysID"));
+					aanestys.setAanestysNimi(rs.getString("AanestysNimi"));
+					return aanestys;
+				}
+				return null;
+			}
+		});
 	}
 	
 	

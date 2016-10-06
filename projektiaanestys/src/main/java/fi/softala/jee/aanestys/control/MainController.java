@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fi.softala.jee.aanestys.bean.Aanestys;
 import fi.softala.jee.aanestys.bean.AanestysImpl;
@@ -140,6 +142,24 @@ public class MainController {
 	    model.addObject("aanestys", newAanestys);
 	    model.setViewName("tulos/aanestysForm");
 	    return model;
+	}
+	
+	//LISTAA ÄÄNESTYKSET
+	@RequestMapping(value = "aanestys", method = RequestMethod.GET)
+					public String getAanestys(Model model) {
+						List<Aanestys> listaaAanestys = edao.lista();
+						model.addAttribute("aanestykset", listaaAanestys);
+						return "vaihto/aanestykset";
+	}
+	
+	//POISTAA ÄÄNESTYKSEN
+	@RequestMapping(value = "/aanestyspoisto/{aanestysID}", method = RequestMethod.GET)
+	public String poista(@ModelAttribute("envBean") EnvBean envBean) {
+//		int tunnus = model.
+//		System.out.println("ping");
+		edao.delete(Integer.parseInt(envBean.getEnv()));
+		System.out.println("ping2");
+		return "redirect:/";
 	}
 
 }
