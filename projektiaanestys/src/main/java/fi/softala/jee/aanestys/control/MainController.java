@@ -173,7 +173,7 @@ public class MainController {
 	
 	//LISTAA ÄÄNESTYKSET
 	@RequestMapping(value = "aanestys", method = RequestMethod.GET)
-					public String getAanestys(Model model) {
+					public String getAanestykset(Model model) {
 						List<Aanestys> listaaAanestys = edao.lista();
 						model.addAttribute("aanestykset", listaaAanestys);
 						return "vaihto/aanestykset";
