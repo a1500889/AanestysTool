@@ -14,19 +14,20 @@
 	<img id="raidat" src="resources/images/raidat.png" />
 </div>
 
-<h1>Äänestys</h1>
+<h1>Admin</h1>
 
 	<div id="contentbox">
 		<h3>Tältä sivulta löydät äänestyksen</h3>
 		
 		
-		<h3>Linkki äänestykseen:</h3>
+		<h2>Linkki äänestykseen:</h2>
 		
 			<a href="Main/lista">Äänestys</a>
 		
 	</div>
 
-<a href="Main/newAanestys">Muokkaa/lisää äänestys</a>
+<h2>Äänestyksen muokkaukset</h2>
+<a href="Main/newAanestys">Muokkaa/lisää äänestys</a><br>
 <a href="Main/newAanestaja">Lisää äänestäjä</a>
 
 <h2>Äänestyslista</h2>

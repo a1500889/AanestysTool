@@ -23,7 +23,6 @@
 <td>Tunnus:</td>
 <td>Kuvaus:</td>
 
-<form action="/aanestyspoisto/${aanestys.aanestysID}" method="post">
 
 <c:forEach items="${aanestykset}" var="tykset"> 
 <tr>   
@@ -41,6 +40,14 @@
  <c:out value="${tykset.kuvaus}"/>
  </td>
  
+ <td>
+ <c:url value="/lista/${tykset.aanestysID}" var="aanUrl"/>
+ <form action="<c:url value="/lista/${tykset.aanestysID}"/>">
+ <button type="submit">paina</button>
+ </form>
+ <button class="btn btn-info" onclick="location.href='${aanUrl}'">LIIKU</button>
+ </td>
+
  <form:form id="envselection" modelAttribute="envBean" method="get" action="aanestyspoisto">
  <form:radiobutton path="env" value="${tykset.aanestysID}" onclick="submitForm()"/>
  <button type="submit">Testi</button>
@@ -53,6 +60,6 @@
 
 
 </table>
-
+<a href="/projektiaanestys">Takaisin</a>
 </body>
 </html>

@@ -30,7 +30,7 @@
 	<form:form id="envselection" modelAttribute="envBean" method="post" action="lista">
 	<c:forEach var="optio" items="${vaihtoehdot}">
 	<%-- from:radiobutton setti hakee controllerin getView metodista vaihtoehdot --%>
-		<form:radiobutton path="env" value="${optio.vaihtoehtoID}" onclick="submitForm()"/>${optio.vaihtoehtoNimi}
+		<form:radiobutton path="env" value="${optio.vaihtoehtoID}" onclick="submitForm()"/>${optio.vaihtoehtoNimi}<br>
 	</c:forEach>
 	
 	
@@ -39,8 +39,9 @@
 <%--     <form:radiobutton path="env" value="QA 73" onclick="submitForm()"/>QA 73 --%>
 <%--     <form:radiobutton path="env" value="QA 74" onclick="submitForm()"/>QA 74 --%>
     	<button type="submit">Äänestä</button>
-</form:form>		
-				
+</form:form>	
+
+<a href="/projektiaanestys">Takaisin</a>				
 
 
 

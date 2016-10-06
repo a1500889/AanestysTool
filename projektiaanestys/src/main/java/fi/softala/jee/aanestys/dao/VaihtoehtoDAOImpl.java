@@ -91,4 +91,26 @@ public class VaihtoehtoDAOImpl implements VaihtoehtoDAO {
 		
 		return listaaVaihtoehdot;
 }
+
+	public List<Vaihtoehto> haeVaihtoehdot(int AanestysID) {
+		String sql = "SELECT * FROM Vaihtoehto WHERE AanestysID ="+AanestysID;
+		List<Vaihtoehto> listaavEhto = jdbcTemplate.query(sql, new RowMapper<Vaihtoehto>() {
+			
+			
+			public Vaihtoehto mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Vaihtoehto vEhto = new VaihtoehtoImpl();
+				
+				vEhto.setVaihtoehtoID(rs.getInt("vaihtoehtoID"));
+				vEhto.setAanestysID(rs.getInt("aanestysID"));
+				vEhto.setVaihtoehtoNimi(rs.getString("vaihtoehtoNimi"));
+				
+				return vEhto;
+		
+			}
+		});
+		
+		return listaavEhto;
+		
+		
+	}
 }

@@ -14,6 +14,8 @@ public interface VaihtoehtoDAO {
 	
 	public Vaihtoehto get (int Vaihtoehto);
 	
+	public List<Vaihtoehto> haeVaihtoehdot (int AanestysID);
+	
 	public List<Vaihtoehto> lista();
 
 }

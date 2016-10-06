@@ -113,7 +113,6 @@ public class MainController {
 		a.setAanestysID(vdao.get(vaihtoehtoID).getAanestysID());
 
 		adao.insert(a);
-		System.out.println("parameter is " + envBean.getEnv());
 
 		return "redirect:listaa";
 
@@ -121,9 +120,9 @@ public class MainController {
 
 	// HAKEE KANNASTA VAIHTOEHDOT JA LISTAA NE KÄYTTÄJÄLLE
 	// EnvBean toimii backup beanina, ei tarvitse kiinnittää huomiota.
-	@RequestMapping(value = "lista", method = RequestMethod.GET)
-	public String getView(Model model) {
-		List<Vaihtoehto> listaaVaihtoehdot = vdao.lista();
+	@RequestMapping(value = "lista/1", method = RequestMethod.GET)
+	public String getView(@PathVariable("aanestysID") int aanID, Model model) {
+		List<Vaihtoehto> listaaVaihtoehdot = vdao.haeVaihtoehdot(aanID);
 		model.addAttribute("vaihtoehdot", listaaVaihtoehdot);
 		EnvBean envBean = new EnvBean();
 		model.addAttribute(envBean);
