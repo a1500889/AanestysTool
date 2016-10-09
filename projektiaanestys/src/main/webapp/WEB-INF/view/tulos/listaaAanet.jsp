@@ -19,7 +19,7 @@
 <c:forEach items="${tuloslista}" var="tulos">
   <li><c:out value="${tulos.vaihtoehtoNimi}" />:<c:out value="${tulos.aanlkm}" /></li>
 </c:forEach>
-<a href="/projektiaanestys">Takaisin</a>
+<a href="/projektiaanestys/">Takaisin</a>
 
 
 </body>

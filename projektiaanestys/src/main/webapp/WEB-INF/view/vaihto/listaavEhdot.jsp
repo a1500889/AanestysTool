@@ -41,7 +41,7 @@
     	<button type="submit">Äänestä</button>
 </form:form>	
 
-<a href="/projektiaanestys">Takaisin</a>				
+<a href="/projektiaanestys/">Takaisin</a>				
 
 
 

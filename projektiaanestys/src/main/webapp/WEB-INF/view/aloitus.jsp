@@ -20,7 +20,7 @@
 		<h3>Tältä sivulta löydät äänestyksen</h3>
 		
 		
-		<h2>Linkki äänestykseen:</h2>
+		<h2>Linkki vaihtoehtoihin:</h2>
 		
 			<a href="Main/lista">Äänestys</a>
 		
