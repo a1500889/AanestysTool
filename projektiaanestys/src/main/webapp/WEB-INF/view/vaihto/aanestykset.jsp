@@ -40,17 +40,22 @@
  <c:out value="${tykset.kuvaus}"/>
  </td>
  
- <td>
- <c:url value="/lista/${tykset.aanestysID}" var="aanUrl"/>
- <form action="<c:url value="/lista/${tykset.aanestysID}"/>">
- <button type="submit">paina</button>
- </form>
- <button class="btn btn-info" onclick="location.href='${aanUrl}'">LIIKU</button>
- </td>
+<!--  <td> -->
+<%--  <c:url value="/lista/${tykset.aanestysID}" var="aanUrl"/> --%>
+<%--  <form action="<c:url value="/lista/${tykset.aanestysID}"/>"> --%>
+<!--  <button type="submit">paina</button> -->
+<%--  </form> --%>
+<%--  <button class="btn btn-info" onclick="location.href='${aanUrl}'">LIIKU</button> --%>
+<!--  </td> -->
 
  <form:form id="envselection" modelAttribute="envBean" method="get" action="aanestyspoisto">
  <form:radiobutton path="env" value="${tykset.aanestysID}" onclick="submitForm()"/>
  <button type="submit">Testi</button>
+ </form:form>
+ 
+ <form:form id="envselection" modelAttribute="envBean" method="get" action="lista">
+ <form:radiobutton path="env" value="${tykset.aanestysID}" onclick="submitForm()"/>
+ <button type="submit">Äänestä</button>
  </form:form>
 
 </tr>
