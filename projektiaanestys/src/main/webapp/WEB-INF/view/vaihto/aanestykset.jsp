@@ -50,12 +50,12 @@
 
  <form:form id="envselection" modelAttribute="envBean" method="get" action="aanestyspoisto">
  <form:radiobutton path="env" value="${tykset.aanestysID}" onclick="submitForm()"/>
- <button type="submit">Testi</button>
+ <button type="submit">Poista</button>
  </form:form>
  
  <form:form id="envselection" modelAttribute="envBean" method="get" action="lista">
  <form:radiobutton path="env" value="${tykset.aanestysID}" onclick="submitForm()"/>
- <button type="submit">Äänestä</button>
+ <button type="submit">Valitse</button>
  </form:form>
 
 </tr>
