@@ -12,26 +12,37 @@
 </head>
 <body>
 
+
+=======
+	<img id="logo" src="resources/images/hh_logo.jpg" />
 	<div class="container" id="sisalto">
 
 		<div class="row">
 
+			<div class="six columns">
+				<h3>Äänestäjä</h3>
 
 
 
+				<a class="button" href="Main/lista">Äänestys</a>
 
+				<!-- 				<a href="Main/lista">Äänestys</a> -->
+			</div>
 
+			<div class="six columns">
 
+				<h3>Admin</h3>
 
+				<a class="button" href="Main/newAanestys">Lisää/muokkaa äänestys</a><br>
+				<a class="button" href="Main/newAanestaja">Lisää äänestäjä</a><br>
+				<a class="button" href="Main/aanestys">Listaa äänestykset</a><br>
+				<a class="button" href="Main/aanestajat">Lista äänestäjistä</a><br>
 
-			<a class="button" href="Main/lista">Äänestys</a> <br> <a
-				class="button" href="Main/newAanestys">Muokkaa/lisää äänestys</a><br>
-			<a class="button" href="Main/newAanestaja">Lisää äänestäjä</a> <br>
-			<a class="button" href="Main/aanestys">Äänestykset</a> <br>
-			<a class="button" href="Main/aanestajat">Äänestäjät</a>
+			</div>
 		</div>
 	</div>
 
 
+>>>>>>> 8ee1f414ce112a29a3b724fd2c37061022c526d7
 </body>
 </html>
