@@ -16,6 +16,6 @@ public interface VaihtoehtoDAO {
 	
 	public List<Vaihtoehto> haeVaihtoehdot (int AanestysID);
 	
-	public List<Vaihtoehto> lista();
+	public List<Vaihtoehto> lista(int AanestId);
 
 }

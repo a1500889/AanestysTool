@@ -62,8 +62,8 @@ public class AaniDAOImpl implements AaniDAO{
 		
 	}
 
-	public List<Aani> lista() {
-		String sql = "SELECT * FROM Aani;";
+	public List<Aani> lista(int AanestId) {
+		String sql = "SELECT * FROM Aani WHERE AanestysID="+AanestId;
 		List<Aani> aaniLista = jdbcTemplate.query(sql, new RowMapper<Aani>(){
 		
 			public Aani mapRow(ResultSet rs, int rowNum) throws SQLException {

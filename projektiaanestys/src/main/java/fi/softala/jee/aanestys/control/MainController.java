@@ -39,7 +39,19 @@ import fi.softala.jee.aanestys.dao.VaihtoehtoDAOImpl;
 public class MainController {
 	// http://stackoverflow.com/questions/21028954/radio-button-selection-and-its-value-in-spring-mvc
 	// löytyy esimerkki EnvBean:ista.
+	
+	//Tässä "teippi-ja-naru"-ratkaisu, joka tulee korvata pikimmin. 
+	private int AanestID;
 
+	public int getAanestId() {
+		return AanestID;
+	}
+
+	public void setAanestId(int AanestID) {
+		this.AanestID = AanestID;
+	}
+	
+	//Ja tässä normaalit
 	@Inject
 	private AaniDAO adao;
 
@@ -50,6 +62,7 @@ public class MainController {
 	public void setDao(AaniDAO adao) {
 		this.adao = adao;
 	}
+	
 
 	@Inject
 	private VaihtoehtoDAO vdao;
@@ -78,16 +91,25 @@ public class MainController {
 
 	// HAKEE ANNETUT ÄÄNET KANNASTA JA OHJAA NE .jsp SIVULLE.
 	@RequestMapping(value = "listaa", method = RequestMethod.GET)
-	public String getCreateForm(Model model) {
-		List<Aani> Annetutlista = adao.lista();
+	public String getCreateForm(@ModelAttribute("envBean") EnvBean envBean, Model model) {
+		
+		//Vaihtoehto p = vdao.get(Integer.parseInt(envBean.getEnv()));
+		
+		// ==I|I== EPÄPUHDASTA KOODIA, KORVATTAVA MAHD. NOP. ==I|I==
+		List<Aani> Annetutlista = adao.lista(getAanestId());
+		// ==I|I== EPÄPUHDASTA KOODIA, KORVATTAVA MAHD. NOP. ==I|I==
+		
 		ArrayList<String> AnnetutTxt = new ArrayList<String>();
 
 		for (Aani x : Annetutlista) {
 			AnnetutTxt.add(vdao.get(x.getVaihtoehtoID()).getVaihtoehtoNimi());
 		}
-
-		List<Vaihtoehto> vaihtoehdot = vdao.lista();
-
+		
+		// ==I|I== EPÄPUHDASTA KOODIA, KORVATTAVA MAHD. NOP. ==I|I==
+		List<Vaihtoehto> vaihtoehdot = vdao.lista(getAanestId());
+		setAanestId(999);
+		// ==I|I== EPÄPUHDASTA KOODIA, KORVATTAVA MAHD. NOP. ==I|I==
+		
 		ArrayList<VaihtoehtoImpl> tulos = new ArrayList<VaihtoehtoImpl>();
 
 		for (Vaihtoehto v : vaihtoehdot) {
@@ -106,14 +128,17 @@ public class MainController {
 
 	// OTTAA ÄÄNESTETTÄVÄN VAIHTOEHDON VASTAAN JA OHJAA ETEENPÄIN
 	@RequestMapping(value = "/lista", method = RequestMethod.POST)
-	public String env(@ModelAttribute("envBean") EnvBean envBean) {
+	public String env(@ModelAttribute("envBean") EnvBean envBean, Model model) {
 		Aani a = new AaniImpl();
 		int vaihtoehtoID = Integer.parseInt(envBean.getEnv());
 		a.setVaihtoehtoID(vaihtoehtoID);
 		a.setAanestysID(vdao.get(vaihtoehtoID).getAanestysID());
-
 		adao.insert(a);
-
+		
+		// ==I|I== EPÄPUHDASTA KOODIA, KORVATTAVA MAHD. NOP. ==I|I==
+		setAanestId(vdao.get(vaihtoehtoID).getAanestysID());
+		// ==I|I== EPÄPUHDASTA KOODIA, KORVATTAVA MAHD. NOP. ==I|I==
+		
 		return "redirect:listaa";
 
 	}
@@ -132,10 +157,9 @@ public class MainController {
 	//HAKEE KANNASTA VAIHTOEHDOT JA LISTAA NE KÄYTTÄJÄLLE
 			//EnvBean toimii backup beanina, ei tarvitse kiinnittää huomiota.
 			@RequestMapping(value = "lista", method = RequestMethod.GET)
-			public String getView(Model model) {
-				List<Vaihtoehto> listaaVaihtoehdot = vdao.lista();
+			public String getView(@ModelAttribute("envBean") EnvBean envBean, Model model) {
+				List<Vaihtoehto> listaaVaihtoehdot = vdao.lista(Integer.parseInt(envBean.getEnv()));
 				model.addAttribute("vaihtoehdot", listaaVaihtoehdot);
-				EnvBean envBean = new EnvBean();
 				model.addAttribute(envBean);
 				return "vaihto/listaavEhdot";
 		}

@@ -47,17 +47,18 @@
 <%--  </form> --%>
 <%--  <button class="btn btn-info" onclick="location.href='${aanUrl}'">LIIKU</button> --%>
 <!--  </td> -->
-
- <form:form id="envselection" modelAttribute="envBean" method="get" action="aanestyspoisto">
- <form:radiobutton path="env" value="${tykset.aanestysID}" onclick="submitForm()"/>
- <button type="submit">Poista</button>
- </form:form>
- 
+<td>
  <form:form id="envselection" modelAttribute="envBean" method="get" action="lista">
- <form:radiobutton path="env" value="${tykset.aanestysID}" onclick="submitForm()"/>
+ <form:hidden path="env" value="${tykset.aanestysID}" onclick="submitForm()"/>
  <button type="submit">Valitse</button>
  </form:form>
-
+</td>
+<td>
+ <form:form id="envselection" modelAttribute="envBean" method="get" action="aanestyspoisto">
+ <form:hidden path="env" value="${tykset.aanestysID}" onclick="submitForm()"/>
+ <button type="submit">Poista</button>
+ </form:form>
+</td>
 </tr>
  
 </form>

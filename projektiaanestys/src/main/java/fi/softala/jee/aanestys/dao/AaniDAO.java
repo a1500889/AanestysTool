@@ -14,6 +14,6 @@ public interface AaniDAO {
 	
 	public Aani get (int Aani);
 	
-	public List<Aani> lista();
+	public List<Aani> lista(int AanestID);
 	
 }
