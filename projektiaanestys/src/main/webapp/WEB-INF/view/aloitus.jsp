@@ -13,7 +13,7 @@
 <body>
 
 
-=======
+
 	<img id="logo" src="resources/images/hh_logo.jpg" />
 	<div class="container" id="sisalto">
 
@@ -43,6 +43,6 @@
 	</div>
 
 
->>>>>>> 8ee1f414ce112a29a3b724fd2c37061022c526d7
+
 </body>
 </html>
