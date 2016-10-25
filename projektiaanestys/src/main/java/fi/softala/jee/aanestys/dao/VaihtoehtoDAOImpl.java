@@ -72,8 +72,8 @@ public class VaihtoehtoDAOImpl implements VaihtoehtoDAO {
 			
 	}
 
-	public List<Vaihtoehto> lista() {
-		String sql = "SELECT * FROM Vaihtoehto";
+	public List<Vaihtoehto> lista(int AanestId) {
+		String sql = "SELECT * FROM Vaihtoehto WHERE AanestysID ="+AanestId;
 		List<Vaihtoehto> listaaVaihtoehdot = jdbcTemplate.query(sql, new RowMapper<Vaihtoehto>() {
 			
 			
