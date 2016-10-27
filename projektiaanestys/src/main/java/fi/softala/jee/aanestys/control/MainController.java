@@ -96,7 +96,13 @@ public class MainController {
 		//Vaihtoehto p = vdao.get(Integer.parseInt(envBean.getEnv()));
 		
 		// ==I|I== EPÄPUHDASTA KOODIA, KORVATTAVA MAHD. NOP. ==I|I==
-		List<Aani> Annetutlista = adao.lista(getAanestId());
+		List<Aani> Annetutlista;
+		
+		if(envBean.equals(null)){
+			Annetutlista = adao.lista(getAanestId());
+		}else{
+			Annetutlista = adao.lista(Integer.parseInt(envBean.getEnv()));
+		}
 		// ==I|I== EPÄPUHDASTA KOODIA, KORVATTAVA MAHD. NOP. ==I|I==
 		
 		ArrayList<String> AnnetutTxt = new ArrayList<String>();
@@ -106,8 +112,13 @@ public class MainController {
 		}
 		
 		// ==I|I== EPÄPUHDASTA KOODIA, KORVATTAVA MAHD. NOP. ==I|I==
-		List<Vaihtoehto> vaihtoehdot = vdao.lista(getAanestId());
+		List<Vaihtoehto> vaihtoehdot;
+		if(envBean.equals(null)){
+		vaihtoehdot = vdao.lista(getAanestId());
 		setAanestId(999);
+		}else{
+			vaihtoehdot = vdao.lista(Integer.parseInt(envBean.getEnv()));
+		}
 		// ==I|I== EPÄPUHDASTA KOODIA, KORVATTAVA MAHD. NOP. ==I|I==
 		
 		ArrayList<VaihtoehtoImpl> tulos = new ArrayList<VaihtoehtoImpl>();

@@ -18,12 +18,7 @@
 <h1>Äänestyksen vaihtoehdot:</h1>
 <%-- Käytetään backup:ina AanestysVaihtoehto beania --%>
 	<c:forEach items="${vaihtoehdot}" var="ehdot">
-		<form:form modelAttribute="aanestysVaihtoehto" method="post">
-	
-			
-				
-				<br/><p></p>		
-
+		<form:form modelAttribute="aanestysVaihtoehto" method="post">		
 		</form:form>
 	</c:forEach>
 	<%-- EnvBean jälleen toiminnassa, method=post ohjaa Controllerissa metodia, action=lista ohjaa listaaAanet.jsp:lle --%>
@@ -32,12 +27,6 @@
 	<%-- from:radiobutton setti hakee controllerin getView metodista vaihtoehdot --%>
 		<form:radiobutton path="env" value="${optio.vaihtoehtoID}" onclick="submitForm()"/>${optio.vaihtoehtoNimi}<br>
 	</c:forEach>
-	
-	
-<%--     <form:radiobutton path="env" value="QA 71" onclick="submitForm()"/>QA 71 --%>
-<%--     <form:radiobutton path="env" value="QA 72" onclick="submitForm()"/>QA 72 --%>
-<%--     <form:radiobutton path="env" value="QA 73" onclick="submitForm()"/>QA 73 --%>
-<%--     <form:radiobutton path="env" value="QA 74" onclick="submitForm()"/>QA 74 --%>
     	<button type="submit">Äänestä</button>
 </form:form>	
 

@@ -59,6 +59,12 @@
  <button type="submit">Poista</button>
  </form:form>
 </td>
+<td>
+ <form:form id="envselection" modelAttribute="envBean" method="get" action="listaa">
+ <form:hidden path="env" value="${tykset.aanestysID}" onclick="submitForm()"/>
+ <button type="submit">Näytä äänet</button>
+ </form:form>
+</td>
 </tr>
  
 </form>
