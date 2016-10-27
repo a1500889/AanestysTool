@@ -1,11 +1,14 @@
 package fi.softala.jee.aanestys.bean;
 
+import java.util.ArrayList;
+
 public class AanestysImpl implements Aanestys {
 //git
 	private int AanestysID;
 	private String Tunnus;
 	private String AanestysNimi;
 	private String Kuvaus;
+	private ArrayList<Vaihtoehto> AanVaihtoehdot;
 	
 	public int getAanestysID() {
 		return AanestysID;
@@ -34,6 +37,20 @@ public class AanestysImpl implements Aanestys {
 	
 	public AanestysImpl() {
 		// TODO Auto-generated constructor stub
+	}
+	
+	public ArrayList<Vaihtoehto> getAanVaihtoehdot() {
+		return AanVaihtoehdot;
+	}
+	
+	public void setAanVaihtoehdot(
+			ArrayList<Vaihtoehto> AanVaihtoehdot) {
+		  this.AanVaihtoehdot = AanVaihtoehdot;
+
+	}
+	public void addAanVaihtoehto(Vaihtoehto UusiVaihtoehto) {
+		this.AanVaihtoehdot.add(UusiVaihtoehto);
+
 	}
 	
 	@Override

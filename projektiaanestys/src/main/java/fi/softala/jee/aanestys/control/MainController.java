@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,6 +36,7 @@ import fi.softala.jee.aanestys.dao.VaihtoehtoDAO;
 import fi.softala.jee.aanestys.dao.VaihtoehtoDAOImpl;
 
 @Controller
+@SessionAttributes("AanestysID")
 @RequestMapping(value = "/Main")
 public class MainController {
 	// http://stackoverflow.com/questions/21028954/radio-button-selection-and-its-value-in-spring-mvc
@@ -97,28 +99,26 @@ public class MainController {
 		
 		// ==I|I== EPÄPUHDASTA KOODIA, KORVATTAVA MAHD. NOP. ==I|I==
 		List<Aani> Annetutlista;
-		
-		if(envBean.equals(null)){
+		//if(envBean.equals(null)){
 			Annetutlista = adao.lista(getAanestId());
-		}else{
-			Annetutlista = adao.lista(Integer.parseInt(envBean.getEnv()));
-		}
+		//}else{
+		//	Annetutlista = adao.lista(Integer.parseInt(envBean.getEnv()));
+		//}
 		// ==I|I== EPÄPUHDASTA KOODIA, KORVATTAVA MAHD. NOP. ==I|I==
-		
 		ArrayList<String> AnnetutTxt = new ArrayList<String>();
-
+		
 		for (Aani x : Annetutlista) {
 			AnnetutTxt.add(vdao.get(x.getVaihtoehtoID()).getVaihtoehtoNimi());
 		}
 		
 		// ==I|I== EPÄPUHDASTA KOODIA, KORVATTAVA MAHD. NOP. ==I|I==
 		List<Vaihtoehto> vaihtoehdot;
-		if(envBean.equals(null)){
+	//	if(envBean.equals(null)){
 		vaihtoehdot = vdao.lista(getAanestId());
 		setAanestId(999);
-		}else{
-			vaihtoehdot = vdao.lista(Integer.parseInt(envBean.getEnv()));
-		}
+	//	}else{
+	//		vaihtoehdot = vdao.lista(Integer.parseInt(envBean.getEnv()));
+	//	}
 		// ==I|I== EPÄPUHDASTA KOODIA, KORVATTAVA MAHD. NOP. ==I|I==
 		
 		ArrayList<VaihtoehtoImpl> tulos = new ArrayList<VaihtoehtoImpl>();
@@ -145,10 +145,11 @@ public class MainController {
 		a.setVaihtoehtoID(vaihtoehtoID);
 		a.setAanestysID(vdao.get(vaihtoehtoID).getAanestysID());
 		adao.insert(a);
-		
+		int AanestID = vdao.get(vaihtoehtoID).getAanestysID();
 		// ==I|I== EPÄPUHDASTA KOODIA, KORVATTAVA MAHD. NOP. ==I|I==
-		setAanestId(vdao.get(vaihtoehtoID).getAanestysID());
+		setAanestId(AanestID);
 		// ==I|I== EPÄPUHDASTA KOODIA, KORVATTAVA MAHD. NOP. ==I|I==
+		model.addAttribute("AanestysID", AanestID);
 		
 		return "redirect:listaa";
 
@@ -171,7 +172,7 @@ public class MainController {
 			public String getView(@ModelAttribute("envBean") EnvBean envBean, Model model) {
 				List<Vaihtoehto> listaaVaihtoehdot = vdao.lista(Integer.parseInt(envBean.getEnv()));
 				model.addAttribute("vaihtoehdot", listaaVaihtoehdot);
-				model.addAttribute(envBean);
+				//model.addAttribute(envBean);
 				return "vaihto/listaavEhdot";
 		}
 
@@ -246,6 +247,14 @@ public class MainController {
 		//Poistaa itse äänestyksen.
 		edao.delete(ID);
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/lisaavaihtoehdot", method = RequestMethod.GET)
+	public String lisaaVaihtoehdot(@ModelAttribute("envBean") EnvBean envBean){
+		
+		
+		
+		return "vaihto/VaihtoehtoForm";
 	}
 	
 }
