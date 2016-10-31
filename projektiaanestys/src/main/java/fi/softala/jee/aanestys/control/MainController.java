@@ -3,6 +3,7 @@ package fi.softala.jee.aanestys.control;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -28,6 +30,7 @@ import fi.softala.jee.aanestys.bean.AaniImpl;
 import fi.softala.jee.aanestys.bean.EnvBean;
 import fi.softala.jee.aanestys.bean.Vaihtoehto;
 import fi.softala.jee.aanestys.bean.VaihtoehtoImpl;
+import fi.softala.jee.aanestys.bean.VaihtoehtoListaPOJO;
 import fi.softala.jee.aanestys.dao.AanestajaDAO;
 import fi.softala.jee.aanestys.dao.AaniDAO;
 import fi.softala.jee.aanestys.dao.AanestysDAO;
@@ -250,7 +253,25 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/lisaavaihtoehdot", method = RequestMethod.GET)
-	public String lisaaVaihtoehdot(@ModelAttribute("envBean") EnvBean envBean){
+	public String lisaaVaihtoehdot(Model model){
+		List<Aanestys> aanestykset = edao.lista();
+		model.addAttribute("aanestykset", aanestykset);
+		EnvBean envBean = new EnvBean();
+		model.addAttribute(envBean);
+		
+		return "vaihto/VaihtoehtoForm";
+	}
+	
+	@RequestMapping(value="/lisaavaihtoehdot", method = RequestMethod.POST)
+	public String tallennavEhdot(@RequestParam("vaihtoehtoNimet") String[] uudetVaihtoehdot, EnvBean envBean, VaihtoehtoImpl temp) {
+		
+		for (int i = 0; i < uudetVaihtoehdot.length; i++) {
+			temp.setAanestysID(Integer.parseInt(envBean.getEnv()));
+			temp.setVaihtoehtoNimi(uudetVaihtoehdot[i]);
+			temp.setVaihtoehtoID(25);
+			vdao.insert(temp);
+		}
+
 		
 		
 		
