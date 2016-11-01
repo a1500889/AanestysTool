@@ -1,42 +1,33 @@
 package fi.softala.jee.aanestys.control;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fi.softala.jee.aanestys.bean.Aanestaja;
 import fi.softala.jee.aanestys.bean.AanestajaImpl;
 import fi.softala.jee.aanestys.bean.Aanestys;
 import fi.softala.jee.aanestys.bean.AanestysImpl;
-import fi.softala.jee.aanestys.bean.AanestysVaihtoehto;
 import fi.softala.jee.aanestys.bean.Aani;
 import fi.softala.jee.aanestys.bean.AaniImpl;
 import fi.softala.jee.aanestys.bean.EnvBean;
 import fi.softala.jee.aanestys.bean.Vaihtoehto;
 import fi.softala.jee.aanestys.bean.VaihtoehtoImpl;
-import fi.softala.jee.aanestys.bean.VaihtoehtoListaPOJO;
 import fi.softala.jee.aanestys.dao.AanestajaDAO;
 import fi.softala.jee.aanestys.dao.AaniDAO;
 import fi.softala.jee.aanestys.dao.AanestysDAO;
-import fi.softala.jee.aanestys.dao.AanestysDAOImpl;
 import fi.softala.jee.aanestys.dao.VaihtoehtoDAO;
-import fi.softala.jee.aanestys.dao.VaihtoehtoDAOImpl;
 
 @Controller
 @SessionAttributes("AanestysID")
@@ -86,27 +77,32 @@ public class MainController {
 	@RequestMapping(value = "listaa", method = RequestMethod.GET)
 	public String getCreateForm(@ModelAttribute(value="env") String iidee, Model model) {
 		
-		
-		List<Aani> Annetutlista;
-		Annetutlista=adao.lista(Integer.parseInt(iidee));
+		//Hakee annetut äänet äänestyksen ID:n perusteella.
+		List<Aani> Annetutlista = adao.lista(Integer.parseInt(iidee));
 		ArrayList<String> AnnetutTxt = new ArrayList<String>();
 		
+		//Muuttaa saadun Ääni-objektiin pohjautuvan listan String-pohjaiseksi,
+		//jotta tiettyjen äänien määrä voidaitiin laskea nopasti ja helposti myöhemmin 
+		//collections.frequency-toiminnolla.
 		for (Aani x : Annetutlista) {
 			AnnetutTxt.add(vdao.get(x.getVaihtoehtoID()).getVaihtoehtoNimi());
 		}
 		
+		//Hakee vaihtoehdot tietokannasta.
 		List<Vaihtoehto> vaihtoehdot;
-		vaihtoehdot = vdao.lista(Integer.parseInt(iidee));
-
-		
+		vaihtoehdot = vdao.haeVaihtoehdot(Integer.parseInt(iidee));
+	
+		//Luo tuloslistan ja käy läpi vaihtoehdon kerrallaan,
+		//käyden läpi kuinka monta kertaa se mainitaan äänilistassa,
+		//ts. katsoo kuinka monta ääntä se on saanut,
+		//laskien summan ja lisäten sen väliaikaiseen vaihtoehto/tulos-objektiin vaihtoehdon nimen ja ID:n kanssa,
+		//joka tallennetaan .jsp-sivulle tulostettavaksi lähetettävään listaan.
 		ArrayList<VaihtoehtoImpl> tulos = new ArrayList<VaihtoehtoImpl>();
-
 		for (Vaihtoehto v : vaihtoehdot) {
 			VaihtoehtoImpl temp = new VaihtoehtoImpl();
 			temp.setVaihtoehtoNimi(v.getVaihtoehtoNimi());
 			temp.setVaihtoehtoID(v.getVaihtoehtoID());
-			temp.setAanlkm(Collections.frequency(AnnetutTxt,
-					v.getVaihtoehtoNimi()));
+			temp.setAanlkm(Collections.frequency(AnnetutTxt, v.getVaihtoehtoNimi()));
 			tulos.add(temp);
 		}
 
@@ -129,16 +125,15 @@ public class MainController {
 		return "redirect:listaa";
 
 	}
-
 	
 	//HAKEE KANNASTA VAIHTOEHDOT JA LISTAA NE KÄYTTÄJÄLLE
-			//EnvBean toimii backup beanina, ei tarvitse kiinnittää huomiota.
-			@RequestMapping(value = "lista", method = RequestMethod.GET)
-			public String getView(@ModelAttribute("envBean") EnvBean envBean, Model model) {
-				List<Vaihtoehto> listaaVaihtoehdot = vdao.lista(Integer.parseInt(envBean.getEnv()));
-				model.addAttribute("vaihtoehdot", listaaVaihtoehdot);
-				return "vaihto/listaavEhdot";
-		}
+	//EnvBean toimii backup beanina, ei tarvitse kiinnittää huomiota.
+	@RequestMapping(value = "lista", method = RequestMethod.GET)
+	public String getView(@ModelAttribute("envBean") EnvBean envBean, Model model) {
+		List<Vaihtoehto> listaaVaihtoehdot = vdao.haeVaihtoehdot(Integer.parseInt(envBean.getEnv()));
+		model.addAttribute("vaihtoehdot", listaaVaihtoehdot);
+		return "vaihto/listaavEhdot";
+	}
 
 	// tallettaa tiedot tietokantaan
 	@RequestMapping(value = "/saveAanestys", method = RequestMethod.POST)
@@ -188,29 +183,27 @@ public class MainController {
 	
 	//LISTAA ÄÄNESTYKSET ADMINILLE
 	@RequestMapping(value = "aanestys", method = RequestMethod.GET)
-					public String getAanestykset(Model model) {
-						List<Aanestys> listaaAanestys = edao.lista();
-						model.addAttribute("aanestykset", listaaAanestys);
-						EnvBean envBean = new EnvBean();
-						model.addAttribute(envBean);
-						return "vaihto/aanestykset";
+	public String getAanestykset(Model model) {
+		List<Aanestys> listaaAanestys = edao.lista();
+		model.addAttribute("aanestykset", listaaAanestys);
+		EnvBean envBean = new EnvBean();
+		model.addAttribute(envBean);
+		return "vaihto/aanestykset";
 	}
 	
 	//LISTAA ÄÄNESTYKSET ÄÄNESTÄJÄLLE
-		@RequestMapping(value = "aanestys1", method = RequestMethod.GET)
-						public String getAanestykset1(Model model) {
-							List<Aanestys> listaaAanestys = edao.lista();
-							model.addAttribute("aanestykset", listaaAanestys);
-							EnvBean envBean = new EnvBean();
-							model.addAttribute(envBean);
-							return "vaihto/listaanestykset";
-		}
+	@RequestMapping(value = "aanestys1", method = RequestMethod.GET)
+	public String getAanestykset1(Model model) {
+		List<Aanestys> listaaAanestys = edao.lista();
+		model.addAttribute("aanestykset", listaaAanestys);
+		EnvBean envBean = new EnvBean();
+		model.addAttribute(envBean);
+		return "vaihto/listaanestykset";
+	}
 		
 	//POISTAA ÄÄNESTYKSEN
 	@RequestMapping(value = "/aanestyspoisto", method = RequestMethod.GET)
 	public String poista(@ModelAttribute("envBean") EnvBean envBean) {
-//		int tunnus = model.
-//		System.out.println("ping");
 		int ID = Integer.parseInt(envBean.getEnv());
 		//Poistaa äänestyksen vaihtoehdot.
 		vdao.deletet(ID);
@@ -223,6 +216,8 @@ public class MainController {
 		return "redirect:/";
 	}
 	
+	//VAIHTOEHTOJEN LISÄÄMINEN ÄÄNESTYKSEEN: OSA 1
+	//Hakee äänestykset, jotta voi valita mihin lisää vaihtoehtoja.
 	@RequestMapping(value="/lisaavaihtoehdot", method = RequestMethod.GET)
 	public String lisaaVaihtoehdot(Model model){
 		List<Aanestys> aanestykset = edao.lista();
@@ -233,6 +228,9 @@ public class MainController {
 		return "vaihto/VaihtoehtoForm";
 	}
 	
+	//VAIHTOEHTOJEN LISÄÄMINEN ÄÄNESTYKSEEN: OSA 2
+	//Hakee valitun äänestyksen ID:n ja annetut vaihtoehdot (String),
+	//tallentaen vaihtoehdot yksi kerrallaan tietokantaan.
 	@RequestMapping(value="/lisaavaihtoehdot", method = RequestMethod.POST)
 	public String tallennavEhdot(@RequestParam("vaihtoehtoNimet") String[] uudetVaihtoehdot, EnvBean envBean, VaihtoehtoImpl temp) {
 		
@@ -242,10 +240,7 @@ public class MainController {
 			temp.setVaihtoehtoID(25);
 			vdao.insert(temp);
 		}
-
-		
-		
-		
+	
 		return "vaihto/VaihtoehtoForm";
 	}
 	

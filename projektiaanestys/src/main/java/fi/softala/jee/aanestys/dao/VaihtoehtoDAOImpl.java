@@ -34,8 +34,7 @@ public class VaihtoehtoDAOImpl implements VaihtoehtoDAO {
 		if(vEhto.getVaihtoehtoID() > 0) {
 			
 			String sql = "INSERT INTO Vaihtoehto (AanestysID, VaihtoehtoNimi)" + " VALUES (?, ?)";
-			jdbcTemplate.update(sql, vEhto.getAanestysID(), vEhto.getVaihtoehtoNimi());
-			
+			jdbcTemplate.update(sql, vEhto.getAanestysID(), vEhto.getVaihtoehtoNimi());	
 			
 		}
 		
@@ -71,26 +70,6 @@ public class VaihtoehtoDAOImpl implements VaihtoehtoDAO {
 		});
 			
 	}
-
-	public List<Vaihtoehto> lista(int AanestId) {
-		String sql = "SELECT * FROM Vaihtoehto WHERE AanestysID ="+AanestId;
-		List<Vaihtoehto> listaaVaihtoehdot = jdbcTemplate.query(sql, new RowMapper<Vaihtoehto>() {
-			
-			
-			public Vaihtoehto mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Vaihtoehto vEhto = new VaihtoehtoImpl();
-				
-				vEhto.setVaihtoehtoID(rs.getInt("vaihtoehtoID"));
-				vEhto.setAanestysID(rs.getInt("aanestysID"));
-				vEhto.setVaihtoehtoNimi(rs.getString("vaihtoehtoNimi"));
-				
-				return vEhto;
-		
-			}
-		});
-		
-		return listaaVaihtoehdot;
-}
 
 	public List<Vaihtoehto> haeVaihtoehdot(int AanestysID) {
 		String sql = "SELECT * FROM Vaihtoehto WHERE AanestysID ="+AanestysID;
