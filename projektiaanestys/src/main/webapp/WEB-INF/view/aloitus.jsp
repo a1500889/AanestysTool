@@ -23,17 +23,15 @@
 				<h3>Äänestäjä</h3>
 
 
-
-				<a class="button" href="Main/lista">Äänestys</a>
-
-				<!-- 				<a href="Main/lista">Äänestys</a> -->
+				<a class="button" href="Main/aanestys1">Listaa äänestykset</a>
+				
 			</div>
 
 			<div class="six columns">
 
 				<h3>Admin</h3>
 
-				<a class="button" href="Main/newAanestys">Lisää/muokkaa äänestys</a><br>
+				<a class="button" href="Main/newAanestys">Lisää äänestys</a><br>
 				<a class="button" href="Main/newAanestaja">Lisää äänestäjä</a><br>
 				<a class="button" href="Main/aanestys">Listaa äänestykset</a><br>
 				<a class="button" href="Main/aanestajat">Lista äänestäjistä</a><br>

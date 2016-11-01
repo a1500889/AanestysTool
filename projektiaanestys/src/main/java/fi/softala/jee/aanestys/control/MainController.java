@@ -187,7 +187,7 @@ public class MainController {
 		return "vaihto/aanestajat";
 	}
 	
-	//LISTAA ÄÄNESTYKSET
+	//LISTAA ÄÄNESTYKSET ADMINILLE
 	@RequestMapping(value = "aanestys", method = RequestMethod.GET)
 					public String getAanestykset(Model model) {
 						List<Aanestys> listaaAanestys = edao.lista();
@@ -197,6 +197,16 @@ public class MainController {
 						return "vaihto/aanestykset";
 	}
 	
+	//LISTAA ÄÄNESTYKSET ÄÄNESTÄJÄLLE
+		@RequestMapping(value = "aanestys1", method = RequestMethod.GET)
+						public String getAanestykset1(Model model) {
+							List<Aanestys> listaaAanestys = edao.lista();
+							model.addAttribute("aanestykset", listaaAanestys);
+							EnvBean envBean = new EnvBean();
+							model.addAttribute(envBean);
+							return "vaihto/listaanestykset";
+		}
+		
 	//POISTAA ÄÄNESTYKSEN
 	@RequestMapping(value = "/aanestyspoisto", method = RequestMethod.GET)
 	public String poista(@ModelAttribute("envBean") EnvBean envBean) {
