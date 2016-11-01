@@ -16,7 +16,7 @@
 </head>
 <body>
 	<img id="logo" src="../resources/images/hh_logo.jpg" />
-
+	<hr>
 	<div class="container" id="LisaaAanestaja">
 
 		<div class="row">
@@ -27,48 +27,51 @@
 
 				<h1>Tarjolla olevat äänestykset:</h1>
 
-				<table>
+				<table class="u-full-width">
+					<thead>
+						<tr class="header">
+							<th>Nimi </th>
+							<th>Tunnus </th>
+							<th>Kuvaus </th>
+						</tr>
+					</thead>
+					<tbody>
 
-					<td>Nimi:</td>
-					<td>ID:</td>
-					<td>Tunnus:</td>
-					<td>Kuvaus:</td>
+						<c:forEach items="${aanestykset}" var="tykset">
+							<tr>
+								<td><c:out value="${tykset.aanestysNimi}" /></td>
+								
+								<td><c:out value="${tykset.tunnus}" /></td>
 
-
-					<c:forEach items="${aanestykset}" var="tykset">
-						<tr>
-							<td><c:out value="${tykset.aanestysNimi}" /></td>
-							<td><c:out value="${tykset.aanestysID}" /></td>
-							<td><c:out value="${tykset.tunnus}" /></td>
-
-							<td><c:out value="${tykset.kuvaus}" /></td>
-
-							<!--  <td> -->
-							<%--  <c:url value="/lista/${tykset.aanestysID}" var="aanUrl"/> --%>
-							<%--  <form action="<c:url value="/lista/${tykset.aanestysID}"/>"> --%>
-							<!--  <button type="submit">paina</button> -->
-							<%--  </form> --%>
-							<%--  <button class="btn btn-info" onclick="location.href='${aanUrl}'">LIIKU</button> --%>
-							<!--  </td> -->
-							<td><form:form id="envselection" modelAttribute="envBean"
-									method="get" action="lista">
-									<form:hidden path="env" value="${tykset.aanestysID}"
-										onclick="submitForm()" />
-									<button type="submit">Valitse</button>
-								</form:form></td>
-							<td><form:form id="envselection" modelAttribute="envBean"
-									method="get" action="aanestyspoisto">
-									<form:hidden path="env" value="${tykset.aanestysID}"
-										onclick="submitForm()" />
-									<button type="submit">Poista</button>
-								</form:form></td>
+								<td><c:out value="${tykset.kuvaus}" /></td>
+							</tr>
+							
+							<tr>
+								<td><form:form id="envselection" modelAttribute="envBean"
+										method="get" action="lista">
+										<form:hidden path="env" value="${tykset.aanestysID}"
+											onclick="submitForm()" />
+										<button type="submit">Valitse</button>
+									</form:form></td>
+									
+							</tr>
+							<tr>
+								<td><form:form id="envselection" modelAttribute="envBean"
+										method="get" action="aanestyspoisto">
+										<form:hidden path="env" value="${tykset.aanestysID}"
+											onclick="submitForm()" />
+										<button type="submit">Poista</button>
+									</form:form></td>
+							</tr>
+							<tr class="napit">
 							<td>
-									<button onclick="location.href='listaa/${tykset.aanestysID}'">Listaa äänet</button>
+								<button onclick="location.href='listaa/${tykset.aanestysID}'">Tulos</button>
 								</td>
 						</tr>
 
 						
 					</c:forEach>
+				</tbody>
 
 
 				</table>
