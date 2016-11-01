@@ -249,4 +249,9 @@ public class MainController {
 		return "vaihto/VaihtoehtoForm";
 	}
 	
+	@RequestMapping(value="/admin", method = RequestMethod.GET)
+	public String admin (Model model){
+		return "Admin/admin";
+	}
+
 }
