@@ -16,58 +16,54 @@
 </head>
 <body>
 	<img id="logo" src="../resources/images/hh_logo.jpg" />
-
+	<hr>
 	<div class="container" id="LisaaAanestaja">
 
 		<div class="row">
 
 
-			<div class="nine columns">
+			<div class="eleven columns">
 
 
 				<h1>Tarjolla olevat äänestykset:</h1>
 
-				<table>
-
-					<td>Nimi:</td>
-					<td>ID:</td>
-					<td>Tunnus:</td>
-					<td>Kuvaus:</td>
-
-
+				<table class="u-full-width">
+				<thead>
+					<tr class="header">
+					<th>Nimi </th>
+					<th>Tunnus </th>
+					<th>Kuvaus </th>
+					</tr>
+				</thead>
+				<tbody>
 					<c:forEach items="${aanestykset}" var="tykset">
 						<tr>
 							<td><c:out value="${tykset.aanestysNimi}" /></td>
-							<td><c:out value="${tykset.aanestysID}" /></td>
 							<td><c:out value="${tykset.tunnus}" /></td>
 
 							<td><c:out value="${tykset.kuvaus}" /></td>
-
-							<!--  <td> -->
-							<%--  <c:url value="/lista/${tykset.aanestysID}" var="aanUrl"/> --%>
-							<%--  <form action="<c:url value="/lista/${tykset.aanestysID}"/>"> --%>
-							<!--  <button type="submit">paina</button> -->
-							<%--  </form> --%>
-							<%--  <button class="btn btn-info" onclick="location.href='${aanUrl}'">LIIKU</button> --%>
-							<!--  </td> -->
+						</tr>
+						
+						<tr>
 							<td><form:form id="envselection" modelAttribute="envBean"
 									method="get" action="lista">
 									<form:hidden path="env" value="${tykset.aanestysID}"
 										onclick="submitForm()" />
 									<button type="submit">Valitse</button>
 								</form:form></td>
-					
+					</tr>
+					<tr class="napit">
 							<td><form:form id="envselection" modelAttribute="envBean"
 									method="get" action="listaa">
 									<form:hidden path="env" value="${tykset.aanestysID}"
 										onclick="submitForm()" />
-									<button type="submit">Listaa äänet</button>
+									<button type="submit">Tulos</button>
 								</form:form></td>
 						</tr>
-
+					
 						
 					</c:forEach>
-
+					</tbody>
 
 				</table>
 			</div>
