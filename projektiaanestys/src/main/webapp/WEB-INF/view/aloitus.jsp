@@ -37,6 +37,7 @@
 				<a class="button" href="Main/newAanestaja">Lis‰‰ ‰‰nest‰j‰</a><br>
 				<a class="button" href="Main/aanestys">Listaa ‰‰nestykset</a><br>
 				<a class="button" href="Main/aanestajat">Lista ‰‰nest‰jist‰</a><br>
+				<a class="button" href="Main/lisaavaihtoehdot">Lis‰‰ vaihtoehtoja</a><br>
 
 			</div>
 		</div>
