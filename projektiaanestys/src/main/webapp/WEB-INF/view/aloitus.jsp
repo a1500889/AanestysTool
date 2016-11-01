@@ -15,6 +15,7 @@
 
 
 	<img id="logo" src="resources/images/hh_logo.jpg" />
+	<hr>
 	<div class="container" id="sisalto">
 
 		<div class="row">
@@ -31,11 +32,8 @@
 
 				<h3>Admin</h3>
 
-				<a class="button" href="Main/newAanestys">Lis‰‰ ‰‰nestys</a><br>
-				<a class="button" href="Main/newAanestaja">Lis‰‰ ‰‰nest‰j‰</a><br>
-				<a class="button" href="Main/aanestys">Listaa ‰‰nestykset</a><br>
-				<a class="button" href="Main/aanestajat">Lista ‰‰nest‰jist‰</a><br>
-				<a class="button" href="Main/lisaavaihtoehdot">Lis‰‰ vaihtoehtoja</a><br>
+				<a class="button" href="Main/admin">Admin sivulle t‰st‰</a><br>
+			
 
 			</div>
 		</div>
