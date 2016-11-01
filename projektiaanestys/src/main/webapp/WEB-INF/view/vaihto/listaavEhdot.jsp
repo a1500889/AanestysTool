@@ -32,8 +32,7 @@
 					</form:form>
 				</c:forEach>
 				<%-- EnvBean jälleen toiminnassa, method=post ohjaa Controllerissa metodia, action=lista ohjaa listaaAanet.jsp:lle --%>
-				<form:form id="envselection" modelAttribute="envBean" method="post"
-					action="lista">
+				<form:form id="envselection" modelAttribute="envBean" method="post" action="lista">
 					<c:forEach var="optio" items="${vaihtoehdot}">
 						<%-- from:radiobutton setti hakee controllerin getView metodista vaihtoehdot --%>
 						<form:radiobutton path="env" value="${optio.vaihtoehtoID}"

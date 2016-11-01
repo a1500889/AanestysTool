@@ -62,12 +62,9 @@
 										onclick="submitForm()" />
 									<button type="submit">Poista</button>
 								</form:form></td>
-							<td><form:form id="envselection" modelAttribute="envBean"
-									method="get" action="listaa">
-									<form:hidden path="env" value="${tykset.aanestysID}"
-										onclick="submitForm()" />
-									<button type="submit">Listaa äänet</button>
-								</form:form></td>
+							<td>
+									<button onclick="location.href='listaa/${tykset.aanestysID}'">Listaa äänet</button>
+								</td>
 						</tr>
 
 						

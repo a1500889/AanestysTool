@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -74,13 +75,12 @@ public class MainController {
 	}
 
 	// HAKEE ANNETUT ÄÄNET KANNASTA JA OHJAA NE .jsp SIVULLE.
-	@RequestMapping(value = "listaa", method = RequestMethod.GET)
-	public String getCreateForm(@ModelAttribute(value="env") String iidee, Model model) {
-		
+	@RequestMapping(value = "listaa/{id}", method = RequestMethod.GET)
+	public String getCreateForm(@PathVariable("id") int iidee, Model model) {
+
 		//Hakee annetut äänet äänestyksen ID:n perusteella.
-		List<Aani> Annetutlista = adao.lista(Integer.parseInt(iidee));
+		List<Aani> Annetutlista = adao.lista(iidee);
 		ArrayList<String> AnnetutTxt = new ArrayList<String>();
-		
 		//Muuttaa saadun Ääni-objektiin pohjautuvan listan String-pohjaiseksi,
 		//jotta tiettyjen äänien määrä voidaitiin laskea nopasti ja helposti myöhemmin 
 		//collections.frequency-toiminnolla.
@@ -90,7 +90,7 @@ public class MainController {
 		
 		//Hakee vaihtoehdot tietokannasta.
 		List<Vaihtoehto> vaihtoehdot;
-		vaihtoehdot = vdao.haeVaihtoehdot(Integer.parseInt(iidee));
+		vaihtoehdot = vdao.haeVaihtoehdot(iidee);
 	
 		//Luo tuloslistan ja käy läpi vaihtoehdon kerrallaan,
 		//käyden läpi kuinka monta kertaa se mainitaan äänilistassa,
@@ -120,9 +120,8 @@ public class MainController {
 		a.setAanestysID(vdao.get(vaihtoehtoID).getAanestysID());
 		adao.insert(a);
 		int AanestID = vdao.get(vaihtoehtoID).getAanestysID();
-		model.addAttribute("AanestysID", AanestID);
 		
-		return "redirect:listaa";
+		return "redirect:listaa/"+AanestID+"";
 
 	}
 	
@@ -243,6 +242,15 @@ public class MainController {
 	
 		return "vaihto/VaihtoehtoForm";
 	}
+	
+	@RequestMapping(value="/bypass", method = RequestMethod.POST)
+	public String ohitusredirect(@ModelAttribute("envBean") String iidee, Model model) {
+		model.addAttribute("AanestysID", Integer.parseInt(iidee));
+		
+		return "redirect:listaa";
+	}
+	
+	
 	
 	@RequestMapping(value="/admin", method = RequestMethod.GET)
 	public String admin (Model model){

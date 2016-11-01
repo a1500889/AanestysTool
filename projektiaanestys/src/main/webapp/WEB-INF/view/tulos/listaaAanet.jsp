@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="../resources/styles/tyyli.css">
 <link rel="stylesheet" href="../resources/styles/skeleton.css">
 <link rel="stylesheet" href="../resources/styles/normalize.css">
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Annettujen äänten tulos</title>
 </head>
