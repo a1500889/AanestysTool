@@ -84,7 +84,7 @@ public class MainController {
 
 	// HAKEE ANNETUT ÄÄNET KANNASTA JA OHJAA NE .jsp SIVULLE.
 	@RequestMapping(value = "listaa", method = RequestMethod.GET)
-	public String getCreateForm(@ModelAttribute("envBean") EnvBean envBean, @ModelAttribute(value="env") String iidee, Model model) {
+	public String getCreateForm(@ModelAttribute(value="env") String iidee, Model model) {
 		
 		
 		List<Aani> Annetutlista;
@@ -137,7 +137,6 @@ public class MainController {
 			public String getView(@ModelAttribute("envBean") EnvBean envBean, Model model) {
 				List<Vaihtoehto> listaaVaihtoehdot = vdao.lista(Integer.parseInt(envBean.getEnv()));
 				model.addAttribute("vaihtoehdot", listaaVaihtoehdot);
-				//model.addAttribute(envBean);
 				return "vaihto/listaavEhdot";
 		}
 
