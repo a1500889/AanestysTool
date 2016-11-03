@@ -14,4 +14,5 @@ public interface AanestajaDAO {
 	
 	public List<Aanestaja> lista();
 
+	public List<String> listaaLuvalliset(int AanestysID);
 }

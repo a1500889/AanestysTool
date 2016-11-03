@@ -34,10 +34,13 @@
 				<%-- EnvBean jälleen toiminnassa, method=post ohjaa Controllerissa metodia, action=lista ohjaa listaaAanet.jsp:lle --%>
 				<form:form id="envselection" modelAttribute="envBean" method="post" action="lista">
 					<c:forEach var="optio" items="${vaihtoehdot}">
+
 						<%-- from:radiobutton setti hakee controllerin getView metodista vaihtoehdot --%>
 						<form:radiobutton path="env" value="${optio.vaihtoehtoID}"
 							onclick="submitForm()" />${optio.vaihtoehtoNimi}<br>
 					</c:forEach>
+					<input type="hidden" name="etunimi" value="${etunimi}"/>
+					<input type="hidden" name="sukunimi" value="${sukunimi}"/>
 					<button type="submit">Äänestä</button>
 				</form:form>
 

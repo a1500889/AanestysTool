@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import fi.softala.jee.aanestys.bean.Aanestaja;
 import fi.softala.jee.aanestys.bean.AanestajaImpl;
@@ -113,12 +116,12 @@ public class MainController {
 
 	// OTTAA ÄÄNESTETTÄVÄN VAIHTOEHDON VASTAAN JA OHJAA ETEENPÄIN
 	@RequestMapping(value = "/lista", method = RequestMethod.POST)
-	public String env(@ModelAttribute("envBean") EnvBean envBean, Model model) {
+	public String env(@ModelAttribute("envBean") EnvBean envBean,@ModelAttribute("etunimi") String etunimi,@ModelAttribute("sukunimi") String sukunimi, Model model) {
 		Aani a = new AaniImpl();
 		int vaihtoehtoID = Integer.parseInt(envBean.getEnv());
 		a.setVaihtoehtoID(vaihtoehtoID);
 		a.setAanestysID(vdao.get(vaihtoehtoID).getAanestysID());
-		adao.insert(a);
+		adao.insert(a, etunimi, sukunimi);
 		int AanestID = vdao.get(vaihtoehtoID).getAanestysID();
 		
 		return "redirect:listaa/"+AanestID+"";
@@ -128,8 +131,11 @@ public class MainController {
 	//HAKEE KANNASTA VAIHTOEHDOT JA LISTAA NE KÄYTTÄJÄLLE
 	//EnvBean toimii backup beanina, ei tarvitse kiinnittää huomiota.
 	@RequestMapping(value = "lista", method = RequestMethod.GET)
-	public String getView(@ModelAttribute("envBean") EnvBean envBean, Model model) {
+	public String getView(@ModelAttribute("envBean") EnvBean envBean, Model model, 
+			@ModelAttribute("Aetunimi") String etunimi, @ModelAttribute("Asukunimi") String sukunimi) {
 		List<Vaihtoehto> listaaVaihtoehdot = vdao.haeVaihtoehdot(Integer.parseInt(envBean.getEnv()));
+		model.addAttribute("etunimi", etunimi);
+		model.addAttribute("sukunimi", sukunimi);
 		model.addAttribute("vaihtoehdot", listaaVaihtoehdot);
 		return "vaihto/listaavEhdot";
 	}
@@ -250,7 +256,31 @@ public class MainController {
 		return "redirect:listaa";
 	}
 	
+	@RequestMapping(value="/tunnistus", method = RequestMethod.GET)
+	public String tunnistusGet(@ModelAttribute("envBean") EnvBean envBean, Model model){
+		model.addAttribute("iidee", Integer.parseInt(envBean.getEnv()));
+		return "vaihto/tunnistus";
+	}
 	
+	@RequestMapping(value="/tunnistus", method = RequestMethod.POST)
+	public RedirectView tunnistusPost(@ModelAttribute("envBean") EnvBean envBean, @RequestParam("iidee") int id, 
+			@RequestParam("etunimi") String etunimi, @RequestParam("sukunimi") String sukunimi, Model model, RedirectAttributes lahetettävät){
+		String menosuunta = "asdf";
+		List<String> nimet =aadao.listaaLuvalliset(id);
+		String nimi = etunimi+" "+sukunimi;
+		
+		if(nimet.contains(nimi)){
+			lahetettävät.addFlashAttribute("envBean", new EnvBean(Integer.toString(id)));
+			lahetettävät.addFlashAttribute("Aetunimi", etunimi);
+			lahetettävät.addFlashAttribute("Asukunimi", sukunimi);
+			menosuunta="lista";
+		}else{
+			lahetettävät.addFlashAttribute("alert","Ei oikeutta äänestää.");
+			lahetettävät.addFlashAttribute("envBean", new EnvBean(Integer.toString(id)));
+			menosuunta= "tunnistus";
+		}
+		return new RedirectView(menosuunta);
+	}
 	
 	@RequestMapping(value="/admin", method = RequestMethod.GET)
 	public String admin (Model model){

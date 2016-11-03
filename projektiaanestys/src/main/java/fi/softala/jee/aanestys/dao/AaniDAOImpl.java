@@ -1,12 +1,10 @@
 package fi.softala.jee.aanestys.dao;
 
-import java.sql.JDBCType;
 import java.sql.ResultSet;
 import java.util.List;
 import java.sql.SQLException;
 
 import javax.inject.Inject;
-import javax.sql.DataSource;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -35,6 +33,34 @@ public class AaniDAOImpl implements AaniDAO{
 		String kasky = "INSERT INTO Aani(AanestysID, VaihtoehtoID, AanestajaID) VALUES(?,?,?);";
 		jdbcTemplate.update(kasky, Aani.getAanestysID(), Aani.getVaihtoehtoID(), 1);
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public void insert(Aani Aani, String etunimi, String sukunimi) {
+		String kasky = "INSERT INTO Aani(AanestysID, VaihtoehtoID, AanestajaID) VALUES(?,?,?);";
+		jdbcTemplate.update(kasky, Aani.getAanestysID(), Aani.getVaihtoehtoID(), 1);
+		
+		String kasky2 = "SELECT Aanestaja.AanestajaID FROM Aanestaja INNER JOIN Lupa ON Aanestaja.AanestajaID=Lupa.AanestajaID WHERE Aanestaja.Etunimi='"+etunimi+"' AND Aanestaja.Sukunimi='"+sukunimi+"' AND Lupa.Aanestanyt=false ORDER BY AanestajaID LIMIT 1;";
+		Integer paskalista = jdbcTemplate.query(kasky2, new ResultSetExtractor<Integer>(){
+		
+			public Integer extractData(ResultSet rs) throws SQLException, DataAccessException {
+				int Id = 999;
+					if(rs.next()){
+						System.out.println(rs.getInt("AanestajaID"));
+						Id = rs.getInt("AanestajaID");
+					}
+				
+				return Id;
+	
+			}
+		
+		});
+		
+		System.out.println(paskalista);
+		
+		String kasky3 = "UPDATE Lupa SET Aanestanyt=true WHERE AanestysID=? AND AanestajaID= ?";
+		jdbcTemplate.update(kasky3, Aani.getAanestysID(),paskalista);
+				// TODO Auto-generated method stub
 		
 	}
 
@@ -82,6 +108,12 @@ public class AaniDAOImpl implements AaniDAO{
 	
 
 	}
+	
+	public void aanestanyt(int AanestysID, int AanestajaID){
+		String sql = "INSERT INTO Aanestanyt VALUES(?,?);";
+		jdbcTemplate.update(sql,AanestajaID,AanestysID);
+	}
+	
 
 	public void deletet(int AaniID) {
 		// TODO Auto-generated method stub

@@ -58,4 +58,18 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 		});
 		return lista;
 	}
+	
+	public List<String> listaaLuvalliset(int AanestysID){
+		String sql = "SELECT Aanestaja.Etunimi, Aanestaja.sukunimi FROM Lupa INNER JOIN Aanestaja ON Aanestaja.AanestajaID=Lupa.AanestajaID WHERE AanestysID ="+AanestysID+" AND Lupa.Aanestanyt=false;";
+		List<String> luvallisetLista = jdbcTemplate.query(sql, new RowMapper<String>(){
+			public final String mapRow (ResultSet rs, int rowNum) throws SQLException {
+				String nimi = rs.getString("Etunimi")+" "+rs.getString("Sukunimi");
+
+			
+				return nimi;
+			}
+		});
+		
+		return luvallisetLista;
+	}
 }

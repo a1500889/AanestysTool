@@ -6,6 +6,7 @@ public class AaniImpl implements Aani {
 	private int AaniID;
 	private int AanestysID;
 	private int VaihtoehtoID;
+	private int AanestajaID;
 	
 	public int getAaniID() {
 		return AaniID;
@@ -33,6 +34,12 @@ public class AaniImpl implements Aani {
 		VaihtoehtoID = vaihtoehtoID;
 	}
 	
+	public int getAanestajaID() {
+		return AanestajaID;
+	}
+	public void setAanestajaID(int aanestajaID) {
+		AanestajaID = aanestajaID;
+	}
 	public AaniImpl() {
 		// TODO Auto-generated constructor stub
 	}

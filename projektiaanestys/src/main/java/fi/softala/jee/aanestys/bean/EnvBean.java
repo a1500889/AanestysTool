@@ -4,6 +4,13 @@ public class EnvBean {
 
     private String env;
 
+    public EnvBean(String env){
+    	this.env=env;
+    }
+    
+    public EnvBean(){
+    }
+    
     public String getEnv() {
         return env;
     }

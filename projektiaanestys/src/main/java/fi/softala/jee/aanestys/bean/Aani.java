@@ -13,5 +13,9 @@ public interface Aani {
 	public abstract int getVaihtoehtoID();
 
 	public abstract void setVaihtoehtoID(int VaihtoehtoID);
+	
+	public abstract int getAanestajaID();
+	
+	public abstract void setAanestajaID(int AanestajaID);
 
 }

@@ -47,7 +47,7 @@
 						
 						<tr>
 							<td><form:form id="envselection" modelAttribute="envBean"
-									method="get" action="lista">
+									method="get" action="tunnistus">
 									<form:hidden path="env" value="${tykset.aanestysID}"
 										onclick="submitForm()" />
 									<button type="submit">Valitse</button>
