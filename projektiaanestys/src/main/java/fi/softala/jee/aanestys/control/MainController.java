@@ -1,5 +1,6 @@
 package fi.softala.jee.aanestys.control;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +27,7 @@ import fi.softala.jee.aanestys.bean.AanestysImpl;
 import fi.softala.jee.aanestys.bean.Aani;
 import fi.softala.jee.aanestys.bean.AaniImpl;
 import fi.softala.jee.aanestys.bean.EnvBean;
+import fi.softala.jee.aanestys.bean.Excelreader;
 import fi.softala.jee.aanestys.bean.Vaihtoehto;
 import fi.softala.jee.aanestys.bean.VaihtoehtoImpl;
 import fi.softala.jee.aanestys.dao.AanestajaDAO;
@@ -76,6 +78,8 @@ public class MainController {
 	public void setDAO (AanestajaDAO aadao){
 		this.aadao = aadao;
 	}
+	
+	
 
 	// HAKEE ANNETUT ÄÄNET KANNASTA JA OHJAA NE .jsp SIVULLE.
 	@RequestMapping(value = "listaa/{id}", method = RequestMethod.GET)
@@ -287,4 +291,14 @@ public class MainController {
 		return "Admin/admin";
 	}
 
+	@RequestMapping(value = "/newExcelAanestaja", method = RequestMethod.GET)
+	public ModelAndView newExcelAanestaja(ModelAndView model, ArrayList<AanestajaImpl> Lista) throws IOException {
+		Lista = Excelreader.lueExcel();
+		model.addObject("Lista", Lista);
+		model.setViewName("Aanestajat/LisaaExcelista");
+		return model;
+	}
+	
+
+	
 }

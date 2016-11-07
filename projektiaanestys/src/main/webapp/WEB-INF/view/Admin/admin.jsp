@@ -30,6 +30,7 @@
 				<a class="button" href="aanestys">Listaa ‰‰nestykset</a><br>
 				<a class="button" href="aanestajat">Lista ‰‰nest‰jist‰</a><br>
 				<a class="button" href="lisaavaihtoehdot">Lis‰‰ vaihtoehtoja</a><br>
+				<a class="button" href="newExcelAanestaja">Lis‰‰ excelist‰</a><br>
 
 			</div>
 		</div>
