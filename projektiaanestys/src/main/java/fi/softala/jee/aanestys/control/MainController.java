@@ -225,6 +225,16 @@ public class MainController {
 		return "redirect:/";
 	}
 	
+	@RequestMapping(value = "/aanestajapoisto", method = RequestMethod.GET)
+	public String poistaAanestaja(@ModelAttribute("envBean") EnvBean envBean) {
+		int ID = Integer.parseInt(envBean.getEnv());
+		//Poistaa äänestäjän.
+		aadao.delete(ID);
+		//Poistaa oikeudet poistettavaan äänestykseen.
+		aadao.poistaLuvatAanestaja(ID);
+		return "redirect:/";
+	}
+	
 	//VAIHTOEHTOJEN LISÄÄMINEN ÄÄNESTYKSEEN: OSA 1
 	//Hakee äänestykset, jotta voi valita mihin lisää vaihtoehtoja.
 	@RequestMapping(value="/lisaavaihtoehdot", method = RequestMethod.GET)

@@ -13,10 +13,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Tunnistaudu äänestykseen</title>
 <script>
-function tarkasta(){
-	
-	
-}
 
 </script>
 </head>
@@ -27,7 +23,7 @@ ${alert}
 <input type="hidden" name="iidee" value="${iidee}">
 <input type=text name="etunimi">
 <input type=text name="sukunimi">
-<button type="submit">asdf</button>
+<button type="submit">Seuraava</button>
 </form:form>
 </body>
 </html>
