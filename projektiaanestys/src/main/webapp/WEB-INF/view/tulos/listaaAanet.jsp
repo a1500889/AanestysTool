@@ -36,7 +36,11 @@
 	<div class="three columns">
 		<a class="button" href="/projektiaanestys/Main/aanestys1">Takaisin</a>
 	</div>
-
+<script>
+setTimeout(function() {
+	  location.reload();
+	}, 7500);
+</script>
 
 </body>
 </html>
