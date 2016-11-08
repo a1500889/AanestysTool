@@ -32,11 +32,13 @@
 
 				<h3>Admin</h3>
 
-				<a class="button" href="Main/admin">Admin sivulle tästä</a><br>
+				<a class="button" href="Main/loginpage">Admin sivulle tästä</a><br>
 			
 
 			</div>
 		</div>
 	</div>
+
+	
 </body>
 </html>

@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -48,7 +49,7 @@
 	<div class="three columns">
 		<a class="button" href="/projektiaanestys/">Takaisin</a>
 	</div>
-
+<a class= "buttun" href="../j_spring_security_logout" > Kirjaudu ulos</a>
 
 </body>
 </html>
