@@ -13,6 +13,8 @@ public interface AanestajaDAO {
 	
 	public void deletet (int AanestysID);
 	
+	public void poistaLuvatAanestaja (int AanestajaID);
+	
 	public List<Aanestaja> lista();
 
 	public List<String> listaaLuvalliset(int AanestysID);

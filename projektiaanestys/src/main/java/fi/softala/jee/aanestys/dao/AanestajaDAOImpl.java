@@ -38,13 +38,19 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 	}
 	
 	public void delete(int AanestajaID) {
-		// TODO Auto-generated method stub
+		String sql = "DELETE FROM Aanestaja WHERE AanestajaID = ?";
+		jdbcTemplate.update(sql, AanestajaID);
 		
 	}
 
 	public void deletet(int AanestysID) {
 		String sql = "DELETE FROM Aanestaja WHERE AanestysID = ?";
 		jdbcTemplate.update(sql, AanestysID);
+	}
+	
+	public void poistaLuvatAanestaja (int AanestajaID) {
+		String sql = "DELETE FROM Lupa WHERE AanestajaID = ?";
+		jdbcTemplate.update(sql, AanestajaID);
 	}
 
 	public List<Aanestaja> lista() {
