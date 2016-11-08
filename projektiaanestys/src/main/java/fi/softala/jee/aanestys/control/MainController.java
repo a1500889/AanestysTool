@@ -234,14 +234,14 @@ public class MainController {
 		return "redirect:/";
 	}
 	
-	@RequestMapping(value = "/aanestajapoisto", method = RequestMethod.GET)
+	@RequestMapping(value = "/aanestajapoisto", method = RequestMethod.POST)
 	public String poistaAanestaja(@ModelAttribute("envBean") EnvBean envBean) {
 		int ID = Integer.parseInt(envBean.getEnv());
 		//Poistaa oikeudet poistettavaan äänestykseen.
 		aadao.poistaLuvatAanestaja(ID);
 		//Poistaa äänestäjän.
 		aadao.delete(ID);
-		return "redirect:/";
+		return "redirect:aanestajat";
 	}
 	
 	//VAIHTOEHTOJEN LISÄÄMINEN ÄÄNESTYKSEEN: OSA 1
