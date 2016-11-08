@@ -9,7 +9,6 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -120,15 +119,26 @@ public class MainController {
 
 	// OTTAA ÄÄNESTETTÄVÄN VAIHTOEHDON VASTAAN JA OHJAA ETEENPÄIN
 	@RequestMapping(value = "/lista", method = RequestMethod.POST)
-	public String env(@ModelAttribute("envBean") EnvBean envBean,@ModelAttribute("etunimi") String etunimi,@ModelAttribute("sukunimi") String sukunimi, Model model) {
+	public RedirectView env(@ModelAttribute("envBean") EnvBean envBean, @ModelAttribute("KID") String kayttajaID, Model model, RedirectAttributes lahetettävät) {
+		System.out.println("Ping");
+		String matkalippu = null;
 		Aani a = new AaniImpl();
 		int vaihtoehtoID = Integer.parseInt(envBean.getEnv());
+		System.out.println("ping2");
 		a.setVaihtoehtoID(vaihtoehtoID);
 		a.setAanestysID(vdao.get(vaihtoehtoID).getAanestysID());
-		adao.insert(a, etunimi, sukunimi);
-		int AanestID = vdao.get(vaihtoehtoID).getAanestysID();
 		
-		return "redirect:listaa/"+AanestID+"";
+		if(!aadao.tarkistaAanestysoikeus(Integer.parseInt(kayttajaID), a.getAanestysID())){
+			adao.insert(a, Integer.parseInt(kayttajaID));
+			int AanestID = vdao.get(vaihtoehtoID).getAanestysID();
+			matkalippu = "listaa/"+AanestID+"";
+		}else{
+			lahetettävät.addFlashAttribute("alert","Ei oikeutta äänestää.");
+			lahetettävät.addFlashAttribute("envBean", new EnvBean(Integer.toString(a.getAanestysID())));
+			matkalippu= "tunnistus";
+		}
+		
+		return new RedirectView(matkalippu);
 
 	}
 	
@@ -136,10 +146,9 @@ public class MainController {
 	//EnvBean toimii backup beanina, ei tarvitse kiinnittää huomiota.
 	@RequestMapping(value = "lista", method = RequestMethod.GET)
 	public String getView(@ModelAttribute("envBean") EnvBean envBean, Model model, 
-			@ModelAttribute("Aetunimi") String etunimi, @ModelAttribute("Asukunimi") String sukunimi) {
+			@ModelAttribute("KID") int kayttajaID) {
 		List<Vaihtoehto> listaaVaihtoehdot = vdao.haeVaihtoehdot(Integer.parseInt(envBean.getEnv()));
-		model.addAttribute("etunimi", etunimi);
-		model.addAttribute("sukunimi", sukunimi);
+		model.addAttribute("KID", kayttajaID);
 		model.addAttribute("vaihtoehdot", listaaVaihtoehdot);
 		return "vaihto/listaavEhdot";
 	}
@@ -274,9 +283,11 @@ public class MainController {
 		String nimi = etunimi+" "+sukunimi;
 		
 		if(nimet.contains(nimi)){
+			AaniImpl p = new AaniImpl();
+			p.setAanestysID(id);
+			int KayttäjäID = aadao.haeVapaaAanestajaID(p, etunimi, sukunimi);
 			lahetettävät.addFlashAttribute("envBean", new EnvBean(Integer.toString(id)));
-			lahetettävät.addFlashAttribute("Aetunimi", etunimi);
-			lahetettävät.addFlashAttribute("Asukunimi", sukunimi);
+			lahetettävät.addFlashAttribute("KID", KayttäjäID);
 			menosuunta="lista";
 		}else{
 			lahetettävät.addFlashAttribute("alert","Ei oikeutta äänestää.");

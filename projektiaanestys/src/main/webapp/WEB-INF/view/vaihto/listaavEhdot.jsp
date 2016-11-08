@@ -39,8 +39,7 @@
 						<form:radiobutton path="env" value="${optio.vaihtoehtoID}"
 							onclick="submitForm()" />${optio.vaihtoehtoNimi}<br>
 					</c:forEach>
-					<input type="hidden" name="etunimi" value="${etunimi}"/>
-					<input type="hidden" name="sukunimi" value="${sukunimi}"/>
+					<input type="hidden" name="KID" value="${KID}"/>
 					<button type="submit">Äänestä</button>
 				</form:form>
 
