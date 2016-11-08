@@ -19,7 +19,9 @@ public class Excelreader {
 	public static ArrayList<AanestajaImpl> lueExcel() throws IOException{
 		ArrayList<AanestajaImpl> aanestajat = new ArrayList<AanestajaImpl>();
 
-		String excelFilePath = "M:/S-16/Softala/git/projektiaanestys/testi.xlsx";
+
+		String excelFilePath = "C:/Users/a1500889/git/AanestysTool/projektiaanestys/testi.xlsx";
+
 		FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
 
 		Workbook workbook = new XSSFWorkbook(inputStream);

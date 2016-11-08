@@ -42,8 +42,17 @@
 								<td><c:out value="${aanestajat.etunimi}" /></td>
 								<td><c:out value="${aanestajat.sukunimi}" /></td>
 							</tr>
+							<tr>
+								<td><form:form id="envselection" modelAttribute="envBean"
+										method="get" action="aanestajapoisto">
+										<form:hidden path="env" value="${aanestajat.aanestajaID}"
+											onclick="submitForm()" />
+										<button type="submit">Poista</button>
+									</form:form></td>
+							</tr>
 						</c:forEach>
 					</tbody>
+					
 				</table>
 			</div>
 		</div>
