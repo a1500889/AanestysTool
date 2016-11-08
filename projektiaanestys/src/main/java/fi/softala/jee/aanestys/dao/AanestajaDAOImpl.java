@@ -39,15 +39,15 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 		jdbcTemplate.update(sql, AanestajaID);
 		
 	}
-
-	public void deletet(int AanestysID) {
-		String sql = "DELETE FROM Aanestaja WHERE AanestysID = ?";
-		jdbcTemplate.update(sql, AanestysID);
-	}
 	
 	public void poistaLuvatAanestaja (int AanestajaID) {
 		String sql = "DELETE FROM Lupa WHERE AanestajaID = ?";
 		jdbcTemplate.update(sql, AanestajaID);
+	}
+
+	public void deletet(int AanestysID) {
+		String sql = "DELETE FROM Aanestaja WHERE AanestysID = ?";
+		jdbcTemplate.update(sql, AanestysID);
 	}
 
 	public List<Aanestaja> lista() {

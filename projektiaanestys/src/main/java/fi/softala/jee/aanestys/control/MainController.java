@@ -228,10 +228,10 @@ public class MainController {
 	@RequestMapping(value = "/aanestajapoisto", method = RequestMethod.GET)
 	public String poistaAanestaja(@ModelAttribute("envBean") EnvBean envBean) {
 		int ID = Integer.parseInt(envBean.getEnv());
-		//Poistaa ‰‰nest‰j‰n.
-		aadao.delete(ID);
 		//Poistaa oikeudet poistettavaan ‰‰nestykseen.
 		aadao.poistaLuvatAanestaja(ID);
+		//Poistaa ‰‰nest‰j‰n.
+		aadao.delete(ID);
 		return "redirect:/";
 	}
 	
