@@ -19,8 +19,8 @@ public class Excelreader {
 	public static ArrayList<AanestajaImpl> lueExcel() throws IOException{
 		ArrayList<AanestajaImpl> aanestajat = new ArrayList<AanestajaImpl>();
 
-
-		String excelFilePath = "C:/Users/a1500889/git/AanestysTool/projektiaanestys/testi.xlsx";
+			//Aseta tähän polku mistä excel-tiedosto luetaan!!
+		String excelFilePath = "C:/Users/a1500949/Documents/testi1.xlsx";
 
 		FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
 
