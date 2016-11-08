@@ -40,7 +40,7 @@
 </head>
 <body>
 	<img id="logo" src="../resources/images/hh_logo.jpg" />
-
+	<hr>
 	<div class="container" id="LisaaAanestaja">
 
 		<div class="row">

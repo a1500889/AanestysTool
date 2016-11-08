@@ -7,6 +7,9 @@ public class VaihtoehtoImpl implements Vaihtoehto{
 	private String VaihtoehtoNimi;
 	private int aanlkm;
 	
+	public VaihtoehtoImpl() {
+		super();
+	}
 	public int getVaihtoehtoID() {
 		return vaihtoehtoID;
 	}

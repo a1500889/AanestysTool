@@ -1,15 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@page contentType="text/html;charset=UTF-8"%>
+<%@page pageEncoding="UTF-8"%>
+
+<%@ page session="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
+
 <link rel="stylesheet" href="../resources/styles/tyyli.css">
 <link rel="stylesheet" href="../resources/styles/skeleton.css">
 <link rel="stylesheet" href="../resources/styles/normalize.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Lisää äänestäjiä</title>
+<title>Ã„Ã¤nestykset</title>
 </head>
 <body>
 	<img id="logo" src="../resources/images/hh_logo.jpg" />
@@ -17,36 +20,43 @@
 	<div class="container" id="LisaaAanestaja">
 
 		<div class="row">
-		
-		
+
+
 			<div class="nine columns">
 
-				<h1>Lisää äänestäjä</h1>
-				<form:form action="saveAanestaja" method="post"
-					modelAttribute="aanestaja">
-					<table>
-						<form:hidden path="AanestajaID" />
-						<tr>
-							<td>Etunimi: </td>
-							<td><form:input path="Etunimi" /></td>
+
+				<h1>LisÃ¤Ã¤ Ã¤Ã¤nestÃ¤jiÃ¤</h1>
+				<h3>Tarkista Ã¤Ã¤nestÃ¤jÃ¤t!</h3>
+
+				<table class="u-full-width">
+					<thead>
+						<tr class="header">
+							<c:forEach items="${Lista}" var="L">
+								<tr>
+								<td><c:out value="${L.etunimi}" /></td>
+								<td><c:out value="${L.sukunimi}" /></td>
+								
+								
+							</tr>
+							
+							
+							</c:forEach>
 						</tr>
-						<tr>
-							<td>Sukunimi: </td>
-							<td><form:input path="Sukunimi" /></td>
-						</tr>
+					</thead>
+					<tbody>
+
+						
+				
+				</tbody>
 
 
-						<tr>
-							<td colspan="2" align="center"><input type="submit"
-								value="Save"></td>
-						</tr>
-					</table>
-				</form:form>
+				</table>
 			</div>
 		</div>
 	</div>
 	<div class="three columns">
 		<a class="button" href="/projektiaanestys/">Takaisin</a>
+		<a class="button" href="saveExcelAanestaja">Tallenna</a>
 	</div>
 </body>
 </html>

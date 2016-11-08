@@ -172,7 +172,7 @@ input[type="reset"],
 input[type="button"] {
   display: inline-block;
   height: 38px;
-  padding: 0 30px;
+  padding: 0 3px;
   color: #555;
   text-align: center;
   font-size: 11px;
@@ -332,17 +332,25 @@ pre > code {
 
 /* Tables
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-th,
-td {
+th {
+font-size: 1.5em
+}
+td,th {
   padding: 12px 15px;
   text-align: left;
-  border-bottom: 1px solid #E1E1E1; }
+   }
 th:first-child,
 td:first-child {
   padding-left: 0; }
 th:last-child,
 td:last-child {
   padding-right: 0; }
+tr.header{
+	border-bottom: 2px solid #000000;
+}
+tr.napit{
+	border-bottom: 1px solid #E1E1E1;
+}
 
 
 /* Spacing
@@ -364,7 +372,7 @@ p,
 ul,
 ol,
 form {
-  margin-bottom: 2.5rem; }
+  margin-bottom: 0.5rem; }
 
 
 /* Utilities

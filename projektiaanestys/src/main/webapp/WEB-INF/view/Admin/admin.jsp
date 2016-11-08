@@ -8,45 +8,47 @@
 <link rel="stylesheet" href="../resources/styles/tyyli.css">
 <link rel="stylesheet" href="../resources/styles/skeleton.css">
 <link rel="stylesheet" href="../resources/styles/normalize.css">
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Lisää äänestäjiä</title>
+<title>Admin</title>
 </head>
 <body>
+
+
+
 	<img id="logo" src="../resources/images/hh_logo.jpg" />
 	<hr>
-	<div class="container" id="LisaaAanestaja">
+	<div class="container" id="sisalto">
 
 		<div class="row">
-		
-		
-			<div class="nine columns">
 
-				<h1>Lisää äänestäjä</h1>
-				<form:form action="saveAanestaja" method="post"
-					modelAttribute="aanestaja">
-					<table>
-						<form:hidden path="AanestajaID" />
-						<tr>
-							<td>Etunimi: </td>
-							<td><form:input path="Etunimi" /></td>
-						</tr>
-						<tr>
-							<td>Sukunimi: </td>
-							<td><form:input path="Sukunimi" /></td>
-						</tr>
+			<div class="five columns">
 
 
-						<tr>
-							<td colspan="2" align="center"><input type="submit"
-								value="Save"></td>
-						</tr>
-					</table>
-				</form:form>
+				<h3>Äänestys</h3>
+
+				<a class="button" href="newAanestys">Lisää äänestys</a><br>
+				<a class="button" href="aanestys">Listaa äänestykset</a><br>
+				<a class="button" href="lisaavaihtoehdot">Lisää vaihtoehtoja</a><br>
+				
+
+			</div>
+			
+			<div class="four columns">
+
+
+				<h3>Äänestäjät</h3>
+
+				
+				<a class="button" href="newAanestaja">Lisää äänestäjä</a><br>
+				<a class="button" href="aanestajat">Lista äänestäjistä</a><br>
+				<a class="button" href="newExcelAanestaja">Lisää excelistä</a><br>
+
 			</div>
 		</div>
 	</div>
 	<div class="three columns">
 		<a class="button" href="/projektiaanestys/">Takaisin</a>
 	</div>
+
+
 </body>
 </html>

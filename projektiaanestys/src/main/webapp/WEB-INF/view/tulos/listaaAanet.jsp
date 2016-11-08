@@ -8,12 +8,13 @@
 <link rel="stylesheet" href="../resources/styles/tyyli.css">
 <link rel="stylesheet" href="../resources/styles/skeleton.css">
 <link rel="stylesheet" href="../resources/styles/normalize.css">
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Annettujen äänten tulos</title>
 </head>
 <body>
 	<img id="logo" src="../resources/images/hh_logo.jpg" />
-
+	<hr>
 	<div class="container" id="LisaaAanestaja">
 
 		<div class="row">
@@ -33,7 +34,7 @@
 		</div>
 	</div>
 	<div class="three columns">
-		<a class="button" href="/projektiaanestys/">Takaisin</a>
+		<a class="button" href="/projektiaanestys/Main/aanestys1">Takaisin</a>
 	</div>
 
 

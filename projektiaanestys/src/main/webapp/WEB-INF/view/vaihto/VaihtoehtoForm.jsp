@@ -22,7 +22,7 @@
                 var cell1 = row.insertCell(0);
                 var VaihtoehtoNimi = document.createElement("input");
                 VaihtoehtoNimi.type = "text";
-                VaihtoehtoNimi.name = "vaihtoehto[" + counts + "].VaihtoehtoNimi";
+                VaihtoehtoNimi.name = "vaihtoehtoNimet";
                 cell1.appendChild(VaihtoehtoNimi);
 
         }
@@ -39,7 +39,7 @@
 </head>
 <body>
 	<img id="logo" src="../resources/images/hh_logo.jpg" />
-
+	<hr>
 	<div class="container" id="LisaaAanestaja">
 
 		<div class="row">
@@ -47,8 +47,12 @@
 		
 			<div class="nine columns">
 			<form:form action="lisaavaihtoehdot" method="post"
-					modelAttribute="arrayList<Vaihtoehto>">
+					modelAttribute="envBean">
 				<TABLE id="vaihtoehtoTaulu">
+						<c:forEach items="${aanestykset}" var="aanestys">
+				<form:radiobutton path="env" value="${aanestys.aanestysID}" name="aanestysID" onclick="submitForm()" />${aanestys.aanestysNimi}
+				</c:forEach>
+				
       					<TR>
 
               				<TD>Vaihtoehdon nimi:</TD>
@@ -56,14 +60,17 @@
         				</TR>
       					<TR>
 
-                		<TD><INPUT type="text" name="vaihtoehto[0].VaihtoehtoNimi" /></TD>
+                		<TD><INPUT type="text" name="vaihtoehtoNimet" /></TD>
+
+                		
         				</TR>
 					</TABLE>
 					<INPUT type="button" value="Add More" onclick="addRow('vaihtoehtoTaulu')" />
 					<td><input type="button" id="delPOIbutton" value="deleteRow" onclick="deleteRow('vaihtoehtoTaulu')"/></td>
 					<tr>
-					
+					<button type="submit">Tallenna</button>
 					</table>
+					
 				</form:form>
 			</div>
 		</div>

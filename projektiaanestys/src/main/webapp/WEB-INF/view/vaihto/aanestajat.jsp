@@ -16,7 +16,7 @@
 </head>
 <body>
 	<img id="logo" src="../resources/images/hh_logo.jpg" />
-
+	<hr>
 	<div class="container" id="LisaaAanestaja">
 
 		<div class="row">
@@ -25,21 +25,34 @@
 			<div class="nine columns">
 				<h1>Lista äänestäjistä:</h1>
 
-				<table>
-
-					<td>ID:</td>
-					<td>Etunimi:</td>
-					<td>Sukunimi:</td>
-
-
-					<c:forEach items="${aanestajat}" var="aanestajat">
-
-						<tr>
-							<td><c:out value="${aanestajat.aanestajaID}" /></td>
-							<td><c:out value="${aanestajat.etunimi}" /></td>
-							<td><c:out value="${aanestajat.sukunimi}" /></td>
+				<table class="u-full-width">
+					<thead>
+						<tr class="header">
+							<th>ID</th>
+							<th>Etunimi</th>
+							<th>Sukunimi</th>
 						</tr>
-					</c:forEach>
+					</thead>
+					<tbody>
+
+						<c:forEach items="${aanestajat}" var="aanestajat">
+
+							<tr class="napit">
+								<td><c:out value="${aanestajat.aanestajaID}" /></td>
+								<td><c:out value="${aanestajat.etunimi}" /></td>
+								<td><c:out value="${aanestajat.sukunimi}" /></td>
+							</tr>
+							<tr>
+								<td><form:form id="envselection" modelAttribute="envBean"
+										method="post" action="aanestajapoisto">
+										<form:hidden path="env" value="${aanestajat.aanestajaID}"
+											onclick="submitForm()" />
+										<button type="submit">Poista</button>
+									</form:form></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+					
 				</table>
 			</div>
 		</div>

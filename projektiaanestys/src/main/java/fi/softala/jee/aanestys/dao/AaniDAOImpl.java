@@ -1,12 +1,10 @@
 package fi.softala.jee.aanestys.dao;
 
-import java.sql.JDBCType;
 import java.sql.ResultSet;
 import java.util.List;
 import java.sql.SQLException;
 
 import javax.inject.Inject;
-import javax.sql.DataSource;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,11 +28,28 @@ public class AaniDAOImpl implements AaniDAO{
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
+	
+	@Inject
+	public AanestajaDAO aandao;
+	
+	public void set (AanestajaDAO aadao){
+		this.aandao=aadao;
+	}
 
 	public void insert(Aani Aani) {
 		String kasky = "INSERT INTO Aani(AanestysID, VaihtoehtoID, AanestajaID) VALUES(?,?,?);";
 		jdbcTemplate.update(kasky, Aani.getAanestysID(), Aani.getVaihtoehtoID(), 1);
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public void insert(Aani Aani, int kayttajaID) {
+	
+		String kasky = "INSERT INTO Aani(AanestysID, VaihtoehtoID, AanestajaID) VALUES(?,?,?);";
+		jdbcTemplate.update(kasky, Aani.getAanestysID(), Aani.getVaihtoehtoID(), 1);	
+		
+		String kasky3 = "UPDATE Lupa SET Aanestanyt=true WHERE AanestysID=? AND AanestajaID= ?";
+		jdbcTemplate.update(kasky3, Aani.getAanestysID(),kayttajaID);
 		
 	}
 
@@ -82,9 +97,16 @@ public class AaniDAOImpl implements AaniDAO{
 	
 
 	}
+	
+	public void aanestanyt(int AanestysID, int AanestajaID){
+		String sql = "INSERT INTO Aanestanyt VALUES(?,?);";
+		jdbcTemplate.update(sql,AanestajaID,AanestysID);
+	}
+	
 
 	public void deletet(int AaniID) {
 		// TODO Auto-generated method stub
 		
 	}
+	
 }
