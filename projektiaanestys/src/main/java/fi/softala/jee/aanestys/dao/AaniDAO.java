@@ -8,7 +8,7 @@ public interface AaniDAO {
 
 	public void insert (Aani Aani);
 	
-	public void insert (Aani Aani, String Etunimi, String Sukunimi);
+	public void insert (Aani Aani, int kayttajaID);
 	
 	public void delete (int AanestysID);
 	

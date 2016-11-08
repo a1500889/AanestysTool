@@ -28,6 +28,13 @@ public class AaniDAOImpl implements AaniDAO{
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
+	
+	@Inject
+	public AanestajaDAO aandao;
+	
+	public void set (AanestajaDAO aadao){
+		this.aandao=aadao;
+	}
 
 	public void insert(Aani Aani) {
 		String kasky = "INSERT INTO Aani(AanestysID, VaihtoehtoID, AanestajaID) VALUES(?,?,?);";
@@ -36,31 +43,13 @@ public class AaniDAOImpl implements AaniDAO{
 		
 	}
 	
-	public void insert(Aani Aani, String etunimi, String sukunimi) {
-		String kasky = "INSERT INTO Aani(AanestysID, VaihtoehtoID, AanestajaID) VALUES(?,?,?);";
-		jdbcTemplate.update(kasky, Aani.getAanestysID(), Aani.getVaihtoehtoID(), 1);
-		
-		String kasky2 = "SELECT Aanestaja.AanestajaID FROM Aanestaja INNER JOIN Lupa ON Aanestaja.AanestajaID=Lupa.AanestajaID WHERE Aanestaja.Etunimi='"+etunimi+"' AND Aanestaja.Sukunimi='"+sukunimi+"' AND Lupa.Aanestanyt=false ORDER BY AanestajaID LIMIT 1;";
-		Integer paskalista = jdbcTemplate.query(kasky2, new ResultSetExtractor<Integer>(){
-		
-			public Integer extractData(ResultSet rs) throws SQLException, DataAccessException {
-				int Id = 999;
-					if(rs.next()){
-						System.out.println(rs.getInt("AanestajaID"));
-						Id = rs.getInt("AanestajaID");
-					}
-				
-				return Id;
+	public void insert(Aani Aani, int kayttajaID) {
 	
-			}
-		
-		});
-		
-		System.out.println(paskalista);
+		String kasky = "INSERT INTO Aani(AanestysID, VaihtoehtoID, AanestajaID) VALUES(?,?,?);";
+		jdbcTemplate.update(kasky, Aani.getAanestysID(), Aani.getVaihtoehtoID(), 1);	
 		
 		String kasky3 = "UPDATE Lupa SET Aanestanyt=true WHERE AanestysID=? AND AanestajaID= ?";
-		jdbcTemplate.update(kasky3, Aani.getAanestysID(),paskalista);
-				// TODO Auto-generated method stub
+		jdbcTemplate.update(kasky3, Aani.getAanestysID(),kayttajaID);
 		
 	}
 
@@ -119,4 +108,5 @@ public class AaniDAOImpl implements AaniDAO{
 		// TODO Auto-generated method stub
 		
 	}
+	
 }

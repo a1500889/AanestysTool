@@ -6,12 +6,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import fi.softala.jee.aanestys.bean.Aanestaja;
 import fi.softala.jee.aanestys.bean.AanestajaImpl;
+import fi.softala.jee.aanestys.bean.Aani;
 
 @Repository
 public class AanestajaDAOImpl implements AanestajaDAO {
@@ -77,5 +80,46 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 		});
 		
 		return luvallisetLista;
+	}
+	
+	//hakee etunimen ja sukunimen perusteella ÄänestäjäID:n. Hakee ensimmäisen, jos samoja nimiä on useita.
+	public int haeVapaaAanestajaID(Aani Aani, String etunimi, String sukunimi){
+		String kasky2 = "SELECT Aanestaja.AanestajaID FROM Aanestaja INNER JOIN Lupa ON Aanestaja.AanestajaID=Lupa.AanestajaID WHERE Aanestaja.Etunimi='"+etunimi+"' AND Aanestaja.Sukunimi='"+sukunimi+"' AND Lupa.Aanestanyt=false AND Lupa.AanestysID='"+Aani.getAanestysID()+"' ORDER BY AanestajaID LIMIT 1;";
+		Integer paskalista = jdbcTemplate.query(kasky2, new ResultSetExtractor<Integer>(){
+		
+			public Integer extractData(ResultSet rs) throws SQLException, DataAccessException {
+				int Id = 999;
+					if(rs.next()){
+						Id = rs.getInt("AanestajaID");
+					}
+				
+				return Id;
+	
+			}
+		
+		});
+		return paskalista;
+	}
+	
+	public boolean tarkistaAanestysoikeus(int kayttajaID, int aanestysID){
+		boolean oikeus = false;
+		String tarkastuskasky = "SELECT Aanestanyt FROM Lupa WHERE AanestajaID= '"+kayttajaID+"' AND AanestysID='"+aanestysID+"';";
+		System.out.println(tarkastuskasky);
+		oikeus = jdbcTemplate.query(tarkastuskasky, new ResultSetExtractor<Boolean>(){
+		
+			public Boolean extractData(ResultSet rs) throws SQLException, DataAccessException {
+				boolean oikeus = false;
+					if(rs.next()){
+						oikeus = rs.getBoolean("Aanestanyt");
+						System.out.println("fragumentation:"+oikeus);
+					}
+				
+				return oikeus;
+	
+			}
+		
+		});
+		
+		return oikeus;
 	}
 }
