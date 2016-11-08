@@ -299,6 +299,19 @@ public class MainController {
 		return model;
 	}
 	
+	@RequestMapping(value = "/saveExcelAanestaja", method = RequestMethod.GET)
+	public <Lista> ModelAndView saveExcelAanestaja(ModelAndView model, ArrayList<AanestajaImpl> Lista) throws IOException {
+		Lista = Excelreader.lueExcel();
+		
+		for(int i = 0; i<Lista.size(); i++){
+			AanestajaImpl newAanestaja = new AanestajaImpl();
+			newAanestaja.setEtunimi(Lista.get(i).getEtunimi());
+			newAanestaja.setSukunimi(Lista.get(i).getSukunimi());
+			aadao.insert(newAanestaja);
+		}
+		
+		return new ModelAndView("Admin/admin");
+	}
 
 	
 }

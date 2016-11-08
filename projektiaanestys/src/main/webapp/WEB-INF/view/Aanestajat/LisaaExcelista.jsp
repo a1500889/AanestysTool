@@ -25,7 +25,8 @@
 			<div class="nine columns">
 
 
-				<h1>asd:</h1>
+				<h1>Lisää äänestäjiä</h1>
+				<h3>Tarkista äänestäjät!</h3>
 
 				<table class="u-full-width">
 					<thead>
@@ -55,6 +56,7 @@
 	</div>
 	<div class="three columns">
 		<a class="button" href="/projektiaanestys/">Takaisin</a>
+		<a class="button" href="saveExcelAanestaja">Tallenna</a>
 	</div>
 </body>
 </html>
