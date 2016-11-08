@@ -20,16 +20,26 @@
 
 		<div class="row">
 
-			<div class="nine columns">
+			<div class="five columns">
 
 
-				<h3>Admin</h3>
+				<h3>Äänestys</h3>
 
 				<a class="button" href="newAanestys">Lisää äänestys</a><br>
-				<a class="button" href="newAanestaja">Lisää äänestäjä</a><br>
 				<a class="button" href="aanestys">Listaa äänestykset</a><br>
-				<a class="button" href="aanestajat">Lista äänestäjistä</a><br>
 				<a class="button" href="lisaavaihtoehdot">Lisää vaihtoehtoja</a><br>
+				
+
+			</div>
+			
+			<div class="four columns">
+
+
+				<h3>Äänestäjät</h3>
+
+				
+				<a class="button" href="newAanestaja">Lisää äänestäjä</a><br>
+				<a class="button" href="aanestajat">Lista äänestäjistä</a><br>
 				<a class="button" href="newExcelAanestaja">Lisää excelistä</a><br>
 
 			</div>
