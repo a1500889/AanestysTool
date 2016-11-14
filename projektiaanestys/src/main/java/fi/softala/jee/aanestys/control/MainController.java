@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -157,7 +158,7 @@ public class MainController {
 	@RequestMapping(value = "/saveAanestys", method = RequestMethod.POST)
 	public ModelAndView saveAanestys(@ModelAttribute AanestysImpl aanestys) {
 		edao.saveOrUpdate(aanestys);
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/Main/admin");
 	}
 
 	// Luo ‰‰nestysformin
@@ -333,7 +334,7 @@ public class MainController {
 		
 		return new ModelAndView("Admin/admin");
 	}
-
+ 
 	@RequestMapping(value="/loginpage", method = RequestMethod.GET)
 	public String login(Model model) {
  

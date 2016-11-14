@@ -46,7 +46,7 @@
 		</div>
 	</div>
 	<div class="three columns">
-		<a class="button" href="/projektiaanestys/">Takaisin</a>
+		<a class="button" href="/projektiaanestys/Main/admin">Takaisin</a>
 	</div>
 </body>
 </html>

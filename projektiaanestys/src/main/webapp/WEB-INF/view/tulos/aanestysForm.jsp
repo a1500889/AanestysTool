@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="../resources/styles/skeleton.css">
 <link rel="stylesheet" href="../resources/styles/normalize.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>muokkaa/lis‰‰ ‰‰nestys</title>
+<title>Lis‰‰ ‰‰nestys</title>
 <SCRIPT lang="javascript">
         function addRow(tableID) 
         {
@@ -46,13 +46,13 @@
 		<div class="row">
 			<div class="nine columns">
 
-				<h1>muokkaa/lis‰‰ ‰‰nestys</h1>
+				<h1>Lis‰‰ ‰‰nestys</h1>
 				<form:form action="saveAanestys" method="post"
 					modelAttribute="aanestys">
 					<table>
 						<form:hidden path="AanestysID" />
 						<tr>
-							<td>nimi:</td>
+							<td>Nimi:</td>
 							<td><form:input path="AanestysNimi" /></td>
 						</tr>
 						<tr>
@@ -70,12 +70,13 @@
 					<td colspan="2" align="center"><input type="submit"
 								value="Save"></td>
 					</tr>
+					<div class="three columns">
+		<a class="button" href="/projektiaanestys/Main/admin">Takaisin</a>
+	</div>
 				</form:form>
 			</div>
 		</div>
 	</div>
-	<div class="three columns">
-		<a class="button" href="/projektiaanestys/">Takaisin</a>
-	</div>
+	
 </body>
 </html>

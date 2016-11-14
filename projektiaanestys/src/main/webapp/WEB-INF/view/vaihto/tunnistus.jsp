@@ -18,12 +18,22 @@
 </head>
 <body>
 
+<h2>Anna nimesi:</h2>
+
 ${alert}
 <form:form method="post" action="tunnistus">
 <input type="hidden" name="iidee" value="${iidee}">
+
+<p>Etunimi</p>
 <input type=text name="etunimi">
-<input type=text name="sukunimi">
-<button type="submit">Seuraava</button>
+<p>Sukunimi</p>
+<input type=text name="sukunimi"><br>
+<div class="three columns">
+		<button type="submit">Seuraava</button>
+		<a class="button" href="/projektiaanestys/Main/aanestys1">Takaisin</a>
+	</div>
+
 </form:form>
+
 </body>
 </html>

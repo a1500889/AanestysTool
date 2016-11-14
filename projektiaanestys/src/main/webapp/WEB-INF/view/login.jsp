@@ -29,7 +29,7 @@
 		<tr><td>PASSWORD:</td><td><input type='password' name='j_password' /></td></tr>
 		<tr><td>&nbsp;</td><td><button type="submit">Kirjaudu</button></td></tr>
 		</table>
-		<a class="button" href="/projektiaanestys">Alkuun</a><br>
+		<a class="button" href="/projektiaanestys/">Alkuun</a><br>
 	</fieldset>
 	</form>
 	</div>
