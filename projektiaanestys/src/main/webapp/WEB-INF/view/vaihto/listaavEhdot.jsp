@@ -42,16 +42,16 @@
 					</c:forEach>
 					<input type="hidden" name="KID" value="${KID}"/>
 					<button type="submit">Äänestä</button>
+					
+					<div class="three columns">
+		<a class="button" href="/projektiaanestys/">Takaisin</a>
+	</div>
 				</form:form>
+				
 
 			</div>
 		</div>
 	</div>
-	<div class="three columns">
-		<a class="button" href="/projektiaanestys/">Takaisin</a>
-	</div>
-
-
 
 </body>
 </html>
