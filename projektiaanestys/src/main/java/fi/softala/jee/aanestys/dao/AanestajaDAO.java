@@ -16,6 +16,8 @@ public interface AanestajaDAO {
 	public void poistaLuvatAanestaja (int AanestajaID);
 	
 	public List<Aanestaja> lista();
+	
+	public void lisaaAanestysOikeudet(int[] aanestajat, int[]aanestykset);
 
 	public List<String> listaaLuvalliset(int AanestysID);
 	
