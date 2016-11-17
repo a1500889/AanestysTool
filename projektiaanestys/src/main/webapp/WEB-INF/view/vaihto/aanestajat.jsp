@@ -20,8 +20,13 @@
 	<div class="container" id="LisaaAanestaja">
 
 		<div class="row">
-
-
+			<font color="green">${alert}</font>
+			<form:form method="POST" id="oikeusForm" commandName="lisaaOikeudet" action="lisaaOikeudet">
+			<c:forEach items="${aanestykset}" var="aanestys">
+			<td><input type="checkbox" name="valAanestykset" value="${aanestys.aanestysID}"/> </td>
+			<td><c:out value="${aanestys.aanestysNimi}" /></td>
+			</c:forEach>
+			<input type="submit" value="Lisaa Oikeudet">
 			<div class="nine columns">
 				<h1>Lista äänestäjistä:</h1>
 
@@ -34,18 +39,18 @@
 						</tr>
 					</thead>
 					<tbody>
-
-						<c:forEach items="${aanestajat}" var="aanestajat">
+						<c:forEach items="${aanestajat}" var="aanestaja">
 
 							<tr class="napit">
-								<td><c:out value="${aanestajat.aanestajaID}" /></td>
-								<td><c:out value="${aanestajat.etunimi}" /></td>
-								<td><c:out value="${aanestajat.sukunimi}" /></td>
+								<td><input type="checkbox" name="valAanestaja" value="${aanestaja.aanestajaID}"/> </td>
+								<td><c:out value="${aanestaja.aanestajaID}" /></td>
+								<td><c:out value="${aanestaja.etunimi}" /></td>
+								<td><c:out value="${aanestaja.sukunimi}" /></td>
 							</tr>
 							<tr>
 								<td><form:form id="envselection" modelAttribute="envBean"
 										method="post" action="aanestajapoisto">
-										<form:hidden path="env" value="${aanestajat.aanestajaID}"
+										<form:hidden path="env" value="${aanestaja.aanestajaID}"
 											onclick="submitForm()" />
 										<button type="submit">Poista</button>
 									</form:form></td>
@@ -55,6 +60,7 @@
 					
 				</table>
 			</div>
+			</form:form>
 		</div>
 	</div>
 	<div class="three columns">
