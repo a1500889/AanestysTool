@@ -330,6 +330,7 @@ public class MainController {
 			newAanestaja.setEtunimi(Lista.get(i).getEtunimi());
 			newAanestaja.setSukunimi(Lista.get(i).getSukunimi());
 			aadao.insert(newAanestaja);
+			
 		}
 		
 		return new ModelAndView("Admin/admin");

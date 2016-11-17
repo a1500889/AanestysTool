@@ -6,8 +6,12 @@
 <html>
 <head>
 <link rel="stylesheet" href="resources/styles/tyyli.css">
-<link rel="stylesheet" href="resources/styles/skeleton.css">
-<link rel="stylesheet" href="resources/styles/normalize.css">
+<!-- <link rel="stylesheet" href="resources/styles/skeleton.css"> -->
+<!-- <link rel="stylesheet" href="resources/styles/normalize.css"> -->
+<link rel="stylesheet" href="resources/styles/bootstrap.css">
+<link rel="stylesheet" href="resources/styles/bootstrap.min.css">
+<link rel="stylesheet" href="resources/styles/bootstrap-theme.css">
+<link rel="stylesheet" href="resources/styles/bootstrap-theme.min.css">
 <title>Äänestys</title>
 </head>
 <body>
