@@ -121,11 +121,9 @@ public class MainController {
 	// OTTAA ÄÄNESTETTÄVÄN VAIHTOEHDON VASTAAN JA OHJAA ETEENPÄIN
 	@RequestMapping(value = "/lista", method = RequestMethod.POST)
 	public RedirectView env(@ModelAttribute("envBean") EnvBean envBean, @ModelAttribute("KID") String kayttajaID, Model model, RedirectAttributes lahetettävät) {
-		System.out.println("Ping");
 		String matkalippu = null;
 		Aani a = new AaniImpl();
 		int vaihtoehtoID = Integer.parseInt(envBean.getEnv());
-		System.out.println("ping2");
 		a.setVaihtoehtoID(vaihtoehtoID);
 		a.setAanestysID(vdao.get(vaihtoehtoID).getAanestysID());
 		
@@ -192,8 +190,8 @@ public class MainController {
 	//LISTAA ÄÄNESTÄJÄT
 	@RequestMapping(value = "aanestajat", method = RequestMethod.GET)
 	public String lista(Model model) {
-		List<Aanestaja> listaaAanestajat = aadao.lista();
-		model.addAttribute("aanestajat", listaaAanestajat);
+		model.addAttribute("aanestajat", aadao.lista());
+		model.addAttribute("aanestykset", edao.lista());
 		EnvBean envBean = new EnvBean();
 		model.addAttribute(envBean);
 		
@@ -333,6 +331,13 @@ public class MainController {
 		}
 		
 		return new ModelAndView("Admin/admin");
+	}
+	
+	@RequestMapping(value="/lisaaOikeudet", method= RequestMethod.POST)
+	public String listaaAanestVal(@RequestParam("valAanestaja") int[] aanestajalista, @RequestParam("valAanestykset") int[] aanestyslista , RedirectAttributes viesti){
+		viesti.addFlashAttribute("alert","Oikeutta jaettu.");
+		aadao.lisaaAanestysOikeudet(aanestajalista, aanestyslista);
+		return "redirect:aanestajat";
 	}
  
 	@RequestMapping(value="/loginpage", method = RequestMethod.GET)
