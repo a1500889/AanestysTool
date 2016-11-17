@@ -5,44 +5,34 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
 <link rel="stylesheet" href="resources/styles/tyyli.css">
-<!-- <link rel="stylesheet" href="resources/styles/skeleton.css"> -->
-<!-- <link rel="stylesheet" href="resources/styles/normalize.css"> -->
-<link rel="stylesheet" href="resources/styles/bootstrap.css">
-<link rel="stylesheet" href="resources/styles/bootstrap.min.css">
-<link rel="stylesheet" href="resources/styles/bootstrap-theme.css">
-<link rel="stylesheet" href="resources/styles/bootstrap-theme.min.css">
+<link rel="stylesheet" href="resources/styles/skeleton.css">
+<link rel="stylesheet" href="resources/styles/normalize.css">
+
 <title>Äänestys</title>
 </head>
 <body>
 
+	
+		<img id="logo" src="resources/images/hh_logo.jpg" />
 
-
-	<img id="logo" src="resources/images/hh_logo.jpg" />
+	
 	<hr>
-	<div class="container" id="sisalto">
+	<div class="container">
+	
 
-		<div class="row">
+		<div class="row" align="center">
+			<div class="twelve-column">
 
-			<div class="six columns">
-				<h3>Äänestäjä</h3>
-
-
-				<a class="button" href="Main/aanestys1">Listaa äänestykset</a>
-				
-			</div>
-
-			<div class="six columns">
-
-				<h3>Admin</h3>
-
-				<a class="button" href="Main/loginpage">Admin sivulle tästä</a><br>
-			
+				<a class="button" href="Main/aanestys1">Äänestykset</a>
+		
+				<a class="button" href="Main/loginpage">Admin</a><br>
 
 			</div>
 		</div>
 	</div>
 
-	
+
 </body>
 </html>
