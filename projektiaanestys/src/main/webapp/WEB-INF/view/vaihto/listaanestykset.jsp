@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="../resources/styles/normalize.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Äänestykset</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	<img id="logo" src="../resources/images/hh_logo.jpg" />
@@ -27,7 +28,7 @@
 
 				<h1>Tarjolla olevat äänestykset:</h1>
 
-				<table class="u-full-width">
+				<table id="miyazaki">
 				<thead>
 					<tr class="header">
 					<th>Nimi </th>
@@ -39,21 +40,21 @@
 					<c:forEach items="${aanestykset}" var="tykset">
 						<tr>
 							<td><c:out value="${tykset.aanestysNimi}" /></td>
-							<td><c:out value="${tykset.aanestysID}" /></td>
+<%-- 							<td><c:out value="${tykset.aanestysID}" /></td> --%>
 							<td><c:out value="${tykset.tunnus}" /></td>
 
 							<td><c:out value="${tykset.kuvaus}" /></td>
-						</tr>
+<!-- 						</tr> -->
 						
-						<tr>
+<!-- 						<tr> -->
 							<td><form:form id="envselection" modelAttribute="envBean"
 									method="get" action="tunnistus">
 									<form:hidden path="env" value="${tykset.aanestysID}"
 										onclick="submitForm()" />
 									<button type="submit">Valitse</button>
 								</form:form></td>
-						</tr>
-						<tr class="napit">
+<!-- 						</tr> -->
+<!-- 						<tr class="napit"> -->
 							<td>
 							<button onclick="location.href='listaa/${tykset.aanestysID}'">Tulos</button>
 								</td>
@@ -70,5 +71,21 @@
 	<div class="three columns">
 		<a class="button" href="/projektiaanestys/">Takaisin</a>
 	</div>
+	<script>
+	var headertext = [],
+	headers = document.querySelectorAll("#miyazaki th"),
+	tablerows = document.querySelectorAll("#miyazaki th"),
+	tablebody = document.querySelector("#miyazaki tbody");
+
+	for(var i = 0; i < headers.length; i++) {
+	  var current = headers[i];
+	  headertext.push(current.textContent.replace(/\r?\n|\r/,""));
+	} 
+	for (var i = 0, row; row = tablebody.rows[i]; i++) {
+	  for (var j = 0, col; col = row.cells[j]; j++) {
+	    col.setAttribute("data-th", headertext[j]);
+	  } 
+	}
+	</script>
 </body>
 </html>
