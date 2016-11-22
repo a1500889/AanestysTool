@@ -11,29 +11,30 @@
 <link rel="stylesheet" href="../resources/styles/skeleton.css">
 <link rel="stylesheet" href="../resources/styles/normalize.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tunnistaudu äänestykseen</title>
 <script>
 
 </script>
 </head>
 <body>
-
-<h2>Anna nimesi:</h2>
-
+<div class="container keskitys">
+<h2 style="margin-top:15%;">Anna nimesi:</h2>
 ${alert}
 <form:form method="post" action="tunnistus">
 <input type="hidden" name="iidee" value="${iidee}">
 
-<p>Etunimi</p>
-<input type=text name="etunimi">
-<p>Sukunimi</p>
-<input type=text name="sukunimi"><br>
-<div class="three columns">
-		<button type="submit">Seuraava</button>
-		<a class="button" href="/projektiaanestys/Main/aanestys1">Takaisin</a>
-	</div>
+<label>Etunimi</label>
+<input class="u-full-width" type=text name="etunimi">
+<label>Sukunimi</label>
+<input class="u-full-width" type=text name="sukunimi"><br>
+<!-- <div class="keskitys"> -->
+		<a class="button button-red" href="/projektiaanestys/Main/aanestys1">Takaisin</a>
+		<button class="button button-primary" type="submit">Seuraava</button>
+		
+<!-- 	</div> -->
 
 </form:form>
-
+</div>
 </body>
 </html>

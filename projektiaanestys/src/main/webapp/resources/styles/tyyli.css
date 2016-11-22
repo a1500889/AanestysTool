@@ -12,19 +12,32 @@
 	border-radius: 8px;
 }
 
-h1 {
-/*padding-top: 10%;
-padding-left: 50%;
-*/
-}
-#sivuraidat {
-	float: left;
-	width:50px;
-	
-	
-}
+/* h1 { */
+/* padding-top: 10%; */
+/* padding-left: 50%; */
+
+/* } */
+/* #sivuraidat { */
+/* 	float: left; */
+/* 	width:50px;	 */
+/* } */
+
 #logo{
-	padding-left: 10%;
+	padding:20px 10px;
+}
+.keskitys{
+	text-align:center;
+	margin:auto;
+}
+.mobiili{
+	text-align:center;
+	margin:auto;
+}
+.mobiili button {
+	text-align: center;
+	padding:5px 0px;
+	width:50%;
+	margin-bottom: 10px;
 }
 
 /* tablen responsiivisuus */
@@ -40,7 +53,6 @@ table#miyazaki {
 table#miyazaki caption { 
   font-size: 2rem; color: #444;
   margin: 1rem;
-  background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/miyazaki.png), url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/miyazaki2.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center left, center right; 

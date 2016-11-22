@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="resources/styles/tyyli.css">
 <link rel="stylesheet" href="resources/styles/skeleton.css">
 <link rel="stylesheet" href="resources/styles/normalize.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Äänestys</title>
 </head>
 <body>

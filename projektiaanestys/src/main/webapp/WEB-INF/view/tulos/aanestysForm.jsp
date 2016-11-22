@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="../resources/styles/skeleton.css">
 <link rel="stylesheet" href="../resources/styles/normalize.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lis‰‰ ‰‰nestys</title>
 <SCRIPT lang="javascript">
         function addRow(tableID) 
