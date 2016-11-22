@@ -37,8 +37,10 @@
 					<c:forEach var="optio" items="${vaihtoehdot}">
 
 						<%-- from:radiobutton setti hakee controllerin getView metodista vaihtoehdot --%>
-						<form:radiobutton path="env" value="${optio.vaihtoehtoID}"
-							onclick="submitForm()" />${optio.vaihtoehtoNimi}<br>
+						<label for="${optio.vaihtoehtoID}">
+						<form:radiobutton path="env" id="${optio.vaihtoehtoID}" value="${optio.vaihtoehtoID}"
+							onclick="submitForm()" /> ${optio.vaihtoehtoNimi}
+							</label>
 					</c:forEach>
 					<input type="hidden" name="KID" value="${KID}"/>
 					<button type="submit">Äänestä</button>
