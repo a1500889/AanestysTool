@@ -77,7 +77,7 @@
 		</div>
 		<div class="keskitys">
 					<hr>
-					<a class="button button-red" href="/projektiaanestys/">Takaisin</a>
+					<a class="button button-red" href="/projektiaanestys/Main/admin">Takaisin</a>
 					
 					</div>
 	</div>
