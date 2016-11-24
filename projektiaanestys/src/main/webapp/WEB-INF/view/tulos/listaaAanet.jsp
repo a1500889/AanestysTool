@@ -17,12 +17,14 @@
 <body>
 	<img id="logo" src="../../resources/images/hh_logo.jpg" />
 	<hr>
-	<div class="container" id="LisaaAanestaja">
+	
+	<div class="container" id="LisaaAanestaja" align ="center" >
 
-		<div class="row">
+		<div style=" text-align:left;" class="row">
 
 
-			<div class="nine columns">
+			
+			
 				<h1>Äänestyksen tulos:</h1>
 
 
@@ -32,11 +34,12 @@
 					<li><c:out value="${tulos.vaihtoehtoNimi}" />:<c:out
 							value="${tulos.aanlkm}" /></li>
 				</c:forEach>
-			</div>
-		</div>
+				<a class="button button-red" class="button" href="/projektiaanestys/Main/aanestys1">Takaisin</a>
+	
+		
 	</div>
-	<div class="three columns">
-		<a class="button" href="/projektiaanestys/Main/aanestys1">Takaisin</a>
+	
+		
 	</div>
 <script>
 setTimeout(function() {

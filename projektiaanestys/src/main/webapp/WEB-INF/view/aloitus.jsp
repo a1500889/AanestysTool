@@ -25,9 +25,9 @@
 		<div class="row" align="center">
 			<div class="twelve-column">
 
-				<a class="button" href="Main/aanestys1">Äänestykset</a>
+				<a class="button button-primary button-aloitus" href="Main/aanestys1">Äänestykset</a>
 		
-				<a class="button" href="Main/loginpage">Admin</a><br>
+<!-- 				<a class="button" href="Main/loginpage">Admin</a><br> -->
 
 			</div>
 		</div>
