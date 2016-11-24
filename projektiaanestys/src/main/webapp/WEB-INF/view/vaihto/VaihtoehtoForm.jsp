@@ -75,9 +75,12 @@
 				</form:form>
 			</div>
 		</div>
+		<div class="keskitys">
+					<hr>
+					<a class="button button-red" href="/projektiaanestys/">Takaisin</a>
+					
+					</div>
 	</div>
-	<div class="three columns">
-		<a class="button" href="/projektiaanestys/Main/admin">Takaisin</a>
-	</div>
+	
 </body>
 </html>

@@ -92,10 +92,13 @@
 			
 			</div>
 		</div>
+		<div class="keskitys">
+					<hr>
+					<a class="button button-red" href="/projektiaanestys/">Takaisin</a>
+					
+					</div>
 	</div>
-	<div class="three columns">
-		<a class="button" href="/projektiaanestys/">Takaisin</a>
-	</div>
+	
 	<script>
 		var headertext = [], headers = document
 				.querySelectorAll("#miyazaki th"), tablerows = document

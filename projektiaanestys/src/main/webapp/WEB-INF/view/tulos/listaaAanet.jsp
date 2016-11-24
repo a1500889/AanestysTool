@@ -18,27 +18,34 @@
 	<img id="logo" src="../../resources/images/hh_logo.jpg" />
 	<hr>
 	
-	<div class="container" id="LisaaAanestaja" align ="center" >
+	<div class="container">
+	
 
-		<div style=" text-align:left;" class="row">
+		<div class="row" align="center">
+
+		
 
 
 			
 			
 				<h1>Äänestyksen tulos:</h1>
 
-
+<table>
 
 
 				<c:forEach items="${tuloslista}" var="tulos">
-					<li><c:out value="${tulos.vaihtoehtoNimi}" />:<c:out
-							value="${tulos.aanlkm}" /></li>
+				<tr>
+					<td><c:out value="${tulos.vaihtoehtoNimi}" />: </td>
+					<td style="padding-left:10%"><c:out value="${tulos.aanlkm}" /></td>
+							</tr>
 				</c:forEach>
+				</table>
+				<hr>
 				<a class="button button-red" class="button" href="/projektiaanestys/Main/aanestys1">Takaisin</a>
 	
 		
-	</div>
 	
+	</div>
 		
 	</div>
 <script>
