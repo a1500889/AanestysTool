@@ -7,7 +7,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -192,6 +191,7 @@ public class MainController {
 	public String lista(Model model) {
 		model.addAttribute("aanestajat", aadao.lista());
 		model.addAttribute("aanestykset", edao.lista());
+		model.addAttribute("ryhmat", aadao.haeRyhmat());
 		EnvBean envBean = new EnvBean();
 		model.addAttribute(envBean);
 		
@@ -310,6 +310,9 @@ public class MainController {
 	public String admin (Model model){
 		return "Admin/admin";
 	}
+	
+	
+	
 
 	@RequestMapping(value = "/newExcelAanestaja", method = RequestMethod.GET)
 	public ModelAndView newExcelAanestaja(ModelAndView model, ArrayList<AanestajaImpl> Lista) throws IOException {

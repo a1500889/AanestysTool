@@ -19,3 +19,15 @@ VaihtoehtoID INT NOT NULL,
 AanestysID INT NOT NULL,
 FOREIGN KEY (VaihtoehtoID) REFERENCES Vaihtoehto(VaihtoehtoID),
 FOREIGN KEY (AanestysID) REFERENCES Aanestys(AanestysID) );
+
+CREATE TABLE Ryhma
+(RyhmaID INT PRIMARY KEY AUTO_INCREMENT,
+RyhmaNimi varchar(50) NOT NULL,
+RyhmaTunnus varchar(15) UNIQUE NOT NULL
+);
+
+
+CREATE TABLE Jasenyys
+(AanestajaID INT NOT NULL,
+RyhmaID INT NOT NULL,
+FOREIGN KEY (AanestajaID) REFERENCES Aanestaja

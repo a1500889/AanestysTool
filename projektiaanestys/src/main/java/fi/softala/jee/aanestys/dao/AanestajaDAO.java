@@ -4,6 +4,7 @@ import java.util.List;
 
 import fi.softala.jee.aanestys.bean.Aanestaja;
 import fi.softala.jee.aanestys.bean.Aani;
+import fi.softala.jee.aanestys.bean.Ryhma;
 
 public interface AanestajaDAO {
 	
@@ -24,4 +25,6 @@ public interface AanestajaDAO {
 	public int haeVapaaAanestajaID(Aani Aani, String etunimi, String sukunimi);
 	
 	public boolean tarkistaAanestysoikeus(int kayttajaID, int aanestysID);
+	
+	public List<Ryhma> haeRyhmat();
 }
