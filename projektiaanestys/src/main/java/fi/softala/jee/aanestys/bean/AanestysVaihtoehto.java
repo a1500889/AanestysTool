@@ -1,7 +1,5 @@
 package fi.softala.jee.aanestys.bean;
 
-import java.util.ArrayList;
-
 public class AanestysVaihtoehto {
 	private String valittuVaihtoehto;
 

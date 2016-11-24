@@ -27,7 +27,12 @@
 			<td><input type="checkbox" name="valAanestykset" value="${aanestys.aanestysID}"/> </td>
 			<td><c:out value="${aanestys.aanestysNimi}" /></td>
 			</c:forEach>
-			<input type="submit" value="Lisaa Oikeudet">
+			<input type="submit" value="Lisaa Oikeudet"><br>
+			<c:forEach items="${ryhmat}" var="ryhma">
+			<td><input type="radio" name="valRyhmat" value="${ryhma.ryhmaID}"/> </td>
+			<td><c:out value="${ryhma.ryhmaNimi}" /></td>
+			</c:forEach>
+			<button type="button">Lisää Ryhmiin</button> PURPOSEFULLY WORTHLESS TEST BUTTON, PLEASE IGNORE.
 			<div class="nine columns">
 				<h1>Lista äänestäjistä:</h1>
 

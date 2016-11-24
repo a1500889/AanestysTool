@@ -15,6 +15,8 @@ import org.springframework.stereotype.Repository;
 import fi.softala.jee.aanestys.bean.Aanestaja;
 import fi.softala.jee.aanestys.bean.AanestajaImpl;
 import fi.softala.jee.aanestys.bean.Aani;
+import fi.softala.jee.aanestys.bean.Ryhma;
+import fi.softala.jee.aanestys.bean.RyhmaImpl;
 
 @Repository
 public class AanestajaDAOImpl implements AanestajaDAO {
@@ -32,7 +34,7 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 
 	//Lis‰‰ kantaan ‰‰nest‰j‰n
 	public void insert(Aanestaja aanestaja) {
-		String sql ="INSERT INTO Aanestaja (Etunimi, Sukunimi)" + " VALUES (?,?)";
+		String sql ="INSERT INTO Aanestaja (Etunimi, Sukunimi, RyhmaID)" + " VALUES (?,?, 1)";
 		jdbcTemplate.update(sql, aanestaja.getEtunimi(), aanestaja.getSukunimi());
 		
 	}
@@ -131,5 +133,27 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 		});
 		
 		return oikeus;
+	}
+	
+	public List<Ryhma> haeRyhmat(){
+		System.out.println("AADAO:Ping");
+		String order = "SELECT * FROM Ryhma";
+		List<Ryhma> ryhmat = jdbcTemplate.query(order, new RowMapper<Ryhma>(){
+			public Ryhma mapRow (ResultSet rs, int rowNum) throws SQLException {
+				Ryhma r = new RyhmaImpl();
+				r.setRyhmaID(rs.getInt("RyhmaID"));
+				r.setRyhmaNimi(rs.getString("RyhmaNimi"));
+				r.setRyhmaTunnus(rs.getString("RyhmaTunnus"));
+				System.out.println("AADAO:pong");
+				
+				return r;
+			}
+		});
+		
+		for (int i = 0; i < ryhmat.size(); i++) {
+			System.out.println("AADAO:"+ryhmat.get(i).getRyhmaNimi());
+		}
+		return ryhmat;
+		
 	}
 }
