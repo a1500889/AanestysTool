@@ -56,13 +56,18 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 	}
 
 	public List<Aanestaja> lista() {
-		String sql="SELECT * FROM Aanestaja";
+		String sql="SELECT AanestajaID, Etunimi, Sukunimi, r.RyhmaID, r.RyhmaNimi, r.RyhmaTunnus FROM Aanestaja a JOIN Ryhma r ON a.RyhmaID=r.RyhmaID";
 		List<Aanestaja> lista=jdbcTemplate.query(sql, new RowMapper<Aanestaja>(){
 			public Aanestaja mapRow (ResultSet rs, int rowNum) throws SQLException {
 				Aanestaja hlo = new AanestajaImpl();
+				Ryhma hryh = new RyhmaImpl();
 				hlo.setAanestajaID(rs.getInt("AanestajaID"));
 				hlo.setEtunimi(rs.getString("Etunimi"));
 				hlo.setSukunimi(rs.getString("Sukunimi"));
+				hryh.setRyhmaID(rs.getInt("RyhmaID"));
+				hryh.setRyhmaNimi(rs.getString("RyhmaNimi"));
+				hryh.setRyhmaTunnus(rs.getString("RyhmaTunnus"));
+				hlo.setRyhma(hryh);
 				
 				return hlo;
 			}
@@ -136,7 +141,6 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 	}
 	
 	public List<Ryhma> haeRyhmat(){
-		System.out.println("AADAO:Ping");
 		String order = "SELECT * FROM Ryhma";
 		List<Ryhma> ryhmat = jdbcTemplate.query(order, new RowMapper<Ryhma>(){
 			public Ryhma mapRow (ResultSet rs, int rowNum) throws SQLException {
@@ -144,16 +148,21 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 				r.setRyhmaID(rs.getInt("RyhmaID"));
 				r.setRyhmaNimi(rs.getString("RyhmaNimi"));
 				r.setRyhmaTunnus(rs.getString("RyhmaTunnus"));
-				System.out.println("AADAO:pong");
 				
 				return r;
 			}
 		});
-		
-		for (int i = 0; i < ryhmat.size(); i++) {
-			System.out.println("AADAO:"+ryhmat.get(i).getRyhmaNimi());
-		}
 		return ryhmat;
 		
 	}
+	
+	public void lisaaRyhmiin(int ryhmaID, int[] aanestajalista){
+		String kasky = "UPDATE Aanestaja SET RyhmaID=? WHERE AanestajaID=?";
+		for (int i = 0; i < aanestajalista.length; i++) {
+			jdbcTemplate.update(kasky, ryhmaID, aanestajalista[i]);
+			
+		}
+		
+	}
+
 }

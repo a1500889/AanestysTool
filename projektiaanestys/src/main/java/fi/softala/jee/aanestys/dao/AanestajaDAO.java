@@ -27,4 +27,6 @@ public interface AanestajaDAO {
 	public boolean tarkistaAanestysoikeus(int kayttajaID, int aanestysID);
 	
 	public List<Ryhma> haeRyhmat();
+	
+	public void lisaaRyhmiin(int ryhmaID, int[] aanestajalista);
 }

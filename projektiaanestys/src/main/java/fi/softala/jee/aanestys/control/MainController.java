@@ -338,9 +338,27 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/lisaaOikeudet", method= RequestMethod.POST)
-	public String listaaAanestVal(@RequestParam("valAanestaja") int[] aanestajalista, @RequestParam("valAanestykset") int[] aanestyslista , RedirectAttributes viesti){
-		viesti.addFlashAttribute("alert","Oikeutta jaettu.");
-		aadao.lisaaAanestysOikeudet(aanestajalista, aanestyslista);
+	public String listaaAanestVal(@RequestParam("lahetysnappi") String nappivalinta, @RequestParam(value="valRyhma", required=false) int ryhmavalinta, @RequestParam("valAanestaja") int[] aanestajalista, @RequestParam(value="valAanestykset", required=false) int[] aanestyslista , RedirectAttributes viesti){
+		if(nappivalinta.equals("oikeus")){
+			if(aanestyslista.length>0){
+				viesti.addFlashAttribute("viestivari","green");
+				viesti.addFlashAttribute("alert","Oikeutta jaettu.");
+				aadao.lisaaAanestysOikeudet(aanestajalista, aanestyslista);
+			}else{
+				viesti.addFlashAttribute("viestivari","red");
+				viesti.addFlashAttribute("alert","Valitse ‰‰nestyksi‰.");
+			}		
+			
+		}else if(nappivalinta.equals("ryhma")){
+			aadao.lisaaRyhmiin(ryhmavalinta, aanestajalista);
+			viesti.addFlashAttribute("viestivari","green");
+			viesti.addFlashAttribute("alert","Valitut lis‰tty ryhmiin.");
+			
+		}else{
+			viesti.addFlashAttribute("viestivari","red");	
+			viesti.addFlashAttribute("alert","Jonkin meni vikaan");	
+		}
+		
 		return "redirect:aanestajat";
 	}
  

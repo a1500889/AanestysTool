@@ -21,18 +21,18 @@
 	<div class="container" id="LisaaAanestaja">
 
 		<div class="row">
-			<font color="green">${alert}</font>
+			<font color="${viestivari}">${alert}</font>
 			<form:form method="POST" id="oikeusForm" commandName="lisaaOikeudet" action="lisaaOikeudet">
 			<c:forEach items="${aanestykset}" var="aanestys">
 			<td><input type="checkbox" name="valAanestykset" value="${aanestys.aanestysID}"/> </td>
 			<td><c:out value="${aanestys.aanestysNimi}" /></td>
 			</c:forEach>
-			<input type="submit" value="Lisaa Oikeudet"><br>
+			<button name="lahetysnappi" value="oikeus" type="submit">Lisaa oikeudet</button><br>
 			<c:forEach items="${ryhmat}" var="ryhma">
-			<td><input type="radio" name="valRyhmat" value="${ryhma.ryhmaID}"/> </td>
+			<td><input type="radio" name="valRyhma" value="${ryhma.ryhmaID}"/> </td>
 			<td><c:out value="${ryhma.ryhmaNimi}" /></td>
 			</c:forEach>
-			<button type="button">Lisää Ryhmiin</button> PURPOSEFULLY WORTHLESS TEST BUTTON, PLEASE IGNORE.
+			<button name="lahetysnappi" value="ryhma" type="submit">Lisaa ryhmään</button>
 			<div class="nine columns">
 				<h1>Lista äänestäjistä:</h1>
 
@@ -42,6 +42,7 @@
 							<th>ID</th>
 							<th>Etunimi</th>
 							<th>Sukunimi</th>
+							<th>Ryhmä</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -52,6 +53,7 @@
 								<td><c:out value="${aanestaja.aanestajaID}" /></td>
 								<td><c:out value="${aanestaja.etunimi}" /></td>
 								<td><c:out value="${aanestaja.sukunimi}" /></td>
+								<td><c:out value="${aanestaja.ryhma.ryhmaTunnus}" /></td>
 							</tr>
 							<tr>
 								<td><form:form id="envselection" modelAttribute="envBean"
