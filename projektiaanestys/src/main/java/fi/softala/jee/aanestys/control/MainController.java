@@ -27,6 +27,8 @@ import fi.softala.jee.aanestys.bean.Aani;
 import fi.softala.jee.aanestys.bean.AaniImpl;
 import fi.softala.jee.aanestys.bean.EnvBean;
 import fi.softala.jee.aanestys.bean.Excelreader;
+import fi.softala.jee.aanestys.bean.Ryhma;
+import fi.softala.jee.aanestys.bean.RyhmaImpl;
 import fi.softala.jee.aanestys.bean.Vaihtoehto;
 import fi.softala.jee.aanestys.bean.VaihtoehtoImpl;
 import fi.softala.jee.aanestys.dao.AanestajaDAO;
@@ -337,6 +339,8 @@ public class MainController {
 		return new ModelAndView("Admin/admin");
 	}
 	
+	//ÄÄNESTYSOIKEUKSIEN LISÄÄMINEN KÄYTTÄJILLE
+	//KÄYTTÄJIEN LISÄÄMINEN RYHMÄÄN
 	@RequestMapping(value="/lisaaOikeudet", method= RequestMethod.POST)
 	public String listaaAanestVal(@RequestParam("lahetysnappi") String nappivalinta, @RequestParam(value="valRyhma", required=false) int ryhmavalinta, @RequestParam("valAanestaja") int[] aanestajalista, @RequestParam(value="valAanestykset", required=false) int[] aanestyslista , RedirectAttributes viesti){
 		if(nappivalinta.equals("oikeus")){
@@ -361,6 +365,41 @@ public class MainController {
 		
 		return "redirect:aanestajat";
 	}
+	
+	@RequestMapping(value = "/newRyhma", method = RequestMethod.GET)
+	public ModelAndView luoRyhma(ModelAndView model) {
+		model.addObject("Ryhma", new RyhmaImpl());
+		model.setViewName("Aanestajat/RyhmaForm");
+		return model;
+	}
+	
+	// Tarkistaa, ettei ryhmän nimeä ja tunnusta ole varattu, tallentaen tiedot tietokantaan. 
+	@RequestMapping(value = "/saveRyhma", method = RequestMethod.POST)
+	public ModelAndView saveRyhma(@ModelAttribute RyhmaImpl ryhma, RedirectAttributes viesti) {
+		List<Ryhma> ryhmalista = aadao.haeRyhmat();
+		boolean onkoNimiTunnusVapaa = true;
+		for (int i = 0; i < ryhmalista.size(); i++) {
+			if(ryhmalista.get(i).getRyhmaNimi().equals(ryhma.getRyhmaNimi())){
+				viesti.addFlashAttribute("viestivari", "red");
+				viesti.addFlashAttribute("alert", "Ryhmän nimi on jo käytössä!");
+				onkoNimiTunnusVapaa=false;
+			}else if(ryhmalista.get(i).getRyhmaTunnus().equals(ryhma.getRyhmaTunnus())){
+				viesti.addFlashAttribute("viestivari", "red");
+				viesti.addFlashAttribute("alert", "Ryhmän tunnus on jo käytössä!");
+				onkoNimiTunnusVapaa=false;
+			}
+		}
+		
+		if(onkoNimiTunnusVapaa){
+			viesti.addFlashAttribute("viestivari", "green");
+			viesti.addFlashAttribute("alert", "Ryhmä tallennettu.");
+			aadao.lisaaRyhma(ryhma);
+		}
+				
+			return new ModelAndView("redirect:newRyhma");
+	}
+	
+	
  
 	@RequestMapping(value="/loginpage", method = RequestMethod.GET)
 	public String login(Model model) {

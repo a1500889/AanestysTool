@@ -29,4 +29,6 @@ public interface AanestajaDAO {
 	public List<Ryhma> haeRyhmat();
 	
 	public void lisaaRyhmiin(int ryhmaID, int[] aanestajalista);
+	
+	public void lisaaRyhma(Ryhma ryhma);
 }

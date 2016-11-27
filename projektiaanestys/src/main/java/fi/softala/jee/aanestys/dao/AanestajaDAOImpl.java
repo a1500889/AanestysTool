@@ -164,5 +164,11 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 		}
 		
 	}
+	
+	public void lisaaRyhma(Ryhma ryhma){
+		String ryhmanLisaysKasky = "INSERT INTO Ryhma (RyhmaNimi, RyhmaTunnus) VALUES(?, ?)";
+		jdbcTemplate.update(ryhmanLisaysKasky, ryhma.getRyhmaNimi(), ryhma.getRyhmaTunnus());
+		
+	}
 
 }
