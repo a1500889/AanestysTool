@@ -113,8 +113,10 @@ public class MainController {
 			temp.setAanlkm(Collections.frequency(AnnetutTxt, v.getVaihtoehtoNimi()));
 			tulos.add(temp);
 		}
-
 		model.addAttribute("tuloslista", tulos);
+		
+		//Hakee itse‰‰n ‰‰nest‰neiden h‰pe‰listan ja list‰‰ sen.
+		model.addAttribute("hapealista", adao.listaaKusimutterit());
 
 		return "tulos/listaaAanet";
 	}
@@ -127,7 +129,6 @@ public class MainController {
 		int vaihtoehtoID = Integer.parseInt(envBean.getEnv());
 		a.setVaihtoehtoID(vaihtoehtoID);
 		a.setAanestysID(vdao.get(vaihtoehtoID).getAanestysID());
-		
 		if(!aadao.tarkistaAanestysoikeus(Integer.parseInt(kayttajaID), a.getAanestysID())){
 			adao.insert(a, Integer.parseInt(kayttajaID));
 			int AanestID = vdao.get(vaihtoehtoID).getAanestysID();
@@ -148,6 +149,7 @@ public class MainController {
 	public String getView(@ModelAttribute("envBean") EnvBean envBean, Model model, 
 			@ModelAttribute("KID") int kayttajaID) {
 		List<Vaihtoehto> listaaVaihtoehdot = vdao.haeVaihtoehdot(Integer.parseInt(envBean.getEnv()));
+		model.addAttribute("vaihtoehto", new VaihtoehtoImpl());
 		model.addAttribute("KID", kayttajaID);
 		model.addAttribute("vaihtoehdot", listaaVaihtoehdot);
 		return "vaihto/listaavEhdot";

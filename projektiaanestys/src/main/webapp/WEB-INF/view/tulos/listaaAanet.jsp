@@ -46,6 +46,13 @@
 		
 	
 	</div>
+	
+	<h1>H‰pe‰paalu</h1>
+	Lista omaa vaihtoehtoaan ‰‰nest‰neist‰:<br>
+	<tr><td>Nimi:</td><td>Ryhm‰:</td></tr>
+	<c:forEach items="${hapealista}" var="havettava">
+	<br><tr><td><c:out value="${havettava.etunimi}" /> <c:out value="${havettava.sukunimi}" /></td>, <td><c:out value="${havettava.ryhma.ryhmaNimi}"/></td></tr>
+	</c:forEach>
 		
 	</div>
 <script>
