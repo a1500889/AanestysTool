@@ -70,7 +70,7 @@
 
 					<td colspan="2" align="center"><input type="submit"
 								value="Save"></td>
-					</tr>
+					
 					<div class="three columns">
 		<a class="button" href="/projektiaanestys/Main/admin">Takaisin</a>
 	</div>

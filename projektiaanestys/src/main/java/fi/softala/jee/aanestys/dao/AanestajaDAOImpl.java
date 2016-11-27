@@ -87,10 +87,10 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 	}
 	
 	public List<String> listaaLuvalliset(int AanestysID){
-		String sql = "SELECT Aanestaja.Etunimi, Aanestaja.sukunimi FROM Lupa INNER JOIN Aanestaja ON Aanestaja.AanestajaID=Lupa.AanestajaID WHERE AanestysID ="+AanestysID+" AND Lupa.Aanestanyt=false;";
+		String sql = "SELECT Aanestaja.Etunimi, Aanestaja.sukunimi, r.RyhmaTunnus FROM Lupa INNER JOIN Aanestaja ON Aanestaja.AanestajaID=Lupa.AanestajaID JOIN Ryhma r ON Aanestaja.RyhmaID=r.RyhmaID WHERE AanestysID ="+AanestysID+" AND Lupa.Aanestanyt=false;";
 		List<String> luvallisetLista = jdbcTemplate.query(sql, new RowMapper<String>(){
 			public final String mapRow (ResultSet rs, int rowNum) throws SQLException {
-				String nimi = rs.getString("Etunimi")+" "+rs.getString("Sukunimi");
+				String nimi = rs.getString("Etunimi")+" "+rs.getString("Sukunimi")+" "+rs.getString("RyhmaTunnus");
 
 			
 				return nimi;
@@ -101,8 +101,8 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 	}
 	
 	//hakee etunimen ja sukunimen perusteella ÄänestäjäID:n. Hakee ensimmäisen, jos samoja nimiä on useita.
-	public int haeVapaaAanestajaID(Aani Aani, String etunimi, String sukunimi){
-		String kasky2 = "SELECT Aanestaja.AanestajaID FROM Aanestaja INNER JOIN Lupa ON Aanestaja.AanestajaID=Lupa.AanestajaID WHERE Aanestaja.Etunimi='"+etunimi+"' AND Aanestaja.Sukunimi='"+sukunimi+"' AND Lupa.Aanestanyt=false AND Lupa.AanestysID='"+Aani.getAanestysID()+"' ORDER BY AanestajaID LIMIT 1;";
+	public int haeVapaaAanestajaID(Aani Aani, String etunimi, String sukunimi, String RyhTun){
+		String kasky2 = "SELECT Aanestaja.AanestajaID FROM Aanestaja INNER JOIN Lupa ON Aanestaja.AanestajaID=Lupa.AanestajaID JOIN Ryhma r ON Aanestaja.RyhmaID=r.RyhmaID WHERE Aanestaja.Etunimi='"+etunimi+"' AND Aanestaja.Sukunimi='"+sukunimi+"' AND r.RyhmaTunnus='"+RyhTun+"' AND Lupa.Aanestanyt=false AND Lupa.AanestysID='"+Aani.getAanestysID()+"' ORDER BY AanestajaID LIMIT 1;";
 		Integer paskalista = jdbcTemplate.query(kasky2, new ResultSetExtractor<Integer>(){
 		
 			public Integer extractData(ResultSet rs) throws SQLException, DataAccessException {

@@ -250,9 +250,11 @@ public class MainController {
 	@RequestMapping(value="/lisaavaihtoehdot", method = RequestMethod.GET)
 	public String lisaaVaihtoehdot(Model model){
 		List<Aanestys> aanestykset = edao.lista();
+		List<Ryhma> ryhmat = aadao.haeRyhmat();
 		model.addAttribute("aanestykset", aanestykset);
-		EnvBean envBean = new EnvBean();
-		model.addAttribute(envBean);
+		model.addAttribute("ryhmat", ryhmat);
+		Vaihtoehto v = new VaihtoehtoImpl();
+		model.addAttribute("vaihtoehto", v);
 		
 		return "vaihto/VaihtoehtoForm";
 	}
@@ -261,23 +263,21 @@ public class MainController {
 	//Hakee valitun ‰‰nestyksen ID:n ja annetut vaihtoehdot (String),
 	//tallentaen vaihtoehdot yksi kerrallaan tietokantaan.
 	@RequestMapping(value="/lisaavaihtoehdot", method = RequestMethod.POST)
-	public String tallennavEhdot(@RequestParam("vaihtoehtoNimet") String[] uudetVaihtoehdot, EnvBean envBean, VaihtoehtoImpl temp) {
+	public String tallennavEhdot(@ModelAttribute VaihtoehtoImpl vaihtoehto, RedirectAttributes viesti) {
 		
-		for (int i = 0; i < uudetVaihtoehdot.length; i++) {
-			temp.setAanestysID(Integer.parseInt(envBean.getEnv()));
-			temp.setVaihtoehtoNimi(uudetVaihtoehdot[i]);
-			temp.setVaihtoehtoID(25);
-			vdao.insert(temp);
+		if(vaihtoehto.getVaihtoehtoNimi().isEmpty()){
+			viesti.addFlashAttribute("viestivari", "red");
+			viesti.addFlashAttribute("alert", "Lis‰‰ vaihtoehdolle nimi.");
+		}else if(vaihtoehto.getRyhmaTunnus().isEmpty()){
+			viesti.addFlashAttribute("viestivari", "red");
+			viesti.addFlashAttribute("alert", "Lis‰‰ vaihtoehdolle ryhm‰tunnus.");
+		}else{
+			viesti.addFlashAttribute("viestivari", "green");
+			viesti.addFlashAttribute("alert", "Vaihtoehto lis‰tty!");
+			vdao.insert(vaihtoehto);
 		}
-	
-		return "vaihto/VaihtoehtoForm";
-	}
-	
-	@RequestMapping(value="/bypass", method = RequestMethod.POST)
-	public String ohitusredirect(@ModelAttribute("envBean") String iidee, Model model) {
-		model.addAttribute("AanestysID", Integer.parseInt(iidee));
 		
-		return "redirect:listaa";
+		return "redirect:lisaavaihtoehdot";
 	}
 	
 	@RequestMapping(value="/tunnistus", method = RequestMethod.GET)
@@ -288,15 +288,18 @@ public class MainController {
 	
 	@RequestMapping(value="/tunnistus", method = RequestMethod.POST)
 	public RedirectView tunnistusPost(@ModelAttribute("envBean") EnvBean envBean, @RequestParam("iidee") int id, 
-			@RequestParam("etunimi") String etunimi, @RequestParam("sukunimi") String sukunimi, Model model, RedirectAttributes lahetett‰v‰t){
+			@RequestParam("etunimi") String etunimi, @RequestParam("sukunimi") String sukunimi, @RequestParam(value="rTun", required=false) String RyhTun, Model model, RedirectAttributes lahetett‰v‰t){
 		String menosuunta = "asdf";
+		if(RyhTun.isEmpty()){
+			RyhTun="R204";
+		}
 		List<String> nimet =aadao.listaaLuvalliset(id);
-		String nimi = etunimi+" "+sukunimi;
+		String nimi = etunimi+" "+sukunimi+" "+RyhTun;
 		
 		if(nimet.contains(nimi)){
 			AaniImpl p = new AaniImpl();
 			p.setAanestysID(id);
-			int Kaytt‰j‰ID = aadao.haeVapaaAanestajaID(p, etunimi, sukunimi);
+			int Kaytt‰j‰ID = aadao.haeVapaaAanestajaID(p, etunimi, sukunimi, RyhTun);
 			lahetett‰v‰t.addFlashAttribute("envBean", new EnvBean(Integer.toString(id)));
 			lahetett‰v‰t.addFlashAttribute("KID", Kaytt‰j‰ID);
 			menosuunta="lista";

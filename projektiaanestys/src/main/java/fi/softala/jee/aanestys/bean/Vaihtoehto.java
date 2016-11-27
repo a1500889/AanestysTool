@@ -17,5 +17,9 @@ public interface Vaihtoehto {
 	public abstract void setAanlkm(int lkm);
 	
 	public abstract int getAanlkm();
+	
+	public abstract void setRyhmaTunnus(String rhID);
+	
+	public abstract String getRyhmaTunnus();
 
 }
