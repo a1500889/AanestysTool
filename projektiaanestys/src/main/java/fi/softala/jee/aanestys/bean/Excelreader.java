@@ -2,10 +2,14 @@ package fi.softala.jee.aanestys.bean;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
- 
+
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -17,12 +21,23 @@ public class Excelreader {
 	
 	@SuppressWarnings("deprecation")
 	public static ArrayList<AanestajaImpl> lueExcel() throws IOException{
+		
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+		fileChooser.setCurrentDirectory(null);
+		int result = fileChooser.showOpenDialog(fileChooser);
+		if (result == JFileChooser.APPROVE_OPTION) {
+		    File selectedFile = fileChooser.getSelectedFile();
+		    System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+		
+		
+		
 		ArrayList<AanestajaImpl> aanestajat = new ArrayList<AanestajaImpl>();
 
 			//Aseta tähän polku mistä excel-tiedosto luetaan!!
-		String excelFilePath = "C:/Users/a1500949/Documents/testi1.xlsx";
+//		String excelFilePath = "C:/Users/a1500949/Documents/testi1.xlsx";
 
-		FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
+		FileInputStream inputStream = new FileInputStream(selectedFile);
 
 		Workbook workbook = new XSSFWorkbook(inputStream);
 		Sheet firstSheet = workbook.getSheetAt(0);
@@ -66,7 +81,10 @@ public class Excelreader {
 		return aanestajat;
 
 	}
-
+		else{
+			return null ;
+		}
+	}
 }
 
 
