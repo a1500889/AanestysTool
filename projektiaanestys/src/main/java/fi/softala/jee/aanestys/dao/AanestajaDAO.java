@@ -22,9 +22,13 @@ public interface AanestajaDAO {
 
 	public List<String> listaaLuvalliset(int AanestysID);
 	
-	public int haeVapaaAanestajaID(Aani Aani, String etunimi, String sukunimi);
+	public int haeVapaaAanestajaID(Aani Aani, String etunimi, String sukunimi, String ryhTun);
 	
 	public boolean tarkistaAanestysoikeus(int kayttajaID, int aanestysID);
 	
 	public List<Ryhma> haeRyhmat();
+	
+	public void lisaaRyhmiin(int ryhmaID, int[] aanestajalista);
+	
+	public void lisaaRyhma(Ryhma ryhma);
 }

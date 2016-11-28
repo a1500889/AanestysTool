@@ -20,7 +20,7 @@
 <body>
 <div class="container keskitys">
 <h2 style="margin-top:15%;">Anna nimesi:</h2>
-${alert}
+<font color="red">${alert}</font>
 <form:form method="post" action="tunnistus">
 <input type="hidden" name="iidee" value="${iidee}">
 
@@ -28,6 +28,8 @@ ${alert}
 <input class="u-full-width" type=text name="etunimi">
 <label>Sukunimi</label>
 <input class="u-full-width" type=text name="sukunimi"><br>
+<label>Ryhmatunnus, jos on</label>
+<input class="u-full-width" type=text name="rTun"><br>
 <!-- <div class="keskitys"> -->
 		<a class="button button-red" href="/projektiaanestys/Main/aanestys1">Takaisin</a>
 		<button class="button button-primary" type="submit">Seuraava</button>

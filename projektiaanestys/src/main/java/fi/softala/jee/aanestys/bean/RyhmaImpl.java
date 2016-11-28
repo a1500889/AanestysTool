@@ -4,6 +4,12 @@ public class RyhmaImpl implements Ryhma {
 	private int RyhmaID;
 	private String RyhmaNimi;
 	private String RyhmaTunnus;
+	
+	public void Ryhma(int id, String nimi, String tunnus){
+		this.RyhmaID=id;
+		this.RyhmaNimi=nimi;
+		this.RyhmaTunnus=tunnus;
+	}
 
 	public int getRyhmaID() {
 		return this.RyhmaID;

@@ -5,7 +5,8 @@ public class VaihtoehtoImpl implements Vaihtoehto{
 	private int vaihtoehtoID;
 	private int AanestysID;
 	private String VaihtoehtoNimi;
-	private int aanlkm;
+	public int aanlkm;
+	private String RyhmaTunnus;
 	
 	public VaihtoehtoImpl() {
 		super();
@@ -35,6 +36,14 @@ public class VaihtoehtoImpl implements Vaihtoehto{
 	public void setAanlkm(int aanlkm) {
 		this.aanlkm = aanlkm;
 	}
+	
+	public void setRyhmaTunnus(String RyhmaTunnus) {
+		this.RyhmaTunnus=RyhmaTunnus;
+	}
+	public String getRyhmaTunnus() {
+		return this.RyhmaTunnus;
+	}
+	
 	@Override
 	public String toString() {
 		return "VaihtoehtoImpl [vaihtoehtoID=" + vaihtoehtoID + ", AanestysID="

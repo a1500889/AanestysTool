@@ -31,12 +31,8 @@ public class VaihtoehtoDAOImpl implements VaihtoehtoDAO {
 	}
 
 	public void insert(Vaihtoehto vEhto) {
-		if(vEhto.getVaihtoehtoID() > 0) {
-			
-			String sql = "INSERT INTO Vaihtoehto (AanestysID, VaihtoehtoNimi)" + " VALUES (?, ?)";
-			jdbcTemplate.update(sql, vEhto.getAanestysID(), vEhto.getVaihtoehtoNimi());	
-			
-		}
+			String sql = "INSERT INTO Vaihtoehto (AanestysID, VaihtoehtoNimi, RyhmaID)" + " VALUES (?, ?, ?)";
+			jdbcTemplate.update(sql, vEhto.getAanestysID(), vEhto.getVaihtoehtoNimi(), vEhto.getRyhmaTunnus());	
 		
 	}
 

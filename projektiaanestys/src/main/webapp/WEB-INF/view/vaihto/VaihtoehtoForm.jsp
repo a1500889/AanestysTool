@@ -47,21 +47,23 @@
 		
 		
 			<div class="nine columns">
+			<font color="${viestivari}">${alert}</font>
 			<form:form action="lisaavaihtoehdot" method="post"
-					modelAttribute="envBean">
-				<TABLE id="vaihtoehtoTaulu">
-						<c:forEach items="${aanestykset}" var="aanestys">
-				<form:radiobutton path="env" value="${aanestys.aanestysID}" name="aanestysID" onclick="submitForm()" />${aanestys.aanestysNimi}
+					modelAttribute="vaihtoehto">
+				<form:hidden path="VaihtoehtoID" />
+				<c:forEach items="${aanestykset}" var="aanestys">
+				<form:radiobutton path="AanestysID" value="${aanestys.aanestysID}" onclick="submitForm()" />${aanestys.aanestysNimi}
 				</c:forEach>
 				
-      					<TR>
+      				<!-- 	<TR>
 
               				<TD>Vaihtoehdon nimi:</TD>
 
         				</TR>
       					<TR>
-
-                		<TD><INPUT type="text" name="vaihtoehtoNimet" /></TD>
+						<form:hidden path="VaihtoehtoID" value="0"/>
+						<form:hidden path="aanlkm" value="0"/>
+                		<TD><INPUT type="text" name="vaihtoehtoNimet" /></TD><TD><INPUT type="text" name="RyhmaTunnus" /></TD>
 
                 		
         				</TR>
@@ -69,9 +71,16 @@
 					<INPUT type="button" value="Add More" onclick="addRow('vaihtoehtoTaulu')" />
 					<td><input type="button" id="delPOIbutton" value="deleteRow" onclick="deleteRow('vaihtoehtoTaulu')"/></td>
 					<tr>
-					<button type="submit">Tallenna</button>
-					</table>
 					
+					-->
+				<table id="vaihtoehtoTaulu">
+					<tr><td>Nimi:</td><td>Ryhm‰Tunnus:</td></tr>
+					<tr><td><form:input path="VaihtoehtoNimi" /></td><form:hidden path="aanlkm"/><td><c:forEach items="${ryhmat}" var="ryhma">
+				<form:radiobutton path="RyhmaTunnus" value="${ryhma.ryhmaID}" onclick="submitForm()" />${ryhma.ryhmaTunnus}</c:forEach></td></tr>
+					
+					
+				</table>
+					<button type="submit">Tallenna</button>
 				</form:form>
 			</div>
 		</div>
