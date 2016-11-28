@@ -25,14 +25,14 @@
 				<form:form action="saveRyhma" method="post"
 					modelAttribute="Ryhma">
 					<table>
-						<form:hidden path="RyhmaTunnus" />
+						<form:hidden path="RyhmaID" />
 						<tr>
 							<td>Nimi:</td>
 							<td><form:input path="RyhmaNimi" /></td>
 						</tr>
 						<tr>
 							<td>Tunnus:</td>
-							<td><form:input path="RyhmaID" /></td>
+							<td><form:input path="RyhmaTunnus" /></td>
 						</tr>
 
 					</table>			

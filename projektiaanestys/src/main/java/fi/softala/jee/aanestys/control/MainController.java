@@ -3,6 +3,7 @@ package fi.softala.jee.aanestys.control;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -113,6 +114,15 @@ public class MainController {
 			temp.setAanlkm(Collections.frequency(AnnetutTxt, v.getVaihtoehtoNimi()));
 			tulos.add(temp);
 		}
+		
+		Collections.sort(tulos, new Comparator<VaihtoehtoImpl>() {
+			
+	        public int compare(VaihtoehtoImpl v1, VaihtoehtoImpl v2) {
+	            return v2.getAanlkm() - v1.getAanlkm(); 
+	        }
+
+	    });
+		
 		model.addAttribute("tuloslista", tulos);
 		
 		//Hakee itse‰‰n ‰‰nest‰neiden h‰pe‰listan ja list‰‰ sen.

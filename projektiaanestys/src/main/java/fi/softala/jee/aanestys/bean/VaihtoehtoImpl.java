@@ -5,7 +5,7 @@ public class VaihtoehtoImpl implements Vaihtoehto{
 	private int vaihtoehtoID;
 	private int AanestysID;
 	private String VaihtoehtoNimi;
-	private int aanlkm;
+	public int aanlkm;
 	private String RyhmaTunnus;
 	
 	public VaihtoehtoImpl() {

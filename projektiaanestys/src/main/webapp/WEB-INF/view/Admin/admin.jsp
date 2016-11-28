@@ -43,6 +43,7 @@
 				<a class="button" href="newAanestaja">Lis‰‰ ‰‰nest‰j‰</a><br>
 				<a class="button" href="aanestajat">Lista ‰‰nest‰jist‰</a><br>
 				<a class="button" href="newExcelAanestaja">Lis‰‰ excelist‰</a><br>
+				<a class="button" href="newRyhma">Lis‰‰ Ryhm‰</a><br>
 
 			</div>
 		</div>
