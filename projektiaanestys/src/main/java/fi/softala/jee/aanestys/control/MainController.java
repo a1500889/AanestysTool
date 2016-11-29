@@ -1,6 +1,7 @@
 package fi.softala.jee.aanestys.control;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -106,15 +107,18 @@ public class MainController {
 		//ts. katsoo kuinka monta ‰‰nt‰ se on saanut,
 		//laskien summan ja lis‰ten sen v‰liaikaiseen vaihtoehto/tulos-objektiin vaihtoehdon nimen ja ID:n kanssa,
 		//joka tallennetaan .jsp-sivulle tulostettavaksi l‰hetett‰v‰‰n listaan.
-		int aanisumma = 0;
+		int aanisumma = adao.haeAnnettujenAanienMaara(iidee);
+		DecimalFormat df = new DecimalFormat("0.00");
 		ArrayList<VaihtoehtoImpl> tulos = new ArrayList<VaihtoehtoImpl>();
 		for (Vaihtoehto v : vaihtoehdot) {
 			VaihtoehtoImpl temp = new VaihtoehtoImpl();
 			temp.setVaihtoehtoNimi(v.getVaihtoehtoNimi());
 			temp.setVaihtoehtoID(v.getVaihtoehtoID());
-			temp.setAanlkm(Collections.frequency(AnnetutTxt, v.getVaihtoehtoNimi()));
+			int aania = Collections.frequency(AnnetutTxt, v.getVaihtoehtoNimi());
+			temp.setAanlkm(aania);
+			String luku = df.format((aania/(aanisumma*1.0))*100);
+			temp.setAaniosuus(Double.parseDouble((luku).replace(",", ".")));
 			tulos.add(temp);
-			aanisumma= aanisumma + temp.getAanlkm();
 			
 			
 		}
@@ -126,8 +130,10 @@ public class MainController {
 	        }
 
 	    });
-		
-		model.addAttribute("aanisumma", aanisumma);
+		double oikeussumma = adao.haeLupaSumma(iidee);
+		double aanestysprosentti = (aanisumma/oikeussumma)*100;
+		String aanPr=df.format(aanestysprosentti);
+		model.addAttribute("aanestysprosentti", aanPr.replace(",", "."));
 		model.addAttribute("tuloslista", tulos);
 		//Hakee itse‰‰n ‰‰nest‰neiden h‰pe‰listan ja list‰‰ sen.
 		model.addAttribute("hapealista", adao.listaaKusimutterit());

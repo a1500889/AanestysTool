@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="../../resources/styles/normalize.css">
 <c:url var="cssUrl" value="/tyyli.css" />
 <link rel="stylesheet" type="text/css" href="${cssUrl}" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Annettujen äänten tulos</title>
@@ -31,12 +34,20 @@
 				<h1>Äänestyksen tulos:</h1>
 
 <table class="tulostaulu">
-
-				<c:out value="${aanisumma}"/>
+<font color="gray" size="2">Äänestysprosentti:</font>
+				<div class="progress">
+    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:${aanestysprosentti}%">
+      <span>${aanestysprosentti}%</span>
+    </div>
+  </div>
 				<c:forEach items="${tuloslista}" var="tulos">
 				<tr>
 					<td><c:out value="${tulos.vaihtoehtoNimi}" />: </td>
-					<td class="numero"><c:out value="${tulos.aanlkm}" /></td>
+					<td class="numero"><c:out value="${tulos.aanlkm}" /></td><td><div class="progress">
+    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:${tulos.aaniosuus}%">
+      <span><c:out value="${tulos.aaniosuus}%"/></span>
+    </div>
+  </div></td>
 							</tr>
 				</c:forEach>
 				</table>

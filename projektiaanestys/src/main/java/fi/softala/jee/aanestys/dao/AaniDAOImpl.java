@@ -18,8 +18,6 @@ import fi.softala.jee.aanestys.bean.Aani;
 import fi.softala.jee.aanestys.bean.AaniImpl;
 import fi.softala.jee.aanestys.bean.Ryhma;
 import fi.softala.jee.aanestys.bean.RyhmaImpl;
-import fi.softala.jee.aanestys.bean.Vaihtoehto;
-import fi.softala.jee.aanestys.bean.VaihtoehtoImpl;
 
 @Repository
 public class AaniDAOImpl implements AaniDAO{
@@ -155,4 +153,9 @@ public class AaniDAOImpl implements AaniDAO{
 		return summa;
 	}
 	
+	public int haeAnnettujenAanienMaara(int AanestysID){
+		String hakuOrderi = "SELECT COUNT(AanestysID) AS 'Annettuja ‰‰ni‰' FROM Lupa WHERE AanestysID=? AND Aanestanyt=1";
+		return jdbcTemplate.queryForObject(hakuOrderi, new Object[]{AanestysID}, Integer.class);	
+		
+	}
 }

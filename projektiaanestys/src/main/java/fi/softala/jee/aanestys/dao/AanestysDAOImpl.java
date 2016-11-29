@@ -1,12 +1,10 @@
 package fi.softala.jee.aanestys.dao;
 
-import java.sql.JDBCType;
 import java.sql.ResultSet;
 import java.util.List;
 import java.sql.SQLException;
 
 import javax.inject.Inject;
-import javax.sql.DataSource;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,8 +12,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import fi.softala.jee.aanestys.bean.Aani;
-import fi.softala.jee.aanestys.bean.AaniImpl;
 import fi.softala.jee.aanestys.bean.Aanestys;
 import fi.softala.jee.aanestys.bean.AanestysImpl;
 

@@ -3,7 +3,6 @@ package fi.softala.jee.aanestys.dao;
 import java.util.List;
 
 import fi.softala.jee.aanestys.bean.Aanestys;
-import fi.softala.jee.aanestys.bean.Aani;
 
 public interface AanestysDAO {
 	
