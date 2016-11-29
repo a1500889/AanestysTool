@@ -147,10 +147,12 @@ public class AaniDAOImpl implements AaniDAO{
 		jdbcTemplate.update(sql,AanestajaID,AanestysID);
 	}
 	
-
-	public void deletet(int AaniID) {
-		// TODO Auto-generated method stub
+	
+	public int haeLupaSumma(int AanestysID){
+		String hakukasky = "SELECT COUNT(AanestysID) AS 'Lupasumma' FROM Lupa WHERE AanestysID=?";
+		int summa = jdbcTemplate.queryForObject(hakukasky, new Object[]{AanestysID}, Integer.class);	
 		
+		return summa;
 	}
 	
 }

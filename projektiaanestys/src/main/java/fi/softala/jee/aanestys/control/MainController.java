@@ -124,7 +124,6 @@ public class MainController {
 	    });
 		
 		model.addAttribute("tuloslista", tulos);
-		
 		//Hakee itse‰‰n ‰‰nest‰neiden h‰pe‰listan ja list‰‰ sen.
 		model.addAttribute("hapealista", adao.listaaKusimutterit());
 
