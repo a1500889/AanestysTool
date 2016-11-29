@@ -236,10 +236,10 @@ public class MainController {
 	@RequestMapping(value = "/aanestyspoisto", method = RequestMethod.GET)
 	public String poista(@ModelAttribute("envBean") EnvBean envBean) {
 		int ID = Integer.parseInt(envBean.getEnv());
-		//Poistaa ‰‰nestyksen vaihtoehdot.
-		vdao.deletet(ID);
 		//Poistaa ‰‰nestyksen ‰‰net.
 		adao.delete(ID);
+		//Poistaa ‰‰nestyksen vaihtoehdot.
+		vdao.deletet(ID);
 		//Poistaa oikeudet poistettavaan ‰‰nestykseen.
 		edao.poistaLuvatAanestys(ID);
 		//Poistaa itse ‰‰nestyksen.
