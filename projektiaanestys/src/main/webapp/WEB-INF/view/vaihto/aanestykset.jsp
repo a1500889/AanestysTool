@@ -13,9 +13,19 @@
 <link rel="stylesheet" href="../resources/styles/normalize.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script type="text/javascript">
+function confirm_delete() {
+  return confirm('are you sure?');
+}
+</script>
+
 <title>Äänestykset</title>
 </head>
 <body>
+
+
+
 	<img id="logo" src="../resources/images/hh_logo.jpg" />
 	<hr>
 	<div class="container" id="LisaaAanestaja">
@@ -61,7 +71,7 @@
 										method="get" action="aanestyspoisto">
 										<form:hidden path="env" value="${tykset.aanestysID}"
 											onclick="submitForm()" />
-										<button type="submit">Poista</button>
+										<button type="submit"  onclick="return confirm_delete()">Poista</button>
 									</form:form></td>
 							</tr>
 							<tr class="napit">

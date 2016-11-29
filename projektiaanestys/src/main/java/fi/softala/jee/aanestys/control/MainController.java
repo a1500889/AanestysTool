@@ -129,7 +129,6 @@ public class MainController {
 		
 		model.addAttribute("aanisumma", aanisumma);
 		model.addAttribute("tuloslista", tulos);
-		
 		//Hakee itse‰‰n ‰‰nest‰neiden h‰pe‰listan ja list‰‰ sen.
 		model.addAttribute("hapealista", adao.listaaKusimutterit());
 
@@ -202,7 +201,7 @@ public class MainController {
 	@RequestMapping(value = "/saveAanestaja", method = RequestMethod.POST)
 	public ModelAndView saveAanestaja(@ModelAttribute AanestajaImpl aanestaja) {
 		aadao.insert(aanestaja);
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/Main/admin");
 	}
 	
 	//LISTAA ƒƒNESTƒJƒT
@@ -241,15 +240,15 @@ public class MainController {
 	@RequestMapping(value = "/aanestyspoisto", method = RequestMethod.GET)
 	public String poista(@ModelAttribute("envBean") EnvBean envBean) {
 		int ID = Integer.parseInt(envBean.getEnv());
-		//Poistaa ‰‰nestyksen vaihtoehdot.
-		vdao.deletet(ID);
 		//Poistaa ‰‰nestyksen ‰‰net.
 		adao.delete(ID);
+		//Poistaa ‰‰nestyksen vaihtoehdot.
+		vdao.deletet(ID);
 		//Poistaa oikeudet poistettavaan ‰‰nestykseen.
 		edao.poistaLuvatAanestys(ID);
 		//Poistaa itse ‰‰nestyksen.
 		edao.delete(ID);
-		return "redirect:/";
+		return "redirect:/Main/admin";
 	}
 	
 	@RequestMapping(value = "/aanestajapoisto", method = RequestMethod.POST)
@@ -449,19 +448,19 @@ public class MainController {
 	 @RequestMapping(value="/400")
 	 public String error400(){
 	  System.out.println("custom error handler");
-	  return path+"/400";
+	  return path;
 	 }
 	 
 	 @RequestMapping(value="/404")
 	 public String error404(){
 	  System.out.println("custom error handler");
-	  return path+"/404";
+	  return path;
 	 }
 	 
 	 @RequestMapping(value="/500")
 	 public String error500(){
 	  System.out.println("custom error handler");
-	  return path+"/500";
+	  return path;
 	 }
 	 
 	 

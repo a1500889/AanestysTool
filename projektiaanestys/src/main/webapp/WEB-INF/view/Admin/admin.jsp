@@ -49,9 +49,9 @@
 		</div>
 	</div>
 	<div class="three columns">
-		<a class="button" href="/projektiaanestys/">Takaisin</a>
+		<a class="button" href="../j_spring_security_logout">Kirjaudu ulos</a>
 	</div>
-<a class= "buttun" href="../j_spring_security_logout" > Kirjaudu ulos</a>
+
 
 </body>
 </html>

@@ -13,8 +13,6 @@ public interface AaniDAO {
 	
 	public void delete (int AanestysID);
 	
-	public void deletet (int AaniID);
-	
 	public Aani get (int Aani);
 	
 	public List<Aani> lista(int AanestID);
@@ -22,5 +20,7 @@ public interface AaniDAO {
 	public void aanestanyt(int AanestysID, int AanestajaID);
 	
 	public List<Aanestaja> listaaKusimutterit();
+	
+	public int haeLupaSumma(int AanestysID);
 	
 }
