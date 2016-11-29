@@ -15,6 +15,13 @@
 	<sec:http auto-config="true" use-expressions="true">
 		
 		<sec:intercept-url pattern="/Main/admin**" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/Main/aanestys" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/Main/aanestajat" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/Main/newExcelAanestaja" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/Main/newRyhma" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/Main/lisaavaihtoehdot" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/Main/newAanestaja" access="hasRole('ROLE_ADMIN')" />
+		<sec:intercept-url pattern="/Main/newAanestys" access="hasRole('ROLE_ADMIN')" />
 		<sec:intercept-url pattern="/*" access="permitAll" />
 
 		<sec:form-login
