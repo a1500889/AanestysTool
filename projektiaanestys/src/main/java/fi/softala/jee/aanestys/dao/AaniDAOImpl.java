@@ -48,8 +48,8 @@ public class AaniDAOImpl implements AaniDAO{
 		boolean tarkistus = tarkistaFusku(kayttajaID, Aani.getVaihtoehtoID());
 		if(tarkistus){
 			//OK, ‰‰nestet‰‰n anonyymisti.
-			String kasky = "INSERT INTO Aani(AanestysID, VaihtoehtoID, AanestajaID) VALUES(?,?,?);";
-			jdbcTemplate.update(kasky, Aani.getAanestysID(), Aani.getVaihtoehtoID(), 0);	
+			String kasky = "INSERT INTO Aani(AanestysID, VaihtoehtoID, AanestajaID) VALUES(?,?,?)";
+			jdbcTemplate.update(kasky, Aani.getAanestysID(), Aani.getVaihtoehtoID(), 1);	
 			
 			String kasky3 = "UPDATE Lupa SET Aanestanyt=true WHERE AanestysID=? AND AanestajaID= ?";
 			jdbcTemplate.update(kasky3, Aani.getAanestysID(),kayttajaID);
