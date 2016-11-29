@@ -357,6 +357,7 @@ font-size: 1.5em
 td,th {
   padding: 12px 15px;
   text-align: left;
+  
    }
 th:first-child,
 td:first-child {
@@ -371,6 +372,19 @@ tr.napit{
 	border-bottom: 1px solid #E1E1E1;
 }
 
+/* tulostaulu */
+
+table.tulostaulu{
+	max-width:400px;
+	width:100%;
+}
+
+table.tulostaulu td{
+	border-bottom: 1px solid black;
+}
+.numero{
+	text-align:center;
+}
 
 /* Spacing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

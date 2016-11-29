@@ -106,6 +106,7 @@ public class MainController {
 		//ts. katsoo kuinka monta ‰‰nt‰ se on saanut,
 		//laskien summan ja lis‰ten sen v‰liaikaiseen vaihtoehto/tulos-objektiin vaihtoehdon nimen ja ID:n kanssa,
 		//joka tallennetaan .jsp-sivulle tulostettavaksi l‰hetett‰v‰‰n listaan.
+		int aanisumma = 0;
 		ArrayList<VaihtoehtoImpl> tulos = new ArrayList<VaihtoehtoImpl>();
 		for (Vaihtoehto v : vaihtoehdot) {
 			VaihtoehtoImpl temp = new VaihtoehtoImpl();
@@ -113,6 +114,9 @@ public class MainController {
 			temp.setVaihtoehtoID(v.getVaihtoehtoID());
 			temp.setAanlkm(Collections.frequency(AnnetutTxt, v.getVaihtoehtoNimi()));
 			tulos.add(temp);
+			aanisumma= aanisumma + temp.getAanlkm();
+			
+			
 		}
 		
 		Collections.sort(tulos, new Comparator<VaihtoehtoImpl>() {
@@ -123,6 +127,7 @@ public class MainController {
 
 	    });
 		
+		model.addAttribute("aanisumma", aanisumma);
 		model.addAttribute("tuloslista", tulos);
 		
 		//Hakee itse‰‰n ‰‰nest‰neiden h‰pe‰listan ja list‰‰ sen.

@@ -30,29 +30,47 @@
 			
 				<h1>ƒ‰nestyksen tulos:</h1>
 
-<table>
+<table class="tulostaulu">
 
-
+				<c:out value="${aanisumma}"/>
 				<c:forEach items="${tuloslista}" var="tulos">
 				<tr>
 					<td><c:out value="${tulos.vaihtoehtoNimi}" />: </td>
-					<td style="padding-left:10%"><c:out value="${tulos.aanlkm}" /></td>
+					<td class="numero"><c:out value="${tulos.aanlkm}" /></td>
 							</tr>
 				</c:forEach>
 				</table>
 				<hr>
 				<a class="button button-red" class="button" href="/projektiaanestys/Main/aanestys1">Takaisin</a>
 	
-		
+		<h1>H‰pe‰paalu</h1>
+	<p>Lista omaa vaihtoehtoaan ‰‰nest‰neist‰:</p><br>
 	
+	<table>
+	<tr>
+	<th>Nimi</th>
+	<th style="padding-left:5%">Ryhm‰</th>
+	</tr>
+	<c:forEach items="${hapealista}" var="havettava">
+	<tr>
+		
+		<td><c:out value="${havettava.etunimi}" /> <c:out value="${havettava.sukunimi}" /></td>
+		
+		<td style="padding-left:5%"><c:out value="${havettava.ryhma.ryhmaNimi}"/></td>
+	
+	</tr>
+	</c:forEach>
+	</table>
 	</div>
 	
-	<h1>H‰pe‰paalu</h1>
-	Lista omaa vaihtoehtoaan ‰‰nest‰neist‰:<br>
-	<tr><td>Nimi:</td><td>Ryhm‰:</td></tr>
-	<c:forEach items="${hapealista}" var="havettava">
-	<br><tr><td><c:out value="${havettava.etunimi}" /> <c:out value="${havettava.sukunimi}" /></td>, <td><c:out value="${havettava.ryhma.ryhmaNimi}"/></td></tr>
-	</c:forEach>
+
+<!-- 	<h1>H‰pe‰paalu</h1> -->
+<!-- 	<p>Lista omaa vaihtoehtoaan ‰‰nest‰neist‰:</p><br> -->
+<!-- 	<tr><td>Nimi:</td><td>Ryhm‰:</td></tr> -->
+<%-- 	<c:forEach items="${hapealista}" var="havettava"> --%>
+<%-- 	<br><tr><td><c:out value="${havettava.etunimi}" /> <c:out value="${havettava.sukunimi}" /></td>, <td><c:out value="${havettava.ryhma.ryhmaNimi}"/></td></tr> --%>
+	
+<%-- 	</c:forEach> --%>
 		
 	</div>
 <script>
