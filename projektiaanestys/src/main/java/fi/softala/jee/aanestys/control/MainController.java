@@ -197,7 +197,7 @@ public class MainController {
 	@RequestMapping(value = "/saveAanestaja", method = RequestMethod.POST)
 	public ModelAndView saveAanestaja(@ModelAttribute AanestajaImpl aanestaja) {
 		aadao.insert(aanestaja);
-		return new ModelAndView("redirect:/");
+		return new ModelAndView("redirect:/Main/admin");
 	}
 	
 	//LISTAA ÄÄNESTÄJÄT
@@ -244,7 +244,7 @@ public class MainController {
 		edao.poistaLuvatAanestys(ID);
 		//Poistaa itse äänestyksen.
 		edao.delete(ID);
-		return "redirect:/";
+		return "redirect:/Main/admin";
 	}
 	
 	@RequestMapping(value = "/aanestajapoisto", method = RequestMethod.POST)
