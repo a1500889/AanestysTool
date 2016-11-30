@@ -52,7 +52,7 @@
 				</c:forEach>
 				</table>
 				<hr>
-				<a class="button button-red" class="button" href="/projektiaanestys/Main/aanestys1">Takaisin</a>
+				<a class="button button-red" class="button" href="/projektiaanestys/Main/aanestys1">Takaisin ‰‰nestyksiin</a>
 	
 		<h1>H‰pe‰paalu</h1>
 	<p>Lista omaa vaihtoehtoaan ‰‰nest‰neist‰:</p><br>

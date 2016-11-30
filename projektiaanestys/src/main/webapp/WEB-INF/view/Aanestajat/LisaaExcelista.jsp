@@ -56,7 +56,7 @@
 		</div>
 	</div>
 	<div class="three columns">
-		<a class="button" href="/projektiaanestys/Main/admin">Takaisin</a>
+		<a class="button" href="/projektiaanestys/Main/admin">Edellinen</a>
 		<a class="button" href="saveExcelAanestaja">Tallenna</a>
 	</div>
 </body>
