@@ -40,6 +40,8 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 	}
 	
 	public void delete(int AanestajaID) {
+		String siistiAanet = "UPDATE Aani SET AanestajaID=1 WHERE AanestajaID=?";
+		jdbcTemplate.update(siistiAanet, AanestajaID);
 		String sql = "DELETE FROM Aanestaja WHERE AanestajaID = ?";
 		jdbcTemplate.update(sql, AanestajaID);
 		
@@ -57,6 +59,7 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 
 	public List<Aanestaja> lista() {
 		String sql="SELECT AanestajaID, Etunimi, Sukunimi, r.RyhmaID, r.RyhmaNimi, r.RyhmaTunnus FROM Aanestaja a JOIN Ryhma r ON a.RyhmaID=r.RyhmaID";
+		//WHERE AanestajaID<>1
 		List<Aanestaja> lista=jdbcTemplate.query(sql, new RowMapper<Aanestaja>(){
 			public Aanestaja mapRow (ResultSet rs, int rowNum) throws SQLException {
 				Aanestaja hlo = new AanestajaImpl();
