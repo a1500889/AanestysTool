@@ -58,7 +58,7 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 	}
 
 	public List<Aanestaja> lista() {
-		String sql="SELECT AanestajaID, Etunimi, Sukunimi, r.RyhmaID, r.RyhmaNimi, r.RyhmaTunnus FROM Aanestaja a JOIN Ryhma r ON a.RyhmaID=r.RyhmaID";
+		String sql="SELECT AanestajaID, Etunimi, Sukunimi, r.RyhmaID, r.RyhmaNimi, r.RyhmaTunnus FROM Aanestaja a JOIN Ryhma r ON a.RyhmaID=r.RyhmaID WHERE AanestajaID<>1";
 		//WHERE AanestajaID<>1
 		List<Aanestaja> lista=jdbcTemplate.query(sql, new RowMapper<Aanestaja>(){
 			public Aanestaja mapRow (ResultSet rs, int rowNum) throws SQLException {
@@ -94,7 +94,7 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 		List<String> luvallisetLista = jdbcTemplate.query(sql, new RowMapper<String>(){
 			public final String mapRow (ResultSet rs, int rowNum) throws SQLException {
 				String nimi = rs.getString("Etunimi")+" "+rs.getString("Sukunimi")+" "+rs.getString("RyhmaNimi");
-
+				nimi=nimi.toLowerCase();
 			
 				return nimi;
 			}

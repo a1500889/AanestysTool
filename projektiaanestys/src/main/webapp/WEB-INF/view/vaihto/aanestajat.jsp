@@ -13,6 +13,15 @@
 <link rel="stylesheet" href="../resources/styles/normalize.css">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script type="text/javascript">
+function toggle(source) {
+	  checkboxes = document.getElementsByName('valAanestaja');
+	  for(var i=0, n=checkboxes.length;i<n;i++) {
+	    checkboxes[i].checked = source.checked;
+	  }
+	}
+</script>
+
 <title>Lista äänestäjistä</title>
 </head>
 <body>
@@ -38,6 +47,7 @@
 
 				<table class="u-full-width">
 					<thead>
+						<tr><input type="checkbox" onClick="toggle(this)"> Valitse kaikki</></tr>
 						<tr class="header">
 							<th>ID</th>
 							<th>Etunimi</th>
