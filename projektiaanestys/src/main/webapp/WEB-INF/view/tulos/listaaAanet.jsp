@@ -54,7 +54,7 @@
 				<hr>
 				<a class="button button-red" class="button" href="/projektiaanestys/Main/aanestys1">Takaisin ‰‰nestyksiin</a>
 	
-		<h1>H‰pe‰paalu</h1>
+		<h1>Hyl‰tyt ‰‰net</h1>
 	<p>Lista omaa vaihtoehtoaan ‰‰nest‰neist‰:</p><br>
 	
 	<table>
@@ -87,7 +87,7 @@
 <script>
 setTimeout(function() {
 	  location.reload();
-	}, 7500);
+	}, 30000);
 </script>
 
 </body>

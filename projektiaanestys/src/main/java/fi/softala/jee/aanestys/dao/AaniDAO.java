@@ -25,4 +25,6 @@ public interface AaniDAO {
 	
 	public int haeAnnettujenAanienMaara(int AanestysID);
 	
+	public int hylattyjenAanienMaara(int AanID);
+	
 }

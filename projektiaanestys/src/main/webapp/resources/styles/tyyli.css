@@ -50,7 +50,7 @@ table#miyazaki {
   border-collapse: collapse;
   font-family: Agenda-Light, sans-serif;
   font-weight: 100; 
-  background: #333; color: #fff;
+  background: #0071e1; color: #fff;
   text-rendering: optimizeLegibility;
   border-radius: 5px; 
 }
@@ -67,7 +67,7 @@ table#miyazaki thead th, table#miyazaki tbody td {
 }
 table#miyazaki tbody td { 
   padding: .8rem; font-size: 1.4rem;
-  color: #444; background: #eee; 
+  color: #444; background: #ffffff; 
 }
 table#miyazaki tbody tr:not(:last-child) { 
   border-top: 1px solid #ddd;

@@ -194,10 +194,10 @@ button:hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover,
 input[type="button"]:hover{
-	color: #00FFFF;
-  background-color: #33C3F0;
-  border-color: #33C3F0; 
-  text-color: #000000
+/* 	color: #00FFFF; */
+/*   background-color: #33C3F0; */
+/*   border-color: #33C3F0;  */
+/*   text-color: #000000 */
 }
 .button:focus,
 button:focus,

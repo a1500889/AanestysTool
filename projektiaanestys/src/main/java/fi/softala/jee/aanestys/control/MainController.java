@@ -116,7 +116,7 @@ public class MainController {
 			temp.setVaihtoehtoID(v.getVaihtoehtoID());
 			int aania = Collections.frequency(AnnetutTxt, v.getVaihtoehtoNimi());
 			temp.setAanlkm(aania);
-			String luku = df.format((aania/(aanisumma*1.0))*100);
+			String luku = df.format((aania/((aanisumma*1.0)-adao.hylattyjenAanienMaara(iidee)))*100);
 			temp.setAaniosuus(Double.parseDouble((luku).replace(",", ".")));
 			tulos.add(temp);
 			

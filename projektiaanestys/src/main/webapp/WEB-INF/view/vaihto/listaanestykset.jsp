@@ -51,12 +51,12 @@
 								<!-- 						</tr> -->
 
 								<!-- 						<tr> -->
-								<td><form:form id="envselection" modelAttribute="envBean"
+								<form:form id="envselection" modelAttribute="envBean"
 										method="get" action="tunnistus">
 										<form:hidden path="env" value="${tykset.aanestysID}"
 											onclick="submitForm()" />
-										<button type="submit">Valitse</button>
-									</form:form></td>
+										<td><button type="submit">Valitse</button></td>
+									</form:form>
 								<!-- 						</tr> -->
 								<!-- 						<tr class="napit"> -->
 								<td>
@@ -81,8 +81,9 @@
 								<button class="button-primary" type="submit">
 									<c:out value="${tykset.aanestysNimi}" />
 								</button>
-								<button class="button-tulos" onclick="location.href='listaa/${tykset.aanestysID}'">Tulos</button>
+								
 							</form:form></td>
+							<button class="button-tulos" onclick="location.href='listaa/${tykset.aanestysID}'">Tulos</button>
 <!-- 					</tr> -->
 <!-- 					<tr class="napit"> -->
 <!-- 						<td> -->

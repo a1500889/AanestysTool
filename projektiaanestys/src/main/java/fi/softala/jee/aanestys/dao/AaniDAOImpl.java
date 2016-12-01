@@ -120,7 +120,7 @@ public class AaniDAOImpl implements AaniDAO{
 	}
 
 	public List<Aani> lista(int AanestId) {
-		String sql = "SELECT * FROM Aani WHERE AanestysID="+AanestId;
+		String sql = "SELECT * FROM Aani WHERE AanestysID="+AanestId+" AND AanestajaID=1";
 		List<Aani> aaniLista = jdbcTemplate.query(sql, new RowMapper<Aani>(){
 		
 			public Aani mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -138,6 +138,14 @@ public class AaniDAOImpl implements AaniDAO{
 		return aaniLista;
 	
 
+	}
+	
+	public int hylattyjenAanienMaara(int AanID){
+		String sql = "SELECT COUNT(AaniID) FROM Aani WHERE AanestysID=? AND AanestajaID<>1";
+		int hylatytMaara = jdbcTemplate.queryForObject(sql, new Object[]{AanID}, Integer.class);
+		
+		return hylatytMaara;
+		
 	}
 	
 	public void aanestanyt(int AanestysID, int AanestajaID){
