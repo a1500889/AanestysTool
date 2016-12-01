@@ -27,7 +27,7 @@
 			<div class="eleven columns desktop">
 
 
-				<h1>Tarjolla olevat äänestykset:</h1>
+				<h1 align="center">Tätä innovaatiota käyttäisin mielelläni</h1>
 
 				<table id="miyazaki">
 					<thead>
@@ -69,7 +69,7 @@
 			
 <!-- mobiiliversio. katoaa isoilla näytöillä -->
 			<div class="twelve columns mobiili">
-			<h3>Valitse äänestys</h3>
+			<h3>Tätä innovaatiota käyttäisin mielelläni</h3>
 			<c:forEach items="${aanestykset}" var="tykset">
 
 					<tr>
@@ -81,6 +81,7 @@
 								<button class="button-primary" type="submit">
 									<c:out value="${tykset.aanestysNimi}" />
 								</button>
+								<button class="button-tulos" onclick="location.href='listaa/${tykset.aanestysID}'">Tulos</button>
 							</form:form></td>
 <!-- 					</tr> -->
 <!-- 					<tr class="napit"> -->

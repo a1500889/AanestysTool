@@ -247,6 +247,11 @@ input[type="button"].button-primary:focus {
  	font-size: 24px;
  
  }
+.button-tulos{
+  color: #FFF;
+  background-color: #44d747;
+  border-color: #32CD32;
+ }
  
 
 
