@@ -90,10 +90,10 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 	}
 	
 	public List<String> listaaLuvalliset(int AanestysID){
-		String sql = "SELECT Aanestaja.Etunimi, Aanestaja.sukunimi, r.RyhmaTunnus FROM Lupa INNER JOIN Aanestaja ON Aanestaja.AanestajaID=Lupa.AanestajaID JOIN Ryhma r ON Aanestaja.RyhmaID=r.RyhmaID WHERE AanestysID ="+AanestysID+" AND Lupa.Aanestanyt=false;";
+		String sql = "SELECT Aanestaja.Etunimi, Aanestaja.sukunimi, r.RyhmaNimi FROM Lupa INNER JOIN Aanestaja ON Aanestaja.AanestajaID=Lupa.AanestajaID JOIN Ryhma r ON Aanestaja.RyhmaID=r.RyhmaID WHERE AanestysID ="+AanestysID+" AND Lupa.Aanestanyt=false;";
 		List<String> luvallisetLista = jdbcTemplate.query(sql, new RowMapper<String>(){
 			public final String mapRow (ResultSet rs, int rowNum) throws SQLException {
-				String nimi = rs.getString("Etunimi")+" "+rs.getString("Sukunimi")+" "+rs.getString("RyhmaTunnus");
+				String nimi = rs.getString("Etunimi")+" "+rs.getString("Sukunimi")+" "+rs.getString("RyhmaNimi");
 
 			
 				return nimi;

@@ -28,7 +28,7 @@
 <input class="u-full-width" type=text name="etunimi">
 <label>Sukunimi</label>
 <input class="u-full-width" type=text name="sukunimi"><br>
-<label>Ryhmatunnus, jos on</label>
+<label>Ryhmän nimi, jos on</label>
 <input class="u-full-width" type=text name="rTun"><br>
 <!-- <div class="keskitys"> -->
 		<a class="button button-red" href="/projektiaanestys/Main/aanestys1">Edellinen</a>
