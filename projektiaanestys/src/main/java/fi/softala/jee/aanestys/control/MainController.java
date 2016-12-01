@@ -324,6 +324,7 @@ public class MainController {
 		}
 		List<String> nimet =aadao.listaaLuvalliset(id);
 		String nimi = etunimi+" "+sukunimi+" "+RyhTun;
+		nimi = nimi.toLowerCase();
 		
 		if(nimet.contains(nimi)){
 			AaniImpl p = new AaniImpl();

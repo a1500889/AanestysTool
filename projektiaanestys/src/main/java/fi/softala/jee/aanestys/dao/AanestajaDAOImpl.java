@@ -94,7 +94,7 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 		List<String> luvallisetLista = jdbcTemplate.query(sql, new RowMapper<String>(){
 			public final String mapRow (ResultSet rs, int rowNum) throws SQLException {
 				String nimi = rs.getString("Etunimi")+" "+rs.getString("Sukunimi")+" "+rs.getString("RyhmaTunnus");
-
+				nimi=nimi.toLowerCase();
 			
 				return nimi;
 			}
