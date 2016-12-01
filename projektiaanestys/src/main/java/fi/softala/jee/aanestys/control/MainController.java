@@ -321,7 +321,7 @@ public class MainController {
 			@RequestParam("etunimi") String etunimi, @RequestParam("sukunimi") String sukunimi, @RequestParam(value="rTun", required=false) String RyhTun, Model model, RedirectAttributes lahetettävät){
 		String menosuunta = "asdf";
 		if(RyhTun.isEmpty()){
-			RyhTun="R204";
+			RyhTun="Äänestäjä";
 		}
 		List<String> nimet =aadao.listaaLuvalliset(id);
 		String nimi = etunimi+" "+sukunimi+" "+RyhTun;
