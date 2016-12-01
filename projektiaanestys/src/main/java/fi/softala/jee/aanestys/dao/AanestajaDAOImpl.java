@@ -105,7 +105,7 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 	
 	//hakee etunimen ja sukunimen perusteella ÄänestäjäID:n. Hakee ensimmäisen, jos samoja nimiä on useita.
 	public int haeVapaaAanestajaID(Aani Aani, String etunimi, String sukunimi, String RyhTun){
-		String kasky2 = "SELECT Aanestaja.AanestajaID FROM Aanestaja INNER JOIN Lupa ON Aanestaja.AanestajaID=Lupa.AanestajaID JOIN Ryhma r ON Aanestaja.RyhmaID=r.RyhmaID WHERE Aanestaja.Etunimi='"+etunimi+"' AND Aanestaja.Sukunimi='"+sukunimi+"' AND r.RyhmaTunnus='"+RyhTun+"' AND Lupa.Aanestanyt=false AND Lupa.AanestysID='"+Aani.getAanestysID()+"' ORDER BY AanestajaID LIMIT 1;";
+		String kasky2 = "SELECT Aanestaja.AanestajaID FROM Aanestaja INNER JOIN Lupa ON Aanestaja.AanestajaID=Lupa.AanestajaID JOIN Ryhma r ON Aanestaja.RyhmaID=r.RyhmaID WHERE Aanestaja.Etunimi='"+etunimi+"' AND Aanestaja.Sukunimi='"+sukunimi+"' AND r.RyhmaNimi='"+RyhTun+"' AND Lupa.Aanestanyt=false AND Lupa.AanestysID='"+Aani.getAanestysID()+"' ORDER BY AanestajaID LIMIT 1";
 		Integer paskalista = jdbcTemplate.query(kasky2, new ResultSetExtractor<Integer>(){
 		
 			public Integer extractData(ResultSet rs) throws SQLException, DataAccessException {

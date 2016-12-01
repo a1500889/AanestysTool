@@ -157,6 +157,7 @@ public class MainController {
 		a.setVaihtoehtoID(vaihtoehtoID);
 		a.setAanestysID(vdao.get(vaihtoehtoID).getAanestysID());
 		if(!aadao.tarkistaAanestysoikeus(Integer.parseInt(kayttajaID), a.getAanestysID())){
+			System.out.println("main:"+kayttajaID);
 			adao.insert(a, Integer.parseInt(kayttajaID));
 			int AanestID = vdao.get(vaihtoehtoID).getAanestysID();
 			matkalippu = "listaa/"+AanestID+"";

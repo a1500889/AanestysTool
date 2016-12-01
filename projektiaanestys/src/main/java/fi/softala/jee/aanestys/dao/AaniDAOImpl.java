@@ -67,8 +67,9 @@ public class AaniDAOImpl implements AaniDAO{
 		boolean onkoOK = true;
 		String tarkastuskasky1 = "SELECT RyhmaID FROM Vaihtoehto WHERE VaihtoehtoID=?";
 		String tarkastuskasky2 = "SELECT RyhmaID FROM Aanestaja WHERE AanestajaID=?";
-		int VaihtoehtoRyhma = jdbcTemplate.queryForInt(tarkastuskasky1,VaihtoehtoID);
-		int AanestajaRyhma = jdbcTemplate.queryForInt(tarkastuskasky2,KayttajaID);
+		int VaihtoehtoRyhma = jdbcTemplate.queryForObject(tarkastuskasky1,new Object[]{VaihtoehtoID}, Integer.class);
+		System.out.println(KayttajaID);
+		int AanestajaRyhma = jdbcTemplate.queryForObject(tarkastuskasky2, new Object[]{KayttajaID}, Integer.class);
 		if(VaihtoehtoRyhma==AanestajaRyhma){
 			onkoOK=false;
 		}
