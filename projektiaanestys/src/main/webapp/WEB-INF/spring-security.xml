@@ -50,7 +50,7 @@
 	 <sec:authentication-manager>
 			<sec:authentication-provider>
 				<sec:user-service>
-					<sec:user name="admin" password="admin" authorities="ROLE_ADMIN" />
+					<sec:user name="admin" password="tomaattinen!tomaatti" authorities="ROLE_ADMIN" />
 				</sec:user-service>
 			</sec:authentication-provider>
 		</sec:authentication-manager>
