@@ -6,6 +6,7 @@ public class VaihtoehtoImpl implements Vaihtoehto{
 	private int AanestysID;
 	private String VaihtoehtoNimi;
 	public int aanlkm;
+	public double aaniosuus;
 	private String RyhmaTunnus;
 	
 	public VaihtoehtoImpl() {
@@ -48,6 +49,13 @@ public class VaihtoehtoImpl implements Vaihtoehto{
 	public String toString() {
 		return "VaihtoehtoImpl [vaihtoehtoID=" + vaihtoehtoID + ", AanestysID="
 				+ AanestysID + ", VaihtoehtoNimi=" + VaihtoehtoNimi + "]";
+	}
+	public void setAaniosuus(double anos) {
+		this.aaniosuus=anos;
+		
+	}
+	public double getAaniosuus() {
+		return this.aaniosuus;
 	}
 	
 	

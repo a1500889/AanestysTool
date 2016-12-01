@@ -21,5 +21,10 @@ public interface Vaihtoehto {
 	public abstract void setRyhmaTunnus(String rhID);
 	
 	public abstract String getRyhmaTunnus();
+	
+	public abstract void setAaniosuus(double anos);
+	
+	public abstract double getAaniosuus();
+	
 
 }

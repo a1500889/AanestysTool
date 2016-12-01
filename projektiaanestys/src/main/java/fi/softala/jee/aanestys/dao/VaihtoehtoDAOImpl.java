@@ -1,12 +1,10 @@
 package fi.softala.jee.aanestys.dao;
 
-import java.sql.JDBCType;
 import java.sql.ResultSet;
 import java.util.List;
 import java.sql.SQLException;
 
 import javax.inject.Inject;
-import javax.sql.DataSource;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;

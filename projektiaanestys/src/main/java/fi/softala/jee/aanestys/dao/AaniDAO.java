@@ -23,4 +23,6 @@ public interface AaniDAO {
 	
 	public int haeLupaSumma(int AanestysID);
 	
+	public int haeAnnettujenAanienMaara(int AanestysID);
+	
 }

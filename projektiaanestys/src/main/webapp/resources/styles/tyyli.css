@@ -40,6 +40,10 @@
 	margin-bottom: 10px;
 }
 
+.progress{
+	margin-top:22px;
+}
+
 /* tablen responsiivisuus */
 table#miyazaki { 
   margin: 0 auto;

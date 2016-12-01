@@ -46,7 +46,7 @@
 					
 					<div class="keskitys">
 					<hr>
-					<a class="button button-red" href="/projektiaanestys/Main/aanestys1">Takaisin</a>
+					<a class="button button-red" href="/projektiaanestys/Main/aanestys1">Edellinen</a>
 					<button class="button button-primary" type="submit">Äänestä</button>
 					</div>
 					

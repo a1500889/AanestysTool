@@ -95,7 +95,7 @@
 		</div>
 		<div class="keskitys">
 					<hr>
-					<a class="button button-red" href="/projektiaanestys/">Takaisin</a>
+					<a class="button button-red" href="/projektiaanestys/">Edellinen</a>
 					
 					</div>
 	</div>
