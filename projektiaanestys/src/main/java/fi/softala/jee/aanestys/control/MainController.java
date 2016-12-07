@@ -265,15 +265,6 @@ public class MainController {
 		return "redirect:/Main/admin";
 	}
 	
-	@RequestMapping(value = "/aanestajapoisto", method = RequestMethod.POST)
-	public String poistaAanestaja(@ModelAttribute("envBean") EnvBean envBean) {
-		int ID = Integer.parseInt(envBean.getEnv());
-		//Poistaa oikeudet poistettavaan äänestykseen.
-		aadao.poistaLuvatAanestaja(ID);
-		//Poistaa äänestäjän.
-		aadao.delete(ID);
-		return "redirect:aanestajat";
-	}
 	
 	//VAIHTOEHTOJEN LISÄÄMINEN ÄÄNESTYKSEEN: OSA 1
 	//Hakee äänestykset, jotta voi valita mihin lisää vaihtoehtoja.
@@ -392,11 +383,29 @@ public class MainController {
 			viesti.addFlashAttribute("viestivari","green");
 			viesti.addFlashAttribute("alert","Valitut lisätty ryhmiin.");
 			
+		}else if(nappivalinta.equals("poisto")){	
+			for (int i = 0; i < aanestajalista.length; i++) {
+				aadao.poistaLuvatAanestaja(aanestajalista[i]);
+				aadao.delete(aanestajalista[i]);
+			}
+			viesti.addFlashAttribute("viestivari","green");	
+			viesti.addFlashAttribute("alert","Äänestäjä(t) poistettu.");
+			
 		}else{
 			viesti.addFlashAttribute("viestivari","red");	
-			viesti.addFlashAttribute("alert","Jonkin meni vikaan");	
+			viesti.addFlashAttribute("alert","Jokin meni vikaan");	
 		}
 		
+		return "redirect:aanestajat";
+	}
+	
+	@RequestMapping(value = "/aanestajapoisto", method = RequestMethod.POST)
+	public String poistaAanestaja(@ModelAttribute("envBean") EnvBean envBean) {
+		int ID = Integer.parseInt(envBean.getEnv());
+		//Poistaa oikeudet poistettavaan äänestykseen.
+		aadao.poistaLuvatAanestaja(ID);
+		//Poistaa äänestäjän.
+		aadao.delete(ID);
 		return "redirect:aanestajat";
 	}
 	
@@ -431,6 +440,26 @@ public class MainController {
 		}
 				
 			return new ModelAndView("redirect:newRyhma");
+	}
+	
+	@RequestMapping(value = "ryhmat", method = RequestMethod.GET)
+	public String listaRyhmat(Model model) {
+		model.addAttribute("ryhmat", aadao.haeRyhmat());
+		EnvBean envBean = new EnvBean();
+		model.addAttribute(envBean);
+		
+		return "vaihto/ryhmat";
+	}
+	
+	@RequestMapping(value = "ryhmapoisto", method = RequestMethod.POST)
+	public String poistaRyhma(Model model, @ModelAttribute("envBean") EnvBean envBean, RedirectAttributes viesti) {
+		aadao.poistaRyhma(Integer.parseInt(envBean.getEnv()));
+		model.addAttribute("ryhmat", aadao.haeRyhmat());
+		EnvBean envBean2 = new EnvBean();
+		model.addAttribute(envBean2);
+		viesti.addFlashAttribute("alert","Ryhmä poistettu.");
+		viesti.addFlashAttribute("viestivari", "red");
+		return "vaihto/ryhmat";
 	}
 	
 	

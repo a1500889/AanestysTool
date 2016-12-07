@@ -173,5 +173,13 @@ public class AanestajaDAOImpl implements AanestajaDAO {
 		jdbcTemplate.update(ryhmanLisaysKasky, ryhma.getRyhmaNimi(), ryhma.getRyhmaTunnus());
 		
 	}
+	
+	public void poistaRyhma(int ryhmaID){
+		VaihtoehtoDAOImpl vdao = new VaihtoehtoDAOImpl();
+		vdao.poistaRyhmanVaihtoehdot(ryhmaID);
+		String poistokysely = "DELETE FROM Ryhma WHERE RyhmaID=?";
+		jdbcTemplate.update(poistokysely, ryhmaID);
+		
+	}
 
 }

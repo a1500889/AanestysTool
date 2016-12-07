@@ -22,7 +22,7 @@ function toggle(source) {
 	}
 </script>
 
-<title>Lista äänestäjistä</title>
+<title>Lista ryhmistä</title>
 </head>
 <body>
 	<img id="logo" src="../resources/images/hh_logo.jpg" />
@@ -31,49 +31,36 @@ function toggle(source) {
 
 		<div class="row">
 			<font color="${viestivari}">${alert}</font>
-			<form:form method="POST" id="oikeusForm" commandName="lisaaOikeudet" action="lisaaOikeudet">
-			<c:forEach items="${aanestykset}" var="aanestys">
-			<td><input type="checkbox" name="valAanestykset" value="${aanestys.aanestysID}"/> </td>
-			<td><c:out value="${aanestys.aanestysNimi}" /></td>
-			</c:forEach>
-			<button name="lahetysnappi" value="oikeus" type="submit">Lisaa oikeudet</button><br>
-			<c:forEach items="${ryhmat}" var="ryhma">
-			<td><input type="radio" name="valRyhma" value="${ryhma.ryhmaID}"/> </td>
-			<td><c:out value="${ryhma.ryhmaNimi}" /></td>
-			</c:forEach>
-			<button name="lahetysnappi" value="ryhma" type="submit">Lisaa ryhmään</button>
 			<div class="nine columns">
-			<button name="lahetysnappi" value="poisto" type="submit">Poista valitut</button>
-				<h1>Lista äänestäjistä:</h1>
+				<h1>Lista ryhmistä:</h1>
 
 				<table class="u-full-width">
 					<thead>
-						<tr><input type="checkbox" onClick="toggle(this)"> Valitse kaikki</></tr>
 						<tr class="header">
-							<th>ID</th>
-							<th>Etunimi</th>
-							<th>Sukunimi</th>
-							<th>Ryhmä</th>
+							<th>Nimi</th>
+							<th>Tunnus</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${aanestajat}" var="aanestaja">
+						<c:forEach items="${ryhmat}" var="ryhma">
 
 							<tr class="napit">
-								<td><input type="checkbox" name="valAanestaja" value="${aanestaja.aanestajaID}"/> </td>
-								<td><c:out value="${aanestaja.aanestajaID}" /></td>
-								<td><c:out value="${aanestaja.etunimi}" /></td>
-								<td><c:out value="${aanestaja.sukunimi}" /></td>
-								<td><c:out value="${aanestaja.ryhma.ryhmaTunnus}" /></td>
+								<td><c:out value="${ryhma.ryhmaNimi}" /></td>
+								<td><c:out value="${ryhma.ryhmaTunnus}" /></td>
 							</tr>
 							<tr>
+								<td><form:form id="envselection" modelAttribute="envBean"
+										method="post" action="ryhmapoisto">
+										<form:hidden path="env" value="${ryhma.ryhmaID}"
+											onclick="submitForm()" />
+										<button type="submit">Poista</button>
+									</form:form></td>
 							</tr>
 						</c:forEach>
 					</tbody>
 					
 				</table>
 			</div>
-			</form:form>
 		</div>
 		<div class="keskitys">
 					<hr>

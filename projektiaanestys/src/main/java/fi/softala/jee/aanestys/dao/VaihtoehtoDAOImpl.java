@@ -1,11 +1,17 @@
 package fi.softala.jee.aanestys.dao;
 
+import java.io.PrintWriter;
+import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLFeatureNotSupportedException;
 import java.util.List;
+import java.util.logging.Logger;
 import java.sql.SQLException;
 
 import javax.inject.Inject;
+import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -24,6 +30,7 @@ public class VaihtoehtoDAOImpl implements VaihtoehtoDAO {
 		return jdbcTemplate;
 	}
 
+	@Autowired
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
@@ -43,6 +50,12 @@ public class VaihtoehtoDAOImpl implements VaihtoehtoDAO {
 	public void deletet(int AanestysID) {
 		String sql = "DELETE FROM Vaihtoehto WHERE AanestysID = ?";
 		jdbcTemplate.update(sql, AanestysID);
+		
+	}
+	
+	public void poistaRyhmanVaihtoehdot(int ryhmaID){
+		String poistokasky = "DELETE FROM Vaihtoehto WHERE RyhmaID=51 ";
+		jdbcTemplate.update(poistokasky);
 		
 	}
 
