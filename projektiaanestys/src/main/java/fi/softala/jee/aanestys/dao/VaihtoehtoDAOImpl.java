@@ -54,8 +54,8 @@ public class VaihtoehtoDAOImpl implements VaihtoehtoDAO {
 	}
 	
 	public void poistaRyhmanVaihtoehdot(int ryhmaID){
-		String poistokasky = "DELETE FROM Vaihtoehto WHERE RyhmaID=51 ";
-		jdbcTemplate.update(poistokasky);
+		String poistokasky = "DELETE FROM Vaihtoehto WHERE RyhmaID=? ";
+		jdbcTemplate.update(poistokasky, ryhmaID);
 		
 	}
 
